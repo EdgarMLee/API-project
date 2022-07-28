@@ -66,7 +66,7 @@ app.use((err, _req, res, _next) => {
     stack: isProduction ? null : err.stack
   });
 });
-
+//TEST
 const routes = require('./routes');
 
 app.use(routes);
