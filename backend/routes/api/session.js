@@ -60,19 +60,5 @@ router.post(
   }
 );
 
-//GET Current User
-// router.get('/',
-// restoreUser, requireAuth,
-// (req, res) => {
-//  const { user } = req;
-//   res.json(user)
-// });
-
-//POST Login User
-// router.post('/',
-// validateLogin,
-// (req, res)=> {
-
-// })
 
 module.exports = router;
