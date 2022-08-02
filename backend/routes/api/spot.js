@@ -1,7 +1,7 @@
-const { requireAuth } = require("../../utils/auth");
+const { requireAuth, restoreUser } = require("../../utils/auth");
 const express = require('express')
 const router = express.Router();
-const { Spot } = require('../../db/models')
+const { Spot, Image, Owner } = require('../../db/models')
 
 //Get all Spots
 router.get('/', async (req, res) => {
@@ -10,8 +10,11 @@ router.get('/', async (req, res) => {
 })
 
 //Get all Spots owned by the Current User
-router.get('/current', requireAuth, async (req, res) => {
-  const spot = await Spot.findAll()
+router.get('/current', requireAuth, restoreUser, async (req, res) => {
+  const id = req.user.id
+  const spot = await Spot.findAll({
+    where: {ownerId: id}
+  })
   res.json(spot)
 })
 
@@ -40,10 +43,24 @@ router.get('/:spotId', async (req, res) => {
   res.json(spot)
 });
 
-//Create a Spot
-// router.post('/', requireAuth, async (req, res) => {
-//   const { address, city, state, country, lat, lng, name, description, price } = req.body;
-//   const spot = await Spot.
-// })
+// Create a Spot
+router.post('/', requireAuth, async (req, res) => {
+  const { address, city, state, country, lat, lng, name, description, price } = req.body;
+  const id = req.user.id
+  const spot = await Spot.create({
+    ownerId: id,
+    address,
+    city,
+    state,
+    country,
+    lat,
+    lng,
+    name,
+    description,
+    price
+  })
+  res.status(201)
+  res.json(spot)
+})
 
 module.exports = router;
