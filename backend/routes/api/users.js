@@ -37,35 +37,27 @@ const validateSignup = [
 ];
 
 // Sign up
-router.post( '/', validateSignup, async (req, res) => {
+router.post( '/', validateSignup, async (req, res, next) => {
     const { firstName, lastName, email, password, username } = req.body;
 //Validate Username is not duplicate
     const validateUsername = await User.findOne({
       where: {username}
     })
     if (validateUsername) {
-      res.status(403);
-      return res.json({
-        "message": "User already exists",
-        "statusCode": 403,
-        "errors": {
-          "username": "User with that username already exists"
-        }
-      })
+      const err = new Error('User already exists')
+        err.status = 403
+        err.errors = { username: "User with that username already exists" }
+        return next(err)
     };
 //Validate Email is not duplicate
     const validateEmail = await User.findOne({
       where: {email}
     })
     if (validateEmail) {
-      res.status(403);
-      return res.json({
-        "message": "User already exists",
-        "statusCode": 403,
-        "errors": {
-          "email": "User with that email already exists"
-        }
-      })
+      const err = new Error('User already exists')
+        err.status = 403
+        err.errors = { username: "User with that email already exists" }
+        return next(err)
     };
     const user = await User.signup({ firstName, lastName, email, username, password });
     const token = await setTokenCookie(res, user);
