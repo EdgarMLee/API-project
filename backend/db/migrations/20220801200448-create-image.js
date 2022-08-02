@@ -36,7 +36,9 @@ module.exports = {
         type: Sequelize.TEXT
       },
       previewImage: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: true,
       },
       createdAt: {
         allowNull: false,
