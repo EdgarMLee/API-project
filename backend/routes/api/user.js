@@ -19,20 +19,27 @@ const validateSignup = [
     .isEmail()
     .withMessage('Username cannot be an email.'),
   check('password')
+    .exists({checkFalsy:true})
+    .notEmpty()
+    .withMessage('Password is required.'),
+  check('password')
     .exists({ checkFalsy: true })
     .isLength({ min: 6 })
     .withMessage('Password must be 6 characters or more.'),
+//Validate firstName and lastName
+  check('firstName')
+    .exists({ checkFalsy: true })
+    .withMessage('First Name is required.'),
+  check('lastName')
+    .exists({ checkFalsy: true })
+    .withMessage('Last Name is required.'),
   handleValidationErrors
 ];
 
 // Sign up
-router.post(
-  '/',
-  validateSignup,
-  async (req, res) => {
+router.post( '/', validateSignup, async (req, res) => {
     const { firstName, lastName, email, password, username } = req.body;
-
-//Validate Username
+//Validate Username is not duplicate
     const validateUsername = await User.findOne({
       where: {username}
     })
@@ -45,8 +52,8 @@ router.post(
           "username": "User with that username already exists"
         }
       })
-    }
-//Validate Email
+    };
+//Validate Email is not duplicate
     const validateEmail = await User.findOne({
       where: {email}
     })
@@ -59,15 +66,14 @@ router.post(
           "email": "User with that email already exists"
         }
       })
-    }
+    };
     const user = await User.signup({ firstName, lastName, email, username, password });
     const token = await setTokenCookie(res, user);
     const userData = user.toSafeObject()
     userData.token = token
     return res.json({
-      user
+      userData
     });
-  }
-);
+  });
 
 module.exports = router;

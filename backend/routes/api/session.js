@@ -53,9 +53,11 @@ router.post(
       err.errors = ['The provided credentials were invalid.'];
       return next(err);
     }
-    await setTokenCookie(res, user);
+    const validateUser = user.toSafeObject();
+    const token = await setTokenCookie(res, user);
+    validateUser.token = token;
     return res.json({
-      user
+      validateUser
     });
   }
 );
