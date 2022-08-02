@@ -28,6 +28,11 @@ router.get(
   }
 );
 
+// Log In User
+// router.post('/', async (req,res) => {
+
+// })
+
 const validateLogin = [
   check('credential')
     .exists({ checkFalsy: true })
