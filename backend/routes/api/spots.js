@@ -62,8 +62,8 @@ router.get('/current', requireAuth, restoreUser, async (req, res) => {
 })
 
 //Get details of a Spot from an id
-router.get('/:spotId', async (req, res) => {
-  const spotId = req.params.spotId
+router.get('/:spotId', async (req, res, next) => {
+  const {spotId} = req.params
   const spot = await Spot.findByPk(spotId,{
     include: [
       {
@@ -77,15 +77,18 @@ router.get('/:spotId', async (req, res) => {
       }
     ]
   })
-  if (!spotId) {
-    res.status(404)
-    res.json({
-      "message": `Spot ${spotId} couldn't be found`,
-      "statusCode": 404
-    })
+  if (!spot) {
+    const err = new Error('Spot couldn\'t be found')
+    err.status = 404
+    return next(err)
   }
   res.json(spot)
 });
+
+
+
+
+
 
 // Create a Spot
 router.post('/', validateSpot, requireAuth, async (req, res) => {
@@ -108,17 +111,15 @@ router.post('/', validateSpot, requireAuth, async (req, res) => {
 })
 
 //Add an Image to a Spot based on the Spot's id
-router.post('/:spotId/images', requireAuth, restoreUser, async (req, res) => {
+router.post('/:spotId/images', requireAuth, restoreUser, async (req, res, next) => {
   const spotIds = req.params.spotId;
   const userIds = req.user.id;
   const urls = req.body.url;
   const spot = await Spot.findByPk(spotIds)
   if (!spot) {
-    res.status(404);
-    res.json({
-      "message": `Spot ${spotIds} couldn't be found`,
-      "statusCode": 404
-    })
+    const err = new Error('Spot couldn\'t be found')
+    err.status = 404
+    return next(err)
   }
   const image = await Image.create({
     url: urls,
@@ -131,5 +132,37 @@ router.post('/:spotId/images', requireAuth, restoreUser, async (req, res) => {
     url: image.url
   })
 })
+
+//Edit a Spot
+router.put('/:spotId', validateSpot, requireAuth, async (req, res, next) => {
+  const { address, city, state, country, lat, lng, name, description, price } = req.body;
+  const spotId = req.params.spotId;
+  const editSpot = await Spot.findByPk(spotId)
+  if (!editSpot) {
+    const err = new Error('Spot couldn\'t be found')
+    err.status = 404
+    return next(err)
+  }
+  // else if (editSpot.ownerId !== req.user.id) {
+  //   const err = new Error('Forbidden')
+  //   err.status = 403
+  //   return next(err)
+  // }
+  else {
+    editSpot.address = address;
+    editSpot.city = city;
+    editSpot.state = state;
+    editSpot.country = country;
+    editSpot.lat = lat;
+    editSpot.lng = lng;
+    editSpot.name = name;
+    editSpot.description = description;
+    editSpot.price = price;
+    await editSpot.save();
+  }
+  return res.json(editSpot);
+})
+
+
 
 module.exports = router;
