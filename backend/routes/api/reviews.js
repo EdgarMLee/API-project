@@ -9,7 +9,18 @@ const id = req.user.id;
 const review = await Review.findAll({
   where: {userId: id}
 })
+const user = await User.findAll({
+  where: {id: review.userId}
+})
+const spot = await Spot.findAll({
+  where: {id: review.spotId}
+})
+const image = await Image.findAll({
+  where: {id: review.}
+})
 res.json(review)
 })
+
+
 
 module.exports = router;

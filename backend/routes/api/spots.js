@@ -1,7 +1,7 @@
 const { requireAuth, restoreUser } = require("../../utils/auth");
 const express = require('express')
 const router = express.Router();
-const { Spot, Image, User } = require('../../db/models')
+const { Spot, Image, User, Review, Booking } = require('../../db/models')
 const { handleValidationErrors } = require('../../utils/validation');
 const { check } = require('express-validator');
 
@@ -175,6 +175,13 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
   })
 })
 
-
+//Get all Reviews by a Spot's id
+router.get('/:spotId/reviews', async (req, res, next) => {
+  const id = req.params.spotId;
+  const review = await Review.findAll({
+    where: {spotId: id }
+  })
+  res.json(review)
+})
 
 module.exports = router;
