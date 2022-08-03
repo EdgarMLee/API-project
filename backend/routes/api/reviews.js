@@ -1,7 +1,20 @@
 const { requireAuth, restoreUser, setTokenCookie } = require("../../utils/auth");
 const express = require('express')
 const router = express.Router();
+const { check } = require('express-validator');
 const { Spot, Image, User, Review } = require('../../db/models')
+const { handleValidationErrors } = require('../../utils/validation');
+
+const validateReview = [
+  check('review')
+    .exists({ checkFalsy: true })
+    .withMessage('Review text is required'),
+  check('stars')
+    .exists({ checkFalsy: true })
+    .isInt({min: 1, max: 5})
+    .withMessage('Stars must be an integer from 1 to 5'),
+    handleValidationErrors
+  ];
 
 //Get all Reviews of the Current User
 router.get('/current', requireAuth, restoreUser, async (req, res, next) => {
@@ -57,6 +70,23 @@ router.post('/:reviewId/images', requireAuth, restoreUser, async (req, res, next
     imageableId: newImage.spotId,
     url: newImage.url,
   });
+});
+
+//Edit a Review
+router.put('/:reviewId', validateReview, requireAuth, restoreUser, async (req, res, next) => {
+  const { review, stars } = req.body;
+  const reviewId = req.params.reviewId;
+  const reviewed = await Review.findByPk(reviewId);
+  if (!reviewed) {
+    const err = new Error('Review couldn\'t be found')
+    err.status = 404
+    return next(err)
+  }
+  const editReview = await reviewed.update({
+    review,
+    stars
+  });
+  res.json(editReview);
 });
 
 module.exports = router;
