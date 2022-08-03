@@ -6,19 +6,24 @@ const { Spot, Image, User, Review } = require('../../db/models')
 //Get all Reviews of the Current User
 router.get('/current', requireAuth, restoreUser, async (req, res, next) => {
 const id = req.user.id;
-const review = await Review.findAll({
+const reviews = await Review.findAll({
   where: {userId: id}
 })
-const user = await User.findAll({
-  where: {id: review.userId}
-})
-const spot = await Spot.findAll({
-  where: {id: review.spotId}
-})
-const image = await Image.findAll({
-  where: {id: review.}
-})
-res.json(review)
+//Iterate each review by attributes
+for (let review of reviews) {
+  const user = await review.getUser({
+    attributes: ['id', 'firstName', 'lastName']
+  });
+  const spot = await review.getSpot()
+  const image = await review.getImages({
+    attributes: ['id', ['reviewId', 'imageableId'], 'url']
+  });
+//Append each one and convert toJSON
+  review.dataValues.User = user.toJSON();
+  review.dataValues.Spot = spot.toJSON();
+  review.dataValues.Image = image
+}
+res.json(reviews)
 })
 
 
