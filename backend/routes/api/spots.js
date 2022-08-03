@@ -86,10 +86,6 @@ router.get('/:spotId', async (req, res, next) => {
 });
 
 
-
-
-
-
 // Create a Spot
 router.post('/', validateSpot, requireAuth, async (req, res) => {
   const { address, city, state, country, lat, lng, name, description, price } = req.body;
@@ -178,6 +174,7 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
     "statusCode": 200
   })
 })
+
 
 
 module.exports = router;
