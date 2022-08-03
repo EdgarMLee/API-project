@@ -68,7 +68,7 @@ router.get('/:spotId', async (req, res) => {
     include: [
       {
         model: Image,
-        attributes: ['id', 'url']
+        attributes: ['userId', 'spotId', 'url']
       },
       {
         model: User,
@@ -80,7 +80,7 @@ router.get('/:spotId', async (req, res) => {
   if (!spotId) {
     res.status(404)
     res.json({
-      "message": `Spot couldn't be found`,
+      "message": `Spot ${spotId} couldn't be found`,
       "statusCode": 404
     })
   }
@@ -116,7 +116,7 @@ router.post('/:spotId/images', requireAuth, restoreUser, async (req, res) => {
   if (!spot) {
     res.status(404);
     res.json({
-      "message": "Spot couldn't be found",
+      "message": `Spot ${spotIds} couldn't be found`,
       "statusCode": 404
     })
   }
