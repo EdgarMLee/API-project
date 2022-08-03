@@ -38,10 +38,28 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     url: DataTypes.TEXT,
-    previewImage: DataTypes.BOOLEAN,
+    previewImage: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true
+    }
   }, {
     sequelize,
     modelName: 'Image',
+    defaultScope: {           // INSERT SCOPES AFTER MODEL NAME
+      attributes: {
+        exclude: [
+          'createdAt', 'updatedAt'
+        ]
+      }
+    },
+    scopes: {
+      limitStuff: {
+        attributes:{
+          exclude: ["previewImage", "spotId", "userId"]
+        }
+      }
+    }
   });
   return Image;
 };
