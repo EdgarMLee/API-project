@@ -23,9 +23,7 @@ for (let review of reviews) {
   review.dataValues.Spot = spot.toJSON();
   review.dataValues.Image = image
 }
-res.json(reviews)
+res.json({"Reviews": reviews})
 })
-
-
 
 module.exports = router;
