@@ -98,6 +98,11 @@ router.delete('/:reviewId', requireAuth, restoreUser, async (req, res, next) => 
     err.status = 404
     return next(err)
   }
-})
+    reviewed.destroy();
+    res.json({
+      "message": "Successfully deleted",
+      "statusCode": 200
+    })
+});
 
 module.exports = router;
