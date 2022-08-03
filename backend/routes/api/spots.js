@@ -218,7 +218,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
 router.post('/:spotId/reviews', validateReview, requireAuth, async (req, res, next) => {
   const spotId = req.params.spotId;
   const id = req.user.id;
-  const user = await User.findByPk(id);
+  // const user = await User.findByPk(id);
   const spot = await Spot.findByPk(spotId);
   if (!spot) {
     const err = new Error('Spot couldn\'t be found')

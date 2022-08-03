@@ -26,4 +26,37 @@ for (let review of reviews) {
 res.json({"Reviews": reviews})
 })
 
+
+//Add an Image to a Review based on the Review's id
+router.post('/:reviewId/images', requireAuth, restoreUser, async (req, res, next) => {
+  const url = req.body.url;
+  const userId = req.user.id;
+  const reviewId = req.params.reviewId;
+  const review = await Review.findByPk(reviewId)
+  if (!review) {
+    const err = new Error('Review couldn\'t be found')
+    err.status = 404
+    return next(err)
+  }
+  const images = await Image.findAll({
+    where: {spotId: review.spotId}
+  })
+  if (images.length >= 10) {
+    const err = new Error('Maximum number of images for this resource was reached')
+    err.status = 403
+    return next(err)
+  }
+  const newImage = await Image.create({
+    url,
+    userId,
+    spotId: review.spotId,
+    reviewId
+  })
+  res.json({
+    id: newImage.id,
+    imageableId: newImage.spotId,
+    url: newImage.url,
+  });
+});
+
 module.exports = router;
