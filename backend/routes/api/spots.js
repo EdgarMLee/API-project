@@ -264,8 +264,11 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
       },
       where: {spotId}
     })
-    res.json(books)
+    res.json({"Bookings": books})
   }
+  // else {
+  //   const books = await Booking.findAll()
+  // }
 })
 
 module.exports = router;
