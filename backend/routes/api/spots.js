@@ -354,6 +354,23 @@ const editBook = await booking.update({
 })
 res.json(editBook);
 })
+//NEED TO FIX EDIT A BOOKING
+
+//Delete a Booking
+router.delete('/:bookingId', requireAuth, restoreUser, async (req, res, next) => {
+  const bookingId = req.params.bookingId;
+  const booking = await Booking.findByPk(bookingId);
+  if (!booking) {
+    const err = new Error("Booking couldn't be found")
+    err.status = 404
+    return next(err)
+  }
+  await booking.destroy();
+  res.json({
+    "message": "Successfully deleted",
+    "statusCode": 200
+  })
+})
 
 
 module.exports = router;
