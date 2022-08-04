@@ -247,4 +247,74 @@ router.post('/:spotId/reviews', validateReview, requireAuth, async (req, res, ne
   res.json(newReview)
 });
 
+//Get all Bookings for a Spot based on the Spot's id
+router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
+  const spotId = req.params.spotId;
+  const user = req.user.id;
+  const spot = await Spot.findByPk(spotId);
+  if (!spot) {
+    const err = new Error('Spot couldn\'t be found')
+    err.status = 404
+    return next(err)
+  }
+  if (spot.ownerId === user) {
+    const ownerBooks = await Booking.findAll({
+      include: {
+        model: User,
+      },
+      where: {spotId}
+    })
+    res.json({"Bookings": ownerBooks})
+  }
+  else {
+    const books = await Booking.findAll({
+      attributes: ['spotId', 'startDate','endDate'],
+      where: {spotId}
+    })
+    res.json({"Bookings": books})
+  }
+})
+
+//Create a Booking from a Spot based on the Spot's id
+router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
+  const { startDate, endDate } = req.body;
+  const userId = req.user.id
+  const spotId = req.params.spotId;
+  const spot = await Spot.findByPk(spotId);
+  if (!spot) {
+    const err = new Error('Spot couldn\'t be found')
+    err.status = 404
+    return next(err)
+  }
+//Check if bookings start/end dates interfere with each other
+  const checkBooking = await Booking.findAll({
+    where: {
+      spotId,
+      [Op.and]:
+      [{startDate: {[Op.lte]: endDate}},
+      {endDate: {[Op.gte]: startDate}}]
+    }
+  })
+//If so, return error message
+  if (checkBooking.length) {
+    const err = new Error("Sorry, this spot is already booked for the specified dates")
+    err.status = 403
+    err.errors = [{"startDate": "Start date conflicts with an existing booking",
+    "endDate": "End date conflicts with an existing booking"}]
+    return next(err)
+  }
+//Create new booking
+  const createBooking = await Booking.create({
+    spotId,
+    userId,
+    startDate,
+    endDate
+  })
+  res.json(createBooking);
+})
+
+
+
+
+
 module.exports = router;
