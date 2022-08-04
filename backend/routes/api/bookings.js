@@ -9,14 +9,25 @@ const { Op } = require("sequelize");
 //Get all of the Current User's Bookings
 router.get('/current', requireAuth, restoreUser, async (req, res, next) => {
   const user = req.user.id
-  const books = await Booking.findAll({
+  const allBooks = await Booking.findAll({
     include: {
       model: Spot,
     },
     where: {userId: user},
     attributes: ['id','userId','spotId','startDate','endDate']
   })
-  res.json({"Bookings": books})
+//Find image belonging to user
+  const image = await Image.findOne({
+    where: {userId: user}
+  })
+//Store image books in empty array belonging to user
+  let storedBooks = [];
+  for (let books of allBooks) {
+    let book = books.toJSON();
+    book.Spot.previewImage = image.dataValues.url;
+    storedBooks.push(book)
+  }
+  res.json({"Bookings": storedBooks})
 });
 
 module.exports = router;

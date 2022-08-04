@@ -275,6 +275,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
   }
 })
 
+//Create a Booking from a Spot based on the Spot's id
 
 
 module.exports = router;
