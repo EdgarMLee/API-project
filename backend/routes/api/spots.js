@@ -258,17 +258,21 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
     return next(err)
   }
   if (spot.ownerId === user) {
-    const books = await Booking.findAll({
+    const ownerBooks = await Booking.findAll({
       include: {
         model: User,
       },
       where: {spotId}
     })
+    res.json({"Bookings": ownerBooks})
+  }
+  else {
+    const books = await Booking.findAll({
+      attributes: ['spotId', 'startDate','endDate'],
+      where: {spotId}
+    })
     res.json({"Bookings": books})
   }
-  // else {
-  //   const books = await Booking.findAll()
-  // }
 })
 
 module.exports = router;
