@@ -286,6 +286,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
     err.status = 404
     return next(err)
   }
+//Check if bookings start/end dates interfere with each other
   const checkBooking = await Booking.findAll({
     where: {
       spotId,
@@ -294,6 +295,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
       {endDate: {[Op.gte]: startDate}}]
     }
   })
+//If so, return error message
   if (checkBooking.length) {
     const err = new Error("Sorry, this spot is already booked for the specified dates")
     err.status = 403
@@ -301,11 +303,12 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
     "endDate": "End date conflicts with an existing booking"}]
     return next(err)
   }
+//Create new booking
   const createBooking = await Booking.create({
     spotId,
+    userId,
     startDate,
-    endDate,
-    userId
+    endDate
   })
   res.json(createBooking);
 })
