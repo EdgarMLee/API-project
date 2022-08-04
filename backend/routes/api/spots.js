@@ -1,7 +1,7 @@
 const { requireAuth, restoreUser } = require("../../utils/auth");
 const express = require('express')
 const router = express.Router();
-const { Spot, Image, User, Review, Booking } = require('../../db/models')
+const { Spot, Image, User, Review, Booking, sequelize } = require('../../db/models')
 const { handleValidationErrors } = require('../../utils/validation');
 const { check } = require('express-validator');
 const { Op } = require("sequelize");
@@ -57,11 +57,47 @@ const validateReview = [
     handleValidationErrors
   ];
 
-//Get all Spots
-router.get('/', async (req, res) => {
-  const spot = await Spot.findAll()
-  res.json(spot)
-})
+  const validateQuery = [
+    check('page')
+      .isInt({min:0, max:10})
+      .default(0)
+      .withMessage("Page must be greater than or equal to 0"),
+    check('size')
+      .isInt({min:0, max:20})
+      .default(20)
+      .withMessage("Size must be greater than or equal to 0"),
+    check('maxLat')
+      .optional()
+      .isDecimal()
+      .withMessage("Maximum latitude is invalid"),
+    check('minLat')
+      .optional()
+      .isDecimal()
+      .withMessage("Minimum latitude is invalid"),
+    check('minLng')
+      .optional()
+      .isDecimal()
+      .withMessage("Minimum longitude is invalid"),
+    check('maxLng')
+      .optional()
+      .isDecimal()
+      .withMessage("Maximum longitude is invalid"),
+    check('minPrice')
+      .optional()
+      .isDecimal({min:0})
+      .withMessage("Minimum price must be greater than or equal to 0"),
+    check('maxPrice')
+      .optional()
+      .isDecimal({min:0})
+      .withMessage('Maximum price must be greater than or equal to 0'),
+    handleValidationErrors
+  ];
+
+// Get all Spots
+// router.get('/', async (req, res) => {
+//   const spot = await Spot.findAll()
+//   res.json(spot)
+// })
 
 //Get all Spots owned by the Current User
 router.get('/current', requireAuth, restoreUser, async (req, res) => {
@@ -282,7 +318,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
   const spotId = req.params.spotId;
   const spot = await Spot.findByPk(spotId);
   if (!spot) {
-    const err = new Error('Spot couldn\'t be found')
+    const err = new Error("Spot couldn't be found")
     err.status = 404
     return next(err)
   }
@@ -295,7 +331,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
       {endDate: {[Op.gte]: startDate}}]
     }
   })
-//If so, return error message
+  //If so, return error message
   if (checkBooking.length) {
     const err = new Error("Sorry, this spot is already booked for the specified dates")
     err.status = 403
@@ -303,7 +339,14 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
     "endDate": "End date conflicts with an existing booking"}]
     return next(err)
   }
-//Create new booking
+  //Cant book your own spot
+  else if (spot.ownerId === userId) {
+    const err = new Error("Cannot book your own spot")
+    err.status = 403
+    return next(err)
+  }
+//Create new booking if not your own spot
+else if (spot.ownerId !== userId) {
   const createBooking = await Booking.create({
     spotId,
     userId,
@@ -311,10 +354,56 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
     endDate
   })
   res.json(createBooking);
+}
+});
+
+
+//Add Query Filters to Get All Spots
+router.get('/', validateQuery, async (req, res, next) => {
+let { page, size, maxLat, minLat, maxLng, minLng, maxPrice, minPrice } = req.query;
+//Setting up pagination
+let pagination = {checkpoint:[]}
+page = parseInt(page);
+size = parseInt(size);
+if (Number.isNaN(page)) page = 1;
+if (Number.isNaN(size)) size = 20;
+pagination.limit = size;
+pagination.offset = size * (page - 1);
+
+//Checkpoints for pagination
+if (maxLat) pagination.checkpoint.push({each: {[Op.gte]: Number(maxLat)}});
+if (minLat) pagination.checkpoint.push({each: {[Op.gte]: Number(minLat)}});
+if (maxLng) pagination.checkpoint.push({each: {[Op.gte]: Number(maxLng)}});
+if (minLng) pagination.checkpoint.push({each: {[Op.gte]: Number(minLng)}});
+if (maxPrice) pagination.checkpoint.push({each: {[Op.gte]: Number(maxPrice)}});
+if (minPrice) pagination.checkpoint.push({each: {[Op.gte]: Number(minPrice)}});
+
+const spots = await Spot.findAll({
+  where: {[Op.and]: pagination.checkpoint},
+  limit: pagination.limit,
+  offset: pagination.offset
 })
 
-
-
-
+//Setting loop for reviews and images
+for (let spot of spots) {
+  const spotReviews = await spot.getReviews({
+    attributes: [[sequelize.fn("AVG", sequelize.col("stars")), "avgStarRating"]]
+  })
+  const avgRating = spotReviews[0].dataValues.avgStarRating;
+  spot.dataValues.avgRating = Number(avgRating).toFixed(1);
+  const previewImage = await Image.findOne({
+    where: {[Op.and]: {
+      spotId: spot.id,
+      previewImage: true
+    }}
+  })
+  if (previewImage) spot.dataValues.previewImage = previewImage.dataValues.url;
+}
+res.json({
+  "Spots": spots,
+  "page": page,
+  "size": size
+})
+});
 
 module.exports = router;
