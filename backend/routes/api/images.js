@@ -1,13 +1,13 @@
-const { requireAuth, restoreUser } = require("../../utils/auth");
 const express = require('express')
-const router = express.Router();
+const { requireAuth, restoreUser } = require("../../utils/auth");
 const { Spot, Image, User, Review, Booking } = require('../../db/models')
 const { handleValidationErrors } = require('../../utils/validation');
 const { check } = require('express-validator');
 const { Op } = require("sequelize");
+const router = express.Router();
 
 //Delete an Image
-router.delete('/:imageId', requireAuth, restoreUser, async (req, res) => {
+router.delete('/:imageId', requireAuth, async (req, res, next) => {
   const imageId = req.params.imageId;
   const image = await Image.findByPk(imageId);
   if (!image) {
