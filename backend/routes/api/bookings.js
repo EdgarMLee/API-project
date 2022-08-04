@@ -84,6 +84,7 @@ router.put('/:bookingId', validateBooking, requireAuth, restoreUser, async (req,
   res.json(editBook);
   });
 
+  
   //Delete a Booking
   router.delete('/:bookingId', requireAuth, restoreUser, async (req, res, next) => {
     const user = req.user.id;
