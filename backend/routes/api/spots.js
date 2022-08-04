@@ -275,4 +275,6 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
   }
 })
 
+
+
 module.exports = router;
