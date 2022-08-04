@@ -315,62 +315,6 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
 
 
 
-//Edit a Booking
-router.put('/:bookingId', requireAuth, restoreUser, async (req, res, next) => {
-const { startDate, endDate } = req.body;
-const todayDate = new Date();
-const bookingId = req.params.bookingId;
-const booking = await Booking.findByPk(bookingId);
-if (!booking) {
-  const err = new Error("Booking couldn't be found")
-  err.status = 404
-  return next(err)
-}
-if (booking.endDate < todayDate) {
-  const err = new Error("Past bookings can't be modified")
-  err.status = 403
-  return next(err)
-}
-// Check if bookings start/end dates interfere with each other
-const checkBooking = await Booking.findAll({
-  where: {
-    bookingId,
-    [Op.and]:
-    [{startDate: {[Op.lte]: endDate}},
-    {endDate: {[Op.gte]: startDate}}]
-  }
-})
-//If so, return error message
-if (checkBooking.length) {
-  const err = new Error("Sorry, this spot is already booked for the specified dates")
-  err.status = 403
-  err.errors = [{"startDate": "Start date conflicts with an existing booking",
-  "endDate": "End date conflicts with an existing booking"}]
-  return next(err)
-}
-const editBook = await booking.update({
-  startDate,
-  endDate
-})
-res.json(editBook);
-})
-//NEED TO FIX EDIT A BOOKING
-
-//Delete a Booking
-router.delete('/:bookingId', requireAuth, restoreUser, async (req, res, next) => {
-  const bookingId = req.params.bookingId;
-  const booking = await Booking.findByPk(bookingId);
-  if (!booking) {
-    const err = new Error("Booking couldn't be found")
-    err.status = 404
-    return next(err)
-  }
-  await booking.destroy();
-  res.json({
-    "message": "Successfully deleted",
-    "statusCode": 200
-  })
-})
 
 
 module.exports = router;
