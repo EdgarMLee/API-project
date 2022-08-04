@@ -7,7 +7,7 @@ const { Op } = require("sequelize");
 const router = express.Router();
 
 //Delete an Image
-router.delete('/:imageId', requireAuth, async (req, res, next) => {
+router.delete('/:imageId', requireAuth, restoreUser, async (req, res, next) => {
   const imageId = req.params.imageId;
   const image = await Image.findByPk(imageId);
   if (!image) {

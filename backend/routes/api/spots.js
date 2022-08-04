@@ -57,6 +57,44 @@ const validateReview = [
     handleValidationErrors
   ];
 
+  const validateQuery = [
+    check('page')
+      .exists({ checkFalsy: true })
+      .isInt({min:0, max:10})
+      .default(0)
+      .withMessage("Page must be greater than or equal to 0"),
+    check('size')
+      .exists({ checkFalsy: true })
+      .isInt({min:0, max:20})
+      .default(20)
+      .withMessage("Size must be greater than or equal to 0"),
+    check('maxLat')
+      .exists({ checkFalsy: true })
+      .isDecimal()
+      .withMessage("Maximum latitude is invalid"),
+    check('minLat')
+      .exists({checkFalsy:true})
+      .isDecimal()
+      .withMessage("Minimum latitude is invalid"),
+    check('minLng')
+      .exists({ checkFalsy: true })
+      .isDecimal()
+      .withMessage("Minimum longitude is invalid"),
+    check('maxLng')
+      .exists({ checkFalsy: true })
+      .isDecimal()
+      .withMessage("Maximum longitude is invalid"),
+    check('minPrice')
+      .exists({ checkFalsy: true })
+      .isDecimal({min:0})
+      .withMessage("Minimum price must be greater than or equal to 0"),
+    check('maxPrice')
+      .exists({ checkFalsy: true })
+      .isDecimal({min:0})
+      .withMessage('Maximum price must be greater than or equal to 0'),
+    handleValidationErrors
+  ];
+
 //Get all Spots
 router.get('/', async (req, res) => {
   const spot = await Spot.findAll()
@@ -282,7 +320,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
   const spotId = req.params.spotId;
   const spot = await Spot.findByPk(spotId);
   if (!spot) {
-    const err = new Error('Spot couldn\'t be found')
+    const err = new Error("Spot couldn't be found")
     err.status = 404
     return next(err)
   }
@@ -295,12 +333,17 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
       {endDate: {[Op.gte]: startDate}}]
     }
   })
-//If so, return error message
+  //If so, return error message
   if (checkBooking.length) {
     const err = new Error("Sorry, this spot is already booked for the specified dates")
     err.status = 403
     err.errors = [{"startDate": "Start date conflicts with an existing booking",
     "endDate": "End date conflicts with an existing booking"}]
+    return next(err)
+  }
+  if (spot.ownerId === userId) {
+    const err = new Error("Cannot book your own spot")
+    err.status = 403
     return next(err)
   }
 //Create new booking
@@ -313,8 +356,29 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
   res.json(createBooking);
 })
 
-
-
-
+//Add Query Filters to Get All Spots
+router.get('/', validateQuery, async (req, res, next) => {
+const { page, size, maxLat, minLat, maxLng, minLng, maxPrice, minPrice } = req.query;
+let pagination = {check:[]}
+if (maxLat) pagination.check.push({lat: {[Op.gte]: Number(maxLat)}});
+if (minLat) pagination.check.push({lat: {[Op.gte]: Number(minLat)}});
+if (maxLng) pagination.check.push({lat: {[Op.gte]: Number(maxLng)}});
+if (minLng) pagination.check.push({lat: {[Op.gte]: Number(minLng)}});
+if (maxPrice) pagination.check.push({lat: {[Op.gte]: Number(maxPrice)}});
+if (minPrice) pagination.check.push({lat: {[Op.gte]: Number(minPrice)}});
+  page = parseInt(page);
+  size = parseInt(size);
+  if (Number.isNaN(page)) page = 1;
+  if (Number.isNaN(size)) size = 20;
+const allSpots = await Spot.findAll({
+  limit: size,
+  offset: size * (page - 1)
+})
+res.json({
+  "Spots": allSpots,
+  "page": page,
+  "size": size
+})
+});
 
 module.exports = router;
