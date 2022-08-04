@@ -341,12 +341,14 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
     "endDate": "End date conflicts with an existing booking"}]
     return next(err)
   }
-  if (spot.ownerId === userId) {
+  //Cant book your own spot
+  else if (spot.ownerId === userId) {
     const err = new Error("Cannot book your own spot")
     err.status = 403
     return next(err)
   }
-//Create new booking
+//Create new booking if not your own spot
+else if (spot.ownerId !== userId) {
   const createBooking = await Booking.create({
     spotId,
     userId,
@@ -354,7 +356,8 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
     endDate
   })
   res.json(createBooking);
-})
+}
+});
 
 //Add Query Filters to Get All Spots
 router.get('/', validateQuery, async (req, res, next) => {
