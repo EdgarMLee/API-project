@@ -1,7 +1,7 @@
 const { requireAuth, restoreUser } = require("../../utils/auth");
 const express = require('express')
 const router = express.Router();
-const { Spot, Image, User, Review, Booking } = require('../../db/models')
+const { Spot, Image, User, Review, Booking, sequelize } = require('../../db/models')
 const { handleValidationErrors } = require('../../utils/validation');
 const { check } = require('express-validator');
 const { Op } = require("sequelize");
@@ -59,47 +59,45 @@ const validateReview = [
 
   const validateQuery = [
     check('page')
-      .exists({ checkFalsy: true })
       .isInt({min:0, max:10})
       .default(0)
       .withMessage("Page must be greater than or equal to 0"),
     check('size')
-      .exists({ checkFalsy: true })
       .isInt({min:0, max:20})
       .default(20)
       .withMessage("Size must be greater than or equal to 0"),
     check('maxLat')
-      .exists({ checkFalsy: true })
+      .optional()
       .isDecimal()
       .withMessage("Maximum latitude is invalid"),
     check('minLat')
-      .exists({checkFalsy:true})
+      .optional()
       .isDecimal()
       .withMessage("Minimum latitude is invalid"),
     check('minLng')
-      .exists({ checkFalsy: true })
+      .optional()
       .isDecimal()
       .withMessage("Minimum longitude is invalid"),
     check('maxLng')
-      .exists({ checkFalsy: true })
+      .optional()
       .isDecimal()
       .withMessage("Maximum longitude is invalid"),
     check('minPrice')
-      .exists({ checkFalsy: true })
+      .optional()
       .isDecimal({min:0})
       .withMessage("Minimum price must be greater than or equal to 0"),
     check('maxPrice')
-      .exists({ checkFalsy: true })
+      .optional()
       .isDecimal({min:0})
       .withMessage('Maximum price must be greater than or equal to 0'),
     handleValidationErrors
   ];
 
-//Get all Spots
-router.get('/', async (req, res) => {
-  const spot = await Spot.findAll()
-  res.json(spot)
-})
+// Get all Spots
+// router.get('/', async (req, res) => {
+//   const spot = await Spot.findAll()
+//   res.json(spot)
+// })
 
 //Get all Spots owned by the Current User
 router.get('/current', requireAuth, restoreUser, async (req, res) => {
@@ -359,26 +357,50 @@ else if (spot.ownerId !== userId) {
 }
 });
 
+
 //Add Query Filters to Get All Spots
 router.get('/', validateQuery, async (req, res, next) => {
-const { page, size, maxLat, minLat, maxLng, minLng, maxPrice, minPrice } = req.query;
-let pagination = {check:[]}
-if (maxLat) pagination.check.push({lat: {[Op.gte]: Number(maxLat)}});
-if (minLat) pagination.check.push({lat: {[Op.gte]: Number(minLat)}});
-if (maxLng) pagination.check.push({lat: {[Op.gte]: Number(maxLng)}});
-if (minLng) pagination.check.push({lat: {[Op.gte]: Number(minLng)}});
-if (maxPrice) pagination.check.push({lat: {[Op.gte]: Number(maxPrice)}});
-if (minPrice) pagination.check.push({lat: {[Op.gte]: Number(minPrice)}});
-  page = parseInt(page);
-  size = parseInt(size);
-  if (Number.isNaN(page)) page = 1;
-  if (Number.isNaN(size)) size = 20;
-const allSpots = await Spot.findAll({
-  limit: size,
-  offset: size * (page - 1)
+let { page, size, maxLat, minLat, maxLng, minLng, maxPrice, minPrice } = req.query;
+//Setting up pagination
+let pagination = {checkpoint:[]}
+page = parseInt(page);
+size = parseInt(size);
+if (Number.isNaN(page)) page = 1;
+if (Number.isNaN(size)) size = 20;
+pagination.limit = size;
+pagination.offset = size * (page - 1);
+
+//Checkpoints for pagination
+if (maxLat) pagination.checkpoint.push({each: {[Op.gte]: Number(maxLat)}});
+if (minLat) pagination.checkpoint.push({each: {[Op.gte]: Number(minLat)}});
+if (maxLng) pagination.checkpoint.push({each: {[Op.gte]: Number(maxLng)}});
+if (minLng) pagination.checkpoint.push({each: {[Op.gte]: Number(minLng)}});
+if (maxPrice) pagination.checkpoint.push({each: {[Op.gte]: Number(maxPrice)}});
+if (minPrice) pagination.checkpoint.push({each: {[Op.gte]: Number(minPrice)}});
+
+const spots = await Spot.findAll({
+  where: {[Op.and]: pagination.checkpoint},
+  limit: pagination.limit,
+  offset: pagination.offset
 })
+
+//Setting loop for reviews and images
+for (let spot of spots) {
+  const spotReviews = await spot.getReviews({
+    attributes: [[sequelize.fn("AVG", sequelize.col("stars")), "avgStarRating"]]
+  })
+  const avgRating = spotReviews[0].dataValues.avgStarRating;
+  spot.dataValues.avgRating = Number(avgRating).toFixed(1);
+  const previewImage = await Image.findOne({
+    where: {[Op.and]: {
+      spotId: spot.id,
+      previewImage: true
+    }}
+  })
+  if (previewImage) spot.dataValues.previewImage = previewImage.dataValues.url;
+}
 res.json({
-  "Spots": allSpots,
+  "Spots": spots,
   "page": page,
   "size": size
 })
