@@ -80,7 +80,7 @@ router.put('/:reviewId', validateReview, requireAuth, restoreUser, async (req, r
   const reviewId = req.params.reviewId;
   const reviewed = await Review.findByPk(reviewId);
   if (!reviewed) {
-    const err = new Error('Review couldn\'t be found')
+    const err = new Error("Review couldn't be found")
     err.status = 404
     return next(err)
   }

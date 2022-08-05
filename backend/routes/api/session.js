@@ -6,19 +6,14 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 // Log out
-router.delete(
-  '/',
-  (_req, res) => {
+router.delete('/', (_req, res) => {
     res.clearCookie('token');
     return res.json({ message: 'success' });
   }
 );
 
 // Restore session user
-router.get(
-  '/',
-  restoreUser,
-  (req, res) => {
+router.get('/', restoreUser, (req, res) => {
     const { user } = req;
     if (user) {
       return res.json({
@@ -40,17 +35,12 @@ const validateLogin = [
 ];
 
 // Log in
-router.post(
-  '/',
-  validateLogin,
-  async (req, res, next) => {
+router.post('/', validateLogin, async (req, res, next) => {
     const { credential, password } = req.body;
     const user = await User.login({ credential, password });
     if (!user) {
       const err = new Error("Invalid credentials");
       err.status = 401;
-      // err.title = 'Login failed';
-      // err.errors = ['The provided credentials were invalid.'];
       return next(err);
     }
     const validateUser = user.toSafeObject();

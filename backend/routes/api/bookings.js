@@ -65,7 +65,6 @@ router.put('/:bookingId', validateBooking, requireAuth, restoreUser, async (req,
   // Check if bookings start/end dates interfere with each other
   const checkBooking = await Booking.findAll({
     where: {
-      // bookingId,
       [Op.and]:
       [{startDate: {[Op.lte]: endDate}},
       {endDate: {[Op.gte]: startDate}}]

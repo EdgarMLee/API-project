@@ -133,7 +133,7 @@ router.get('/:spotId', async (req, res, next) => {
     ]
   })
   if (!spot) {
-    const err = new Error('Spot couldn\'t be found')
+    const err = new Error("Spot couldn't be found")
     err.status = 404
     return next(err)
   }
@@ -168,7 +168,7 @@ router.post('/:spotId/images', requireAuth, restoreUser, async (req, res, next) 
   const urls = req.body.url;
   const spot = await Spot.findByPk(spotIds)
   if (!spot) {
-    const err = new Error('Spot couldn\'t be found')
+    const err = new Error("Spot couldn't be found")
     err.status = 404
     return next(err)
   }
@@ -190,7 +190,7 @@ router.put('/:spotId', validateSpot, requireAuth, async (req, res, next) => {
   const spotId = req.params.spotId;
   const editSpot = await Spot.findByPk(spotId)
   if (!editSpot) {
-    const err = new Error('Spot couldn\'t be found')
+    const err = new Error("Spot couldn't be found")
     err.status = 404
     return next(err)
   }
@@ -219,7 +219,7 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
   const spotId = req.params.spotId;
   const spot = await Spot.findByPk(spotId)
   if (!spot) {
-    const err = new Error('Spot couldn\'t be found')
+    const err = new Error("Spot couldn't be found")
     err.status = 404
     return next(err)
   }
@@ -236,7 +236,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
   //CHECK if spot exists
   const checkSpot = await Spot.findByPk(spotId)
   if (!checkSpot) {
-    const err = new Error('Spot couldn\'t be found')
+    const err = new Error("Spot couldn't be found")
     err.status = 404
     return next(err)
   }
@@ -262,13 +262,13 @@ router.get('/:spotId/reviews', async (req, res, next) => {
 router.post('/:spotId/reviews', validateReview, requireAuth, async (req, res, next) => {
   const spotId = req.params.spotId;
   const id = req.user.id;
-  // const user = await User.findByPk(id);
   const spot = await Spot.findByPk(spotId);
   if (!spot) {
     const err = new Error('Spot couldn\'t be found')
     err.status = 404
     return next(err)
   }
+  //Makes sure if review already exists from user
   const existReview = await Review.findAll({
     where: {
       [Op.and]: [
@@ -276,6 +276,7 @@ router.post('/:spotId/reviews', validateReview, requireAuth, async (req, res, ne
       ],
     },
   })
+  //If so, then return an error
   if (existReview.length >= 1) {
     const err = new Error('User already has a review for this spot')
     err.status = 403
@@ -297,7 +298,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
   const user = req.user.id;
   const spot = await Spot.findByPk(spotId);
   if (!spot) {
-    const err = new Error('Spot couldn\'t be found')
+    const err = new Error("Spot couldn't be found")
     err.status = 404
     return next(err)
   }
@@ -413,11 +414,5 @@ res.json({
   "size": size
 })
 });
-
-// Get all Spots
-// router.get('/', async (req, res) => {
-//   const spot = await Spot.findAll()
-//   res.json(spot)
-// })
 
 module.exports = router;
