@@ -60,11 +60,11 @@ const validateReview = [
   const validateQuery = [
     check('page')
       .isInt({min:0, max:10})
-      .default(0)
+      .optional()
       .withMessage("Page must be greater than or equal to 0"),
     check('size')
       .isInt({min:0, max:20})
-      .default(20)
+      .optional()
       .withMessage("Size must be greater than or equal to 0"),
     check('maxLat')
       .optional()
@@ -378,13 +378,13 @@ if (Number.isNaN(size)) size = 20;
 pagination.limit = size;
 pagination.offset = size * (page - 1);
 
-//Checkpoints for pagination
+//Checkpoints for valid pagination
 if (maxLat) pagination.checkpoint.push({each: {[Op.gte]: Number(maxLat)}});
-if (minLat) pagination.checkpoint.push({each: {[Op.gte]: Number(minLat)}});
+if (minLat) pagination.checkpoint.push({each: {[Op.lte]: Number(minLat)}});
 if (maxLng) pagination.checkpoint.push({each: {[Op.gte]: Number(maxLng)}});
-if (minLng) pagination.checkpoint.push({each: {[Op.gte]: Number(minLng)}});
+if (minLng) pagination.checkpoint.push({each: {[Op.lte]: Number(minLng)}});
 if (maxPrice) pagination.checkpoint.push({each: {[Op.gte]: Number(maxPrice)}});
-if (minPrice) pagination.checkpoint.push({each: {[Op.gte]: Number(minPrice)}});
+if (minPrice) pagination.checkpoint.push({each: {[Op.lte]: Number(minPrice)}});
 
 const spots = await Spot.findAll({
   where: {[Op.and]: pagination.checkpoint},
