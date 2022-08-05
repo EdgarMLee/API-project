@@ -96,11 +96,25 @@ const validateReview = [
 //Get all Spots owned by the Current User
 router.get('/current', requireAuth, restoreUser, async (req, res) => {
   const id = req.user.id
-  const spot = await Spot.findAll({
+  const spots = await Spot.findAll({
     where: {ownerId: id}
   })
-  res.json({"Spots": spot})
-})
+  for (let spot of spots) {
+    const spotReviews = await spot.getReviews({
+      attributes: [[sequelize.fn("AVG", sequelize.col("stars")), "avgStarRating"]]
+    })
+    const avgRating = spotReviews[0].dataValues.avgStarRating;
+    spot.dataValues.avgRating = Number(avgRating).toFixed(1);
+    const previewImage = await Image.findOne({
+      where: {[Op.and]: {
+        spotId: spot.id,
+        previewImage: true
+      }}
+    })
+    if (previewImage) spot.dataValues.previewImage = previewImage.dataValues.url;
+  }
+  res.json({"Spots": spots})
+});
 
 //Get details of a Spot from an id
 router.get('/:spotId', async (req, res, next) => {
