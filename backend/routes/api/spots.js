@@ -99,7 +99,7 @@ router.get('/current', requireAuth, restoreUser, async (req, res) => {
   const spot = await Spot.findAll({
     where: {ownerId: id}
   })
-  res.json(spot)
+  res.json({"Spots": spot})
 })
 
 //Get details of a Spot from an id
