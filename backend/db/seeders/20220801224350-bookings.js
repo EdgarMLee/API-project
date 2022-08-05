@@ -6,32 +6,32 @@ module.exports = {
       {
         spotId: 1,
         userId: 1,
-        startDate: new Date('08-01-2022'),
-        endDate: new Date('08-03-2022'),
+        startDate: new Date('2023-08-01'),
+        endDate: new Date('2023-08-08'),
       },
       {
         spotId: 2,
         userId: 2,
-        startDate: new Date('08-04-2022'),
-        endDate: new Date('08-06-2022'),
+        startDate: new Date('2023-09-01'),
+        endDate: new Date('2023-09-08'),
       },
       {
         spotId: 3,
         userId: 3,
-        startDate: new Date('08-07-2022'),
-        endDate: new Date('08-09-2022'),
+        startDate: new Date('2023-10-01'),
+        endDate: new Date('2023-10-08'),
       },
       {
         spotId: 4,
         userId: 4,
-        startDate: new Date('08-10-2022'),
-        endDate: new Date('08-12-2022'),
+        startDate: new Date('2023-11-01'),
+        endDate: new Date('2023-11-08'),
       },
       {
         spotId: 5,
         userId: 5,
-        startDate: new Date('08-13-2022'),
-        endDate: new Date('08-15-2022'),
+        startDate: new Date('2023-12-01'),
+        endDate: new Date('2023-12-08'),
       }
     ])
   },
