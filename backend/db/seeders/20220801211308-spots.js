@@ -49,7 +49,7 @@ module.exports = {
         lng: 1.325166,
         name: 'Hillcrest',
         description: 'Palms soar over a pool and sculpture garden, and skaters can ollie on the tennis court\'s built-in ramp.',
-        price: 14950
+        price: 1495
       },
       {
         ownerId: 5,
@@ -61,7 +61,7 @@ module.exports = {
         lng: 4.152489,
         name: 'Sand Dollar Retreat - Classic Montecito Craftsman',
         description: 'Coveted beachside community surrounded by manicured gardens with tall hedges to maximize your privacy and relaxation.',
-        price: 1556
+        price: 155
       }
     ])
   },
