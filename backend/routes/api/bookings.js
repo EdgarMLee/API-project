@@ -26,6 +26,7 @@ router.get('/current', requireAuth, restoreUser, async (req, res, next) => {
   const allBooks = await Booking.findAll({
     include: {
       model: Spot,
+      attributes: ['id','ownerId','address','city','state','country','lat','lng','name','price']
     },
     where: {userId: user},
     attributes: ['id','userId','spotId','startDate','endDate']
@@ -84,7 +85,7 @@ router.put('/:bookingId', validateBooking, requireAuth, restoreUser, async (req,
   res.json(editBook);
   });
 
-  
+
   //Delete a Booking
   router.delete('/:bookingId', requireAuth, restoreUser, async (req, res, next) => {
     const user = req.user.id;
