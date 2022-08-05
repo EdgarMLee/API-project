@@ -13,7 +13,7 @@ module.exports = {
         lng: 5.145465,
         name: 'Modern treehouse in the heart of Topanga canyon',
         description: 'The house sits beautifully in the canyon in harmony with its surroundings.',
-        price: 785.15
+        price: 785
       },
       {
         ownerId: 2,
@@ -25,7 +25,7 @@ module.exports = {
         lng: 5.161981,
         name: 'Chimera Private Island in San Blas only adults',
         description: 'Enjoy Chimera Island with its 4 infinity pools with ocean views',
-        price: 199.00
+        price: 199
       },
       {
         ownerId: 3,
@@ -37,7 +37,7 @@ module.exports = {
         lng: 1.545015,
         name: 'Modern Airstream with Amazing Views',
         description: 'Combines both style and comfort in a very unique setting.',
-        price: 100.00
+        price: 100
       },
       {
         ownerId: 4,
@@ -49,7 +49,7 @@ module.exports = {
         lng: 1.325166,
         name: 'Hillcrest',
         description: 'Palms soar over a pool and sculpture garden, and skaters can ollie on the tennis court\'s built-in ramp.',
-        price: 14950.00
+        price: 14950
       },
       {
         ownerId: 5,
@@ -61,7 +61,7 @@ module.exports = {
         lng: 4.152489,
         name: 'Sand Dollar Retreat - Classic Montecito Craftsman',
         description: 'Coveted beachside community surrounded by manicured gardens with tall hedges to maximize your privacy and relaxation.',
-        price: 1556.00
+        price: 1556
       }
     ])
   },
