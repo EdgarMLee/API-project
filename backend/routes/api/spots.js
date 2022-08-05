@@ -283,10 +283,10 @@ router.post('/:spotId/reviews', validateReview, requireAuth, async (req, res, ne
   };
   const { review, stars } = req.body;
   const newReview = await Review.create({
-    review,
-    stars,
     userId: id,
-    spotId
+    spotId,
+    review,
+    stars
   });
   res.json(newReview)
 });
