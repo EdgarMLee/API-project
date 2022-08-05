@@ -18,17 +18,17 @@ module.exports = (sequelize, DataTypes) => {
   Image.init({
     spotId: {
       type: DataTypes.INTEGER,
-      references: {
-        model:'Spots',
-        key: 'id'
-      }
+      // references: {
+      //   model:'Spots',
+      //   key: 'id'
+      // }
     },
     reviewId: {
       type: DataTypes.INTEGER,
-      references: {
-        model:'Reviews',
-        key: 'id'
-      }
+      // references: {
+      //   model:'Reviews',
+      //   key: 'id'
+      // }
     },
     userId: {
       type: DataTypes.INTEGER,

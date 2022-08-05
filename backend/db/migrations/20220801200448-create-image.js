@@ -10,27 +10,27 @@ module.exports = {
       },
       spotId: {
         type: Sequelize.INTEGER,
-        references: {
-          model: 'Spots',
-          key: 'id'
-        },
-        onDelete:'CASCADE'
+        // references: {
+        //   model: 'Spots',
+        //   key: 'id'
+        // },
+        // onDelete:'CASCADE'
       },
       reviewId: {
         type: Sequelize.INTEGER,
-        references: {
-          model: 'Reviews',
-          key: 'id'
-        },
-        onDelete:'CASCADE'
+        // references: {
+        //   model: 'Reviews',
+        //   key: 'id'
+        // },
+        // onDelete:'CASCADE'
       },
       userId: {
         type: Sequelize.INTEGER,
-        references: {
-          model: 'Users',
-          key: 'id'
-        },
-        onDelete:'CASCADE'
+        // references: {
+        //   model: 'Users',
+        //   key: 'id'
+        // },
+        // onDelete:'CASCADE'
       },
       url: {
         type: Sequelize.TEXT

@@ -21,18 +21,18 @@ module.exports = (sequelize, DataTypes) => {
     userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: {
-        model: 'Users',
-        key: 'id',
-      }
+      // references: {
+      //   model: 'Users',
+      //   key: 'id',
+      // }
     },
     spotId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: {
-        model: 'Spots',
-        key: 'id'
-      }
+      // references: {
+      //   model: 'Spots',
+      //   key: 'id'
+      // }
     },
     startDate: {
       type: DataTypes.DATE,
