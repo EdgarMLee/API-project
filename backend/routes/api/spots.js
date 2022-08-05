@@ -93,12 +93,6 @@ const validateReview = [
     handleValidationErrors
   ];
 
-// Get all Spots
-// router.get('/', async (req, res) => {
-//   const spot = await Spot.findAll()
-//   res.json(spot)
-// })
-
 //Get all Spots owned by the Current User
 router.get('/current', requireAuth, restoreUser, async (req, res) => {
   const id = req.user.id
@@ -405,5 +399,11 @@ res.json({
   "size": size
 })
 });
+
+// Get all Spots
+// router.get('/', async (req, res) => {
+//   const spot = await Spot.findAll()
+//   res.json(spot)
+// })
 
 module.exports = router;
