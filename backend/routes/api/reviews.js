@@ -27,7 +27,9 @@ for (let review of reviews) {
   const user = await review.getUser({
     attributes: ['id', 'firstName', 'lastName']
   });
-  const spot = await review.getSpot()
+  const spot = await review.getSpot({
+    attributes: ['id','ownerId','address','city','state','country','lat','lng','name','price']
+  })
   const image = await review.getImages({
     attributes: ['id', ['reviewId', 'imageableId'], 'url']
   });
