@@ -56,7 +56,7 @@ router.post('/:reviewId/images', requireAuth, restoreUser, async (req, res, next
   const images = await Image.findAll({
     where: {spotId: review.spotId}
   })
-  if (images.length >= 10) {
+  if (images.length > 10) {
     const err = new Error('Maximum number of images for this resource was reached')
     err.status = 403
     return next(err)
