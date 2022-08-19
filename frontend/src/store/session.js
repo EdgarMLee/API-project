@@ -27,7 +27,8 @@ export const login = (user) => async (dispatch) => {
     }),
   });
   const data = await response.json();
-  dispatch(setUser(data.user));
+  console.log(data)
+  dispatch(setUser(data.validateUser));
   return response;
 };
 
@@ -52,6 +53,24 @@ const sessionReducer = (state = initialState, action) => {
 // frontend/src/store/session.js
 export const restoreUser = () => async dispatch => {
   const response = await csrfFetch('/api/session');
+  const data = await response.json();
+  dispatch(setUser(data.user));
+  return response;
+};
+
+// frontend/src/store/session.js
+export const signup = (user) => async (dispatch) => {
+  const { firstName, lastName, username, email, password } = user;
+  const response = await csrfFetch("/api/users", {
+    method: "POST",
+    body: JSON.stringify({
+      firstName,
+      lastName,
+      username,
+      email,
+      password,
+    }),
+  });
   const data = await response.json();
   dispatch(setUser(data.user));
   return response;
