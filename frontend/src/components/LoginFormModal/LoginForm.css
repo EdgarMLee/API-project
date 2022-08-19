@@ -1,0 +1,20 @@
+.loginForm {
+  border: none;
+  border-radius: 20px;
+  color: black;
+  font-family: Circular;
+  font-size: 20px;
+  height: 75px;
+  width: 340px;
+}
+
+.userInput {
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
+
+.passwordInput {
+  margin-left: 10px;
+  margin-top: 5px;
+  margin-right: 10px;
+}
