@@ -32,13 +32,19 @@ function SignupFormPage() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className='signUpForm'>
+      <div className="signUpTitle">
+        <h1 className='submitTitle'>Welcome to AwayBnB</h1>
+      </div>
+      <div>
+        <h2 className="signUpSubTitle">Sign Up</h2>
+      </div>
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
       <label>
-        First Name
         <input
+          className="signUp firstName"
           type="text"
           placeholder="First Name"
           value={firstName}
@@ -47,8 +53,8 @@ function SignupFormPage() {
         />
       </label>
       <label>
-        Last Name
         <input
+          className="signUp lastName"
           type="text"
           placeholder="Last Name"
           value={lastName}
@@ -57,8 +63,8 @@ function SignupFormPage() {
         />
       </label>
       <label>
-        Email
         <input
+          className="signUp email"
           type="email"
           placeholder="Email"
           value={email}
@@ -67,17 +73,19 @@ function SignupFormPage() {
         />
       </label>
       <label>
-        Username
         <input
+          className="signUp username"
           type="text"
+          placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
         />
       </label>
       <label>
-        Password
         <input
+          className="signUp pass"
+          placeholder="Password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -85,15 +93,16 @@ function SignupFormPage() {
         />
       </label>
       <label>
-        Confirm Password
         <input
+          className="signUp confirmPass"
+          placeholder="Confirm Password"
           type="password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
         />
       </label>
-      <button type="submit">Sign Up</button>
+      <button type="submit" className='signUpButton'>Sign Up</button>
     </form>
   );
 }

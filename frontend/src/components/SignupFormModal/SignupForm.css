@@ -1,0 +1,70 @@
+/* SignUpPage */
+.signUpForm {
+  display: grid;
+  grid-auto-flow: row;
+  justify-content: center;
+  align-items: center;
+  height: 800px;
+  width: 600px;
+}
+
+/* Welcome to AwayBnB */
+.signUpTitle {
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
+  sans-serif;
+  display: flex;
+  justify-content: center;
+}
+
+/* Sign Up */
+.signUpSubTitle {
+  display: flex;
+  justify-content: center;
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
+  sans-serif;
+  font-size: 18px;
+  font-weight: 750;
+  border: none;
+}
+
+/* SignUpPage Title */
+.submitTitle {
+  font-size: 22px;
+  font-weight: 600;
+  border: none;
+}
+
+/* All Inputs of SignUp Form */
+.signUp {
+  font-size: 16px;
+  border: solid 1px lightslategray;
+  border-radius: 8px;
+  width: 530px;
+  height: 45px;
+  padding-left: 15px;
+  padding-bottom: 6px;
+  padding-top: 6px;
+  margin-bottom: 30px;
+}
+
+/* SignUp Button at Bottom */
+.signUpButton {
+  background-color: rgb(233, 0, 0);
+  color: white;
+  border: white solid 1px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 750;
+  height: 60px;
+  width: 550px;
+  margin-bottom: 20px;
+}
+
+.signupButton {
+  background-color: white;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
+  sans-serif;
+}
