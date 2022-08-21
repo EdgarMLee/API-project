@@ -1,0 +1,65 @@
+/* .profileDiv {
+
+} */
+
+.profileButton {
+  background-color: white;
+  border: 1px lightsteelblue solid;
+  border-radius: 20px;
+}
+
+.profileIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+
+/* .showMenu {
+
+} */
+
+.profile-dropdown {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  background: white;
+  height: 205px;
+  width: 250px;
+  box-shadow: lightslategrey 5px 5px 20px 0px;
+  border-radius: 15px;
+}
+
+.reviewsButton,
+.allSpotButton,
+.createSpotButton,
+.userProfile,
+.logoutUser {
+  color: rgb(70, 70, 70);
+  text-decoration: none;
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
+  sans-serif;
+  font-size: 15px;
+  font-weight:400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 5px;
+}
+
+.reviewsButton:hover,
+.allSpotButton:hover,
+.createSpotButton:hover,
+.logoutUser:hover,
+.userProfile:hover {
+  background-color: rgb(240, 240, 240);
+  border-radius: 15px;
+}
+
+.logoutUser:hover {
+  cursor:pointer;
+}
+
+.divLine {
+  border-top: 1px solid rgb(200, 200, 200);
+}
