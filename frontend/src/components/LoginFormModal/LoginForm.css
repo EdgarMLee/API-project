@@ -10,10 +10,10 @@
 
 /* In Modal */
 .loginTitle {
-  /* padding-right: 200px; */
-  /* margin-top: 150px; */
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
+  sans-serif;
   font-size: 22px;
-  font-weight: normal;
+  font-weight: 600;
   border: none;
 }
 
@@ -45,11 +45,25 @@
 .loginButton {
   background-color: white;
   border: none;
-  font-size: 15px;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
+  sans-serif;
 }
 
 /* In Modal */
 .submitLogin {
+  background-color: rgb(233, 0, 0);
+  color: white;
+  border: white solid 1px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 750;
+  height: 60px;
+  width: 550px;
+}
+
+.submitDemo {
   background-color: rgb(233, 0, 0);
   color: white;
   border: white solid 1px;

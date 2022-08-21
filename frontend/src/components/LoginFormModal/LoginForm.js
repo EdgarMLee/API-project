@@ -55,6 +55,16 @@ function LoginForm() {
       className="submitLogin"
       >Continue</button>
       </div>
+      <div>
+      <button
+      onClick={() => {
+        setCredential('Demo-lition');
+        setPassword("password")
+    }}
+      type="submit"
+      className="submitDemo"
+      >Demo Login</button>
+      </div>
     </form>
   );
 }

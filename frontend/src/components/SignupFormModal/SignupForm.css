@@ -4,10 +4,14 @@
   grid-auto-flow: row;
   justify-content: center;
   align-items: center;
+  height: 800px;
+  width: 600px;
 }
 
 /* Welcome to AwayBnB */
 .signUpTitle {
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
+  sans-serif;
   display: flex;
   justify-content: center;
 }
@@ -16,8 +20,10 @@
 .signUpSubTitle {
   display: flex;
   justify-content: center;
-  font-size: 22px;
-  font-weight: normal;
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
+  sans-serif;
+  font-size: 18px;
+  font-weight: 750;
   border: none;
 }
 
@@ -51,5 +57,14 @@
   font-weight: 750;
   height: 60px;
   width: 550px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.signupButton {
+  background-color: white;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
+  sans-serif;
 }

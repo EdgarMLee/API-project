@@ -6,7 +6,12 @@
   font-size: 20px;
 }
 
-.homeNav {
-  margin: 0, 5px, 0, 0;
-  font-size: 20px;
+.navHome {
+  color: black;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
+  sans-serif;
+  text-decoration: none;
 }
