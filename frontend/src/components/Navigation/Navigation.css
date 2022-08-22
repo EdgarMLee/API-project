@@ -2,9 +2,14 @@
   margin: 0, 5px, 0, 0;
 }
 
-.signUpNav {
-  font-size: 20px;
+.homeLoginSignUp {
+  display:flex;
+  flex-direction: row;
 }
+
+/* .loginSignUp {
+
+} */
 
 .navHome {
   color: black;
@@ -14,4 +19,5 @@
   font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
   sans-serif;
   text-decoration: none;
+  margin-bottom: 10px;
 }
