@@ -2,16 +2,24 @@
   margin: 0, 5px, 0, 0;
 }
 
-.signUpNav {
-  font-size: 20px;
+.homeLoginSignUp {
+  display:flex;
+  justify-content: space-between;
+  margin-right: 50px;
+  margin-top: 20px;
+  /* border: red solid 1px; */
 }
 
 .navHome {
+  /* border: solid black 1px; */
   color: black;
-  border: none;
   font-size: 16px;
   font-weight: 500;
   font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
   sans-serif;
   text-decoration: none;
+}
+
+.bnbLogo {
+  margin-left: 50px;
 }

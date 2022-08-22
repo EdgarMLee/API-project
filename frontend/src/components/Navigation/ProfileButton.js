@@ -35,6 +35,7 @@ function ProfileButton({ user }) {
 
   return (
     <>
+    <div className='fixes profilebutton by existing'>
     <div className='profileDiv'>
       <button onClick={openMenu} className='profileButton'>
         <div className='profileIcon'>
@@ -54,15 +55,14 @@ function ProfileButton({ user }) {
         </div>
           <div className='divLine'></div>
           <Link to='/reviews' className='reviewsButton'>Reviews</Link>
-          {/* <div className='divLine'></div> */}
           <Link to='/view-your-spots' className='allSpotButton'>View Your Spots</Link>
-          {/* <div className='divLine'></div> */}
           <Link to='/host-your-home' className='createSpotButton'>Host Your Home</Link>
           <div className='divLine'></div>
           <div className='logoutUser' onClick={logout}>Log Out</div>
           </div>
         </div>
       )}
+      </div>
     </>
   );
 }
