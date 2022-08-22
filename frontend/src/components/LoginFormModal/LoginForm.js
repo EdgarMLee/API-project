@@ -9,6 +9,7 @@ function LoginForm() {
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
+  // console.log("errors, errors")
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,19 +17,19 @@ function LoginForm() {
     return dispatch(sessionActions.login({ credential, password })).catch(
       async (res) => {
         const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
+        if (data && data.message) setErrors([data.message]);
       }
     );
   };
 
   return (
-    <form onSubmit={handleSubmit} className='loginForm'>
-      <h1 className='loginTitle'>Welcome to AwayBnB</h1>
-      <ul>
+      <form onSubmit={handleSubmit} className='loginForm'>
+      <div>
         {errors.map((error, idx) => (
-          <li key={idx}>{error}</li>
+          <div key={idx} className='divErrors'>{error}</div>
         ))}
-      </ul>
+      </div>
+      <h1 className='loginTitle'>Welcome to AwayBnB</h1>
       <label>
         <input
           type="text"

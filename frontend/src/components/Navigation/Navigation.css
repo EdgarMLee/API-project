@@ -4,20 +4,22 @@
 
 .homeLoginSignUp {
   display:flex;
-  flex-direction: row;
+  justify-content: space-between;
+  margin-right: 50px;
+  margin-top: 20px;
+  /* border: red solid 1px; */
 }
 
-/* .loginSignUp {
-
-} */
-
 .navHome {
+  /* border: solid black 1px; */
   color: black;
-  border: none;
   font-size: 16px;
   font-weight: 500;
   font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
   sans-serif;
   text-decoration: none;
-  margin-bottom: 10px;
+}
+
+.bnbLogo {
+  margin-left: 50px;
 }
