@@ -1,0 +1,41 @@
+.firstDiv {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgb(200, 200, 200);
+}
+
+.imgDiv {
+  height: 300px;
+  width: 320px;
+}
+
+.imgSpot {
+  height: 100%;
+  width: 100%;
+  border-radius: 16px;
+}
+
+.priceSpot,
+.citySpot,
+.nightSpot,
+.starSpot {
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
+  sans-serif;
+  color: black;
+}
+.eachSpot {
+  text-decoration: none;
+}
+
+.citySpot,
+.priceSpot {
+  font-weight: 500;
+}
+
+.citySpot {
+  margin-top: 5px;
+}
+
+.nightSpot {
+  margin-bottom: 10px;
+}
