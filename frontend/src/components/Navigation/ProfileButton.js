@@ -54,8 +54,8 @@ function ProfileButton({ user }) {
           </div> */}
         </div>
           <div className='divLine'></div>
-          <Link to='/reviews' className='reviewsButton'>Reviews</Link>
-          <Link to='/view-your-spots' className='allSpotButton'>View Your Spots</Link>
+          <Link to='/reviews' className='reviewsButton'>View Reviews</Link>
+          <Link to='/view-your-spots' className='allSpotButton'>View Spots</Link>
           <Link to='/host-your-home' className='createSpotButton'>Host Your Home</Link>
           <div className='divLine'></div>
           <div className='logoutUser' onClick={logout}>Log Out</div>
