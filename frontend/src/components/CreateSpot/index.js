@@ -2,21 +2,22 @@ import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import {createSpot, findSpot} from "../../store/spots";
+import "./CreateSpot.css"
 
-const createNewSpot = () => {
+const CreateNewSpot = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const [spotId, setspotId] = useState('');
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [country, setCountry] = useState('');
-  const [lat, setLat] = useState('');
-  const [lng, setLng] = useState('');
+  const [lat, setLat] = useState(null);
+  const [lng, setLng] = useState(null);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [price, setPrice] = useState('');
+  const [price, setPrice] = useState(null);
+  const [errors, setErrors] = useState([]);
 
   useEffect(() => {
     const errors = [];
@@ -30,8 +31,133 @@ const createNewSpot = () => {
     if (description === '') errors.push("Description is required")
     if (price === '') errors.push("Price is required")
   }, [address, city, state, country, lat, lng, name, description, price])
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const spotInfo = {
+      address,
+      city,
+      state,
+      country,
+      lat,
+      lng,
+      name,
+      description,
+      price
+    };
+
+    dispatch(createSpot(spotInfo)).catch(async (res) => {
+      const data = await res.json();
+      if (data && data.errors) setErrors([data.errors])
+    })
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className='createForm'>
+      <div className='createTitle'>
+        <h1 className='createHTitle'>Welcome to AwayBnB</h1>
+      </div>
+      <div>
+        <h2 className='createSubTitle'>Host Your Home</h2>
+      </div>
+      <div>
+        {errors.map((error, idx) =>
+        <div key={idx} className='createError'>{error}</div>
+        )}
+      </div>
+      <label>
+        <input
+        className='createName'
+        type="text"
+        placeholder='Name'
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        required
+        />
+      </label>
+      <label>
+        <input
+        className='createAddress'
+        type="text"
+        placeholder='Address'
+        value={address}
+        onChange={(e) => setAddress(e.target.value)}
+        required
+        />
+      </label>
+      <label>
+        <input
+        className='createCity'
+        type="text"
+        placeholder='City'
+        value={city}
+        onChange={(e) => setCity(e.target.value)}
+        required
+        />
+      </label>
+      <label>
+        <input
+        className='createState'
+        type="text"
+        placeholder='State'
+        value={state}
+        onChange={(e) => setState(e.target.value)}
+        required
+        />
+      </label>
+      <label>
+        <input
+        className='createCountry'
+        type="text"
+        placeholder='Country'
+        value={country}
+        onChange={(e) => setCountry(e.target.value)}
+        required
+        />
+      </label>
+      <label>
+        <input
+        className='createLat'
+        type="number"
+        placeholder='Latitude'
+        value={lat}
+        onChange={(e) => setLat(e.target.value)}
+        required
+        />
+      </label>
+      <label>
+        <input
+        className='createLng'
+        type="number"
+        placeholder='Longitude'
+        value={lng}
+        onChange={(e) => setLng(e.target.value)}
+        required
+        />
+      </label>
+      <label>
+        <input
+        className='createDescription'
+        type="text"
+        placeholder='Description'
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        required
+        />
+      </label>
+      <label>
+        <input
+        className='createPrice'
+        type="number"
+        placeholder='Price'
+        value={price}
+        onChange={(e) => setPrice(e.target.value)}
+        required
+        />
+      </label>
+      <button type="submit" className='signUpButton'>Host Your Home!</button>
+    </form>
+  )
 }
 
-const demoInfo = () => {
-  
-}
+export default CreateNewSpot;

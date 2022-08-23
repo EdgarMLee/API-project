@@ -133,7 +133,7 @@ const spotReducer = (state = initialState, action) => {
     case FIND: {
       const newState = {...state}
       newState[action.spot.id] = action.spot;
-      return {...state, ...newState}
+      return newState;
     }
     default:
       return state;
