@@ -1,0 +1,20 @@
+.nameSpot {
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
+  sans-serif;
+  font-size: 26px;
+  font-weight: 500;
+}
+
+.ratingSpot {
+  font-weight: 500;
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
+  sans-serif;
+}
+
+.stateSpot {
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
+  sans-serif;
+  font-weight: 500;
+  /* TODO MAKE BORDER BOTTOM SHORTER LENGTH */
+  border-bottom: 1px solid black;
+}

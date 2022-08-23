@@ -20,13 +20,14 @@ const FindSpot = () => {
       <div className='firstDiv'></div>
       <div>
           <div className="nameSpot">{spot?.name}</div>
-           <div className='starSpot'>{spot?.avgRating}</div>
-           <div key={spot?.id} className='citySpot'>{spot?.city}, {spot?.state}</div>
+          {/* TODO IMPLEMENT A STAR ICON HERE */}
+           <div className='ratingSpot'>{spot?.avgRating}</div>
+           <div key={spot?.id} className='stateSpot'>{spot?.city}, {spot?.state}, {spot?.country}</div>
           <div className='imgDiv'>
-           <img className='imgSpot' src={spot?.previewImage} alt="Image Not Available"/>
+           <img className='imageSpot' src={spot?.previewImage} alt="Image Not Available"/>
            </div>
-           <div className='priceSpot'>${spot?.price}</div>
-           <div className='nightSpot'>night</div>
+           <div className='pricesSpot'>${spot?.price}</div>
+           <div className='nightsSpot'>night</div>
       </div>
       </>
     )
