@@ -77,7 +77,7 @@ export const editSpot = (spotId) => async (dispatch) => {
     const eachSpot = await res.json();
     dispatch(EDIT_SPOT(eachSpot));
     return eachSpot;
-  }
+  };
 }
 
 //DELETE A SPOT

@@ -22,7 +22,7 @@ const Home = () => {
             // console.log("***spot***",spot)
           <Link className='eachSpot' to={`/spots/${spot?.id}`}>
           <div className='imgDiv'>
-           <img className='imgSpot' src={spot?.previewImage}/>
+           <img className='imgSpot' src={spot?.previewImage} alt="Image Not Available"/>
            </div>
            <div key={spot?.id} className='citySpot'>{spot?.city}, {spot?.state}</div>
            <div className='starSpot'>{spot?.avgRating}</div>
