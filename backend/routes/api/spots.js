@@ -407,7 +407,7 @@ for (let spot of spots) {
   if (previewImage) spot.dataValues.previewImage = previewImage.dataValues.url;
 }
 res.json({
-  "Spots": spots,
+  "spots": spots,
   "page": page,
   "size": size
 })

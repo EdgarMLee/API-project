@@ -30,7 +30,7 @@ const images = [
     userId: 3
   },
   {
-    url: 'https://a0.muscache.com/im/pictures/2e15f0e4-d2ef-4365-bb7b-9697d83d0ebd.jpg?im_w=1200',
+    url: 'https://a0.muscache.com/im/pictures/3ea83d79-0f60-4abd-beda-bc7bd1a8f80c.jpg?im_w=1200',
     previewImage: true,
     spotId: 3,
     reviewId: 5,

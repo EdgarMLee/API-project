@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   height: 800px;
-  width: 600px;
+  width: 630px;
 }
 
 /* Welcome to AwayBnB */
@@ -68,4 +68,15 @@
   font-weight: 500;
   font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
   sans-serif;
+}
+
+.signUpError {
+  font-size: 20px;
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
+  sans-serif;
+  margin-bottom: 18px;
+}
+
+.signUpError:hover {
+  color: red;
 }
