@@ -17,4 +17,17 @@
   font-weight: 500;
   /* TODO MAKE BORDER BOTTOM SHORTER LENGTH */
   border-bottom: 1px solid black;
+  width: 190px;
+}
+
+.fa-star {
+  font-size: 12px;
+}
+
+.imageSpot {
+  margin-top: 20px;
+  height: 400px;
+  width: 400px;
+  border-bottom-left-radius: 15px;
+  border-top-left-radius: 15px;
 }
