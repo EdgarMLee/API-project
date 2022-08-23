@@ -1,36 +1,40 @@
 import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import {createSpot, findSpot} from "../../store/spots";
-import "./CreateSpot.css"
+import { useHistory, useParams } from 'react-router-dom';
+import {editSpot, findSpot} from "../../store/spots";
+import "./EditSpot.css"
 
-const CreateNewSpot = () => {
+const EditSpot = () => {
+  const {spotId} = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
+  const spot = useSelector(state => state.spots[spotId])
 
-  const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [country, setCountry] = useState('');
-  const [lat, setLat] = useState(0);
-  const [lng, setLng] = useState(0);
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [price, setPrice] = useState(0);
+  const [ownerId, setOwnerId] = useState(spot.ownerId)
+  const [address, setAddress] = useState(spot.address);
+  const [city, setCity] = useState(spot.city);
+  const [state, setState] = useState(spot.state);
+  const [country, setCountry] = useState(spot.country);
+  const [lat, setLat] = useState(spot.lat);
+  const [lng, setLng] = useState(spot.lng);
+  const [name, setName] = useState(spot.name);
+  const [description, setDescription] = useState(spot.description);
+  const [price, setPrice] = useState(spot.price);
   const [errors, setErrors] = useState([]);
+  const [disableToggle, setDisableToggle] = useState(false);
 
-  useEffect(() => {
-    const errors = [];
-    if (address === '') errors.push("Street address is required")
-    if (city === '') errors.push("City is required")
-    if (state === '') errors.push("State is required")
-    if (country === '') errors.push("Country is required")
-    if (lat === '') errors.push("Latitude is not valid")
-    if (lng === '') errors.push("'Longitude is not valid'")
-    if (name === '' || name.length > 50) errors.push("Valid name required")
-    if (description === '') errors.push("Description is required")
-    if (price === '') errors.push("Price is required")
-  }, [address, city, state, country, lat, lng, name, description, price])
+  // useEffect(() => {
+  //   const errors = [];
+  //   if (address === '') errors.push("Street address is required")
+  //   if (city === '') errors.push("City is required")
+  //   if (state === '') errors.push("State is required")
+  //   if (country === '') errors.push("Country is required")
+  //   if (lat === '') errors.push("Latitude is not valid")
+  //   if (lng === '') errors.push("'Longitude is not valid'")
+  //   if (name === '' || name.length > 50) errors.push("Valid name required")
+  //   if (description === '') errors.push("Description is required")
+  //   if (price === '') errors.push("Price is required")
+  // }, [address, city, state, country, lat, lng, name, description, price])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -45,29 +49,30 @@ const CreateNewSpot = () => {
       description,
       price
     };
-
-    dispatch(createSpot(spotInfo)).catch(async (res) => {
+    setErrors([]);
+    dispatch(editSpot(spotInfo)).catch(async (res) => {
       const data = await res.json();
       if (data && data.errors) setErrors([data.errors])
     })
+
   }
 
   return (
-    <form onSubmit={handleSubmit} className='createForm'>
-      <div className='createTitle'>
-        <h1 className='createHTitle'>Welcome to AwayBnB</h1>
+    <form onSubmit={handleSubmit} className='editForm'>
+      <div className='editTitle'>
+        {/* <h1 className='createHTitle'>Update Home</h1> */}
       </div>
       <div>
-        <h2 className='createSubTitle'>Host Your Home</h2>
+        <h2 className='editSubTitle'>Update Home</h2>
       </div>
       <div>
         {errors.map((error, idx) =>
-        <div key={idx} className='createError'>{error}</div>
+        <div key={idx} className='editError'>{error}</div>
         )}
       </div>
       <label>
         <input
-        className='createName'
+        className='editName'
         type="text"
         placeholder='Name'
         value={name}
@@ -77,7 +82,7 @@ const CreateNewSpot = () => {
       </label>
       <label>
         <input
-        className='createAddress'
+        className='editAddress'
         type="text"
         placeholder='Address'
         value={address}
@@ -87,7 +92,7 @@ const CreateNewSpot = () => {
       </label>
       <label>
         <input
-        className='createCity'
+        className='editCity'
         type="text"
         placeholder='City'
         value={city}
@@ -97,7 +102,7 @@ const CreateNewSpot = () => {
       </label>
       <label>
         <input
-        className='createState'
+        className='editState'
         type="text"
         placeholder='State'
         value={state}
@@ -107,7 +112,7 @@ const CreateNewSpot = () => {
       </label>
       <label>
         <input
-        className='createCountry'
+        className='editCountry'
         type="text"
         placeholder='Country'
         value={country}
@@ -117,7 +122,7 @@ const CreateNewSpot = () => {
       </label>
       <label>
         <input
-        className='createLat'
+        className='editLat'
         type="number"
         placeholder='Latitude'
         value={lat}
@@ -127,7 +132,7 @@ const CreateNewSpot = () => {
       </label>
       <label>
         <input
-        className='createLng'
+        className='editLng'
         type="number"
         placeholder='Longitude'
         value={lng}
@@ -137,7 +142,7 @@ const CreateNewSpot = () => {
       </label>
       <label>
         <textarea
-        className='createDescription'
+        className='editDescription'
         type="text"
         placeholder='Description'
         value={description}
@@ -147,7 +152,7 @@ const CreateNewSpot = () => {
       </label>
       <label>
         <input
-        className='createPrice'
+        className='editPrice'
         type="number"
         placeholder='Price'
         value={price}
@@ -155,9 +160,9 @@ const CreateNewSpot = () => {
         required
         />
       </label>
-      <button type="submit" className='signUpButton'>Host Your Home!</button>
+      <button type="submit" disabled={disableToggle} className='editSpotBut'>Update Your Home!</button>
     </form>
   )
 }
 
-export default CreateNewSpot;
+export default EditSpot;

@@ -129,11 +129,11 @@ const reviewReducer = (state = initialState, action) => {
       delete newState[action.review.id]
       return newState;
     }
-    case FIND: {
-      const newState = {...state}
-      newState[action.review.id] = action.review;
-      return {...state, ...newState}
-    }
+    // case FIND: {
+    //   const newState = {...state}
+    //   newState[action.review.id] = action.review;
+    //   return newState
+    // }
     default:
       return state;
   }
