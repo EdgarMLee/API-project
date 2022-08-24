@@ -24,6 +24,7 @@ const EditSpot = () => {
   const [errors, setErrors] = useState([]);
   const [disableToggle, setDisableToggle] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
     const errors = [];
@@ -55,7 +56,6 @@ const EditSpot = () => {
     setErrors([]);
     dispatch(editSpot(spotInfo, spot.id)).catch(async (res) => {
       const data = await res.json();
-      console.log('data', data)
       if (data && data.errors) setErrors([data.errors])
     })
     // history.push(`/spots/${spotId}`)
