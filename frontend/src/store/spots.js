@@ -26,9 +26,9 @@ const EDIT_SPOT = (spot) => ({
   spot
 })
 
-const DELETE_SPOT = (spot) => ({
+const DELETE_SPOT = (spotId) => ({
   type: DELETE,
-  spot
+  spotId
 })
 
 const FIND_SPOT = (spotId) => ({
@@ -57,7 +57,16 @@ export const getAllSpots = () => async (dispatch) => {
   const res = await csrfFetch('/api/spots');
   if (res.ok) {
     const allSpots = await res.json();
-    // console.log('allSpots', allSpots);
+    dispatch(GET_SPOT(allSpots.spots));
+  };
+  return res;
+}
+
+//GET ALL SPOTS BY CURRENT USER
+export const allSpotsUser = () => async (dispatch) => {
+  const res = await csrfFetch('/api/currentUser/spots');
+  if (res.ok) {
+    const allSpots = await res.json();
     dispatch(GET_SPOT(allSpots.spots));
   };
   return res;
@@ -82,9 +91,9 @@ export const deleteSpot = (spotId) => async (dispatch) => {
   const res = await csrfFetch(`/api/spots/${spotId}`, {
     method: "DELETE"
   });
-  const spot = await res.json();
+  // const spot = await res.json();
   if (res.ok) {
-    dispatch(DELETE_SPOT(spot));
+    dispatch(DELETE_SPOT(spotId));
   }
   return res;
 }
@@ -125,7 +134,7 @@ const spotReducer = (state = initialState, action) => {
       console.log('state', state)
       const newState = {...state}
       console.log('newState', newState)
-      delete newState[action.spot.id]
+      delete newState[action.spotId]
       return newState;
     }
     case FIND: {

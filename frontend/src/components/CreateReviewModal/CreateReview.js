@@ -6,7 +6,7 @@ import './CreateReview.css';
 function ReviewForm() {
   const dispatch = useDispatch();
   const [review, setReview] = useState('');
-  const [star, setStar] = useState(0);
+  const [star, setStar] = useState('');
   const [errors, setErrors] = useState([]);
 
   const handleSubmit = (e) => {
@@ -45,7 +45,7 @@ function ReviewForm() {
       <div className='reviewStars'>
         <input
           type="number"
-          placeholder='Stars'
+          placeholder='Rate from 1-5 Stars'
           min="0"
           max="5"
           className='userStar'

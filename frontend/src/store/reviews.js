@@ -15,9 +15,9 @@ const CREATE_REVIEW = (reviewInfo) => ({
   reviewInfo
 })
 
-const GET_REVIEW = (review) => ({
+const GET_REVIEW = (reviews) => ({
   type: GET,
-  review
+  reviews
 })
 
 // const EDIT_REVIEW = (reviewId) => ({
@@ -57,8 +57,17 @@ export const getAllReviews = () => async (dispatch) => {
   const res = await csrfFetch('/api/reviews');
   if (res.ok) {
     const allReviews = await res.json();
-    // console.log('allReviews', allReviews);
-    dispatch(GET_REVIEW(allReviews));
+    dispatch(GET_REVIEW(allReviews.reviews));
+  };
+  return res;
+}
+
+//GET ALL REVIEWS BY CURRENT USER
+export const allReviewsUser = () => async (dispatch) => {
+  const res = await csrfFetch('/api/currentUser/reviews');
+  if (res.ok) {
+    const allReviews = await res.json();
+    dispatch(GET_REVIEW(allReviews.reviews));
   };
   return res;
 }
@@ -110,14 +119,14 @@ const reviewReducer = (state = initialState, action) => {
   switch(action.type) {
     case GET: {
       const newState = {...state}
-      action.payload.forEach(review => {
+      action.reviews.forEach(review => {
         newState[review.id] = review;
       })
       return newState;
     }
     case CREATE: {
       const newState = {...state}
-      newState[action.review.id] = action.review
+      newState[action.reviewInfo.id] = action.reviewInfo
       return newState;
     }
     // case EDIT: {

@@ -5,29 +5,27 @@ import {findSpot, allSpots, deleteSpot} from '../../store/spots';
 import {allReviews} from '../../store/reviews';
 import CreateReviewModal from '../CreateReviewModal';
 import EditSpotModal from "../EditSpotModal";
-import ReviewUser from '../UserReview';
+import UserReview from '../UserReview';
 import "./FindSpot.css";
 
-
 const FindSpot = () => {
+  let currentUser;
   const {spotId} = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
   const spotsObj = useSelector(allSpots);
   const reviewsObj = useSelector(allReviews);
+  console.log('allReviews', allReviews)
   const spot = spotsObj.find(spot => spot.id == spotId)
   const sessionUser = useSelector(state => state.session.user);
-  let currentUser;
   useEffect(() => {
     dispatch(findSpot(spotsObj))
   }, [dispatch])
 
-  const handleDelete = async(e) => {
+  const handleDelete = (e) => {
   e.preventDefault();
-  const response = await dispatch(deleteSpot(spotId))
-  // console.log('spotId', spotId)
-  // console.log('response', response)
-  if (response) history.push("/")
+  const res = dispatch(deleteSpot(spotId))
+  if (res) history.push("/")
 }
 
 if (sessionUser && spot) {
@@ -66,7 +64,7 @@ if (sessionUser && spot) {
            </div>
            <div className='allReviewSpot'>
             {/* {reviewsObj.forEach(review => (
-              <ReviewUser key={review.id} review={review}/>
+              <UserReview key={review.id} review={review}/>
             ))} */}
            </div>
            </div>
