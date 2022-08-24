@@ -9,7 +9,6 @@ const FIND = 'spots/FIND';
 
 export const allSpotsArray = (state) => Object.values(state.spots);
 export const allSpotsObj = state => state.spots
-// console.log('allSpots',allSpots)
 
 // Action Creator
 const CREATE_SPOT = (spotInfo) => ({
@@ -130,9 +129,7 @@ const spotReducer = (state = initialState, action) => {
       return newState;
     }
     case DELETE: {
-      console.log('state', state)
       const newState = {...state}
-      console.log('newState', newState)
       delete newState[action.spotId]
       return newState;
     }

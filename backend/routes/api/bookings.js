@@ -38,7 +38,6 @@ router.get('/current', requireAuth, restoreUser, async (req, res, next) => {
 //Store image books in empty array belonging to user
   let storedBooks = [];
   for (let books of allBooks) {
-    console.log(books)
     let book = books.toJSON();
     book.Spot.previewImage = image.dataValues.url;
     storedBooks.push(book)

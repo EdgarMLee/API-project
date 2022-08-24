@@ -7,8 +7,6 @@ import "./Home.css";
 const Home = () => {
   const dispatch = useDispatch();
   const spotsObj = useSelector(allSpotsArray);
-// console.log('spotsObj',spotsObj)
-// console.log('allSpots',allSpots)
   useEffect(() => {
     dispatch(getAllSpots(spotsObj))
   },[dispatch])
@@ -19,7 +17,6 @@ const Home = () => {
       <div className='firstDiv'></div>
       <div className='spotBox'>
         {spotsObj?.map(spot =>
-            // console.log("***spot***",spot)
           <Link className='eachSpot' to={`/spots/${spot?.id}`}>
           <div className='imgDiv'>
            <img className='imgSpot' src={spot?.previewImage || "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"} alt="Image Not Available"/>
