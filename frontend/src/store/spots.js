@@ -26,9 +26,9 @@ const EDIT_SPOT = (spot) => ({
   spot
 })
 
-const DELETE_SPOT = (spotId) => ({
+const DELETE_SPOT = (spot) => ({
   type: DELETE,
-  spotId
+  spot
 })
 
 const FIND_SPOT = (spotId) => ({
@@ -125,7 +125,7 @@ const spotReducer = (state = initialState, action) => {
       console.log('state', state)
       const newState = {...state}
       console.log('newState', newState)
-      delete newState[action.spotId]
+      delete newState[action.spot.id]
       return newState;
     }
     case FIND: {

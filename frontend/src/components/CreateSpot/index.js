@@ -26,7 +26,7 @@ const CreateNewSpot = () => {
     if (state === '') errors.push("State is required")
     if (country === '') errors.push("Country is required")
     if (lat === '') errors.push("Latitude is not valid")
-    if (lng === '') errors.push("'Longitude is not valid'")
+    if (lng === '') errors.push("Longitude is not valid")
     if (name === '' || name.length > 50) errors.push("Valid name required")
     if (description === '') errors.push("Description is required")
     if (price === '') errors.push("Price is required")
@@ -56,6 +56,7 @@ const CreateNewSpot = () => {
 
   return (
     <form onSubmit={handleSubmit} className='createForm'>
+      <div className='createBox'>
       <div className='createTitle'>
         <h1 className='createHTitle'>Welcome to AwayBnB</h1>
       </div>
@@ -67,6 +68,8 @@ const CreateNewSpot = () => {
         <div key={idx} className='createError'>{error}</div>
         )}
       </div>
+        </div>
+        <div className='createText'>
       <label>
         <input
         className='createName'
@@ -138,7 +141,7 @@ const CreateNewSpot = () => {
         />
       </label>
       <label>
-        <textarea
+        <input
         className='createDescription'
         type="text"
         placeholder='Description'
@@ -157,7 +160,10 @@ const CreateNewSpot = () => {
         required
         />
       </label>
+      </div>
+      <div className='createDivBut'>
       <button type="submit" className='signUpButton'>Host Your Home!</button>
+      </div>
     </form>
   )
 }
