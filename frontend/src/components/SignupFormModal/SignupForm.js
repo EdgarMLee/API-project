@@ -36,7 +36,7 @@ function SignupFormPage() {
         <h2 className="signUpSubTitle">Sign Up</h2>
       </div>
       <div>
-        {errors.map((error, idx) =>
+        {Object.values(errors).map((error, idx) =>
         <div key={idx} className='signUpError'>{error}</div>
         )}
       </div>

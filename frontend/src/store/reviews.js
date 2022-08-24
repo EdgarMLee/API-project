@@ -1,5 +1,5 @@
 import { csrfFetch } from "./csrf"
-
+import { findSpot } from "./spots";
 // Variables
 const CREATE = 'reviews/CREATE';
 const GET = 'reviews/GET';
@@ -80,7 +80,7 @@ export const getAllReviews = () => async (dispatch) => {
 // }
 
 //DELETE A REVIEW
-export const deleteReview = (reviewId) => async (dispatch) => {
+export const deleteReview = (reviewId, spotId) => async (dispatch) => {
   const res = await csrfFetch(`/api/reviews/${reviewId}`, {
     method: "DELETE",
     headers: { 'Content-Type': 'application/json' },
@@ -90,6 +90,7 @@ export const deleteReview = (reviewId) => async (dispatch) => {
   });
   const review = await res.json();
   dispatch(DELETE_REVIEW(reviewId));
+  dispatch(findSpot(spotId))
   return review;
 }
 
@@ -129,11 +130,11 @@ const reviewReducer = (state = initialState, action) => {
       delete newState[action.review.id]
       return newState;
     }
-    case FIND: {
-      const newState = {...state}
-      newState[action.review.id] = action.review;
-      return {...state, ...newState}
-    }
+    // case FIND: {
+    //   const newState = {...state}
+    //   newState[action.review.id] = action.review;
+    //   return newState
+    // }
     default:
       return state;
   }

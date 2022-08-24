@@ -17,7 +17,7 @@ const Home = () => {
     spotsObj && (
       <>
       <div className='firstDiv'></div>
-      <div>
+      <div className='spotBox'>
         {spotsObj?.map(spot =>
             // console.log("***spot***",spot)
           <Link className='eachSpot' to={`/spots/${spot?.id}`}>
@@ -25,7 +25,9 @@ const Home = () => {
            <img className='imgSpot' src={spot?.previewImage} alt="Image Not Available"/>
            </div>
            <div key={spot?.id} className='citySpot'>{spot?.city}, {spot?.state}</div>
-           <div className='starSpot'>{spot?.avgRating}</div>
+           <div className='starSpot'>
+           <div className="fa-solid fa-star"/>
+           {spot?.avgRating}</div>
            <div className='priceSpot'>${spot?.price}</div>
            <div className='nightSpot'>night</div>
            </Link>

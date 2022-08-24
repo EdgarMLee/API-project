@@ -1,12 +1,22 @@
 .firstDiv {
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   border-bottom: 1px solid rgb(200, 200, 200);
 }
 
+.spotBox {
+  /* border: red solid 1px; */
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 85px;
+}
+
 .imgDiv {
+  /* border: 1px blue solid; */
   height: 300px;
   width: 320px;
+  display: flex;
+  margin-left: 20px;
 }
 
 .imgSpot {
@@ -22,6 +32,7 @@
   font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
   sans-serif;
   color: black;
+  padding-left: 30px;
 }
 .eachSpot {
   text-decoration: none;
