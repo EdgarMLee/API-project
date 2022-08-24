@@ -7,7 +7,8 @@ const EDIT = 'spots/EDIT';
 const DELETE = 'spots/DELETE';
 const FIND = 'spots/FIND';
 
-export const allSpots = (state) => Object.values(state.spots);
+export const allSpotsArray = (state) => Object.values(state.spots);
+export const allSpotsObj = state => state.spots
 // console.log('allSpots',allSpots)
 
 // Action Creator
@@ -46,7 +47,6 @@ export const createSpot = (spotInfo) => async (dispatch) => {
   });
   if (res.ok) {
     const newSpot = await res.json();
-    console.log('newSpot', newSpot)
     dispatch(CREATE_SPOT(newSpot));
   };
   return res;
@@ -103,9 +103,8 @@ export const findSpot = (spotId) => async (dispatch) => {
   const res = await csrfFetch(`/api/spots/${spotId}`)
   if (res.ok) {
     const spot = await res.json()
-    dispatch(GET_SPOT(spot))
+    dispatch(GET_SPOT([spot]))
   }
-  // return res;
 }
 
 const initialState = {}

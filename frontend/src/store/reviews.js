@@ -7,8 +7,8 @@ const GET = 'reviews/GET';
 const DELETE = 'reviews/DELETE';
 const FIND = 'reviews/FIND';
 
-export const allReviews = (state) => Object.values(state.reviews);
-
+export const allReviewsArray = (state) => Object.values(state.reviews);
+export const allReviewsObj = state => state.reviews;
 // Action Creator
 const CREATE_REVIEW = (reviewInfo) => ({
   type: CREATE,
@@ -103,16 +103,15 @@ export const deleteReview = (reviewId, spotId) => async (dispatch) => {
   return review;
 }
 
-export const findReview = (reviewId) => async (dispatch) => {
-  const res = await csrfFetch(`/api/reviews/${reviewId}`)
+export const findReview = (spotId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/spots/${spotId}/reviews`)
   if (res.ok) {
     const review = await res.json()
-    dispatch(FIND_REVIEW(review))
+    dispatch(GET_REVIEW(review.Reviews))
   }
-  return res;
 }
 
-const initialState = {review:null}
+const initialState = {}
 
 // Reducer
 const reviewReducer = (state = initialState, action) => {

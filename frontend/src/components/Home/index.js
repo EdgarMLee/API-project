@@ -1,12 +1,12 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {allSpots,getAllSpots} from '../../store/spots';
+import {allSpotsArray,getAllSpots} from '../../store/spots';
 import "./Home.css";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const spotsObj = useSelector(allSpots);
+  const spotsObj = useSelector(allSpotsArray);
 // console.log('spotsObj',spotsObj)
 // console.log('allSpots',allSpots)
   useEffect(() => {

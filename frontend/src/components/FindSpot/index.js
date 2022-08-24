@@ -1,8 +1,8 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { useHistory, useParams, Link } from 'react-router-dom';
-import {findSpot, allSpots, deleteSpot} from '../../store/spots';
-import {allReviews} from '../../store/reviews';
+import {findSpot, allSpotsArray, allSpotsObj, deleteSpot} from '../../store/spots';
+import {allReviewsArray, allReviewsObj, findReview} from '../../store/reviews';
 import CreateReviewModal from '../CreateReviewModal';
 import EditSpotModal from "../EditSpotModal";
 import UserReview from '../UserReview';
@@ -13,13 +13,16 @@ const FindSpot = () => {
   const {spotId} = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
-  const spotsObj = useSelector(allSpots);
-  const reviewsObj = useSelector(allReviews);
-  console.log('allReviews', allReviews)
-  const spot = spotsObj.find(spot => spot.id == spotId)
+  const spotsObj = useSelector(allSpotsObj);
+  const reviewsObj = useSelector(allReviewsArray);
+  const [isLoaded, setIsLoaded] = useState(false)
+  const spot = spotsObj[Number(spotId)]
   const sessionUser = useSelector(state => state.session.user);
   useEffect(() => {
-    dispatch(findSpot(spotsObj))
+    dispatch(findSpot(spotId))
+    // dispatch(findReview(spotId))
+    .then(() => dispatch(findReview(spotId)))
+    .then(() => setIsLoaded(true))
   }, [dispatch])
 
   const handleDelete = (e) => {
@@ -34,7 +37,8 @@ if (sessionUser && spot) {
   } else currentUser = false;
 }
 
-  return (
+
+  return isLoaded && (
         (
       <>
       <div className='firstDiv'/>
@@ -53,7 +57,7 @@ if (sessionUser && spot) {
            <div key={spot?.id} className='stateSpot'> · {spot?.city}, {spot?.state}, {spot?.country}</div>
       </div>
           <div className='imgDiv'>
-           <img className='imageSpot' src={spot?.previewImage || "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"} alt="Image Is Not Available"/>
+           <img className='imageSpot' src={spot?.Images[0]?.url || "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"} alt="Image Is Not Available"/>
            </div>
            <div className='bottomText'>
            <div className='pricesSpot'>${spot?.price}</div>
@@ -63,9 +67,9 @@ if (sessionUser && spot) {
               <CreateReviewModal/>
            </div>
            <div className='allReviewSpot'>
-            {/* {reviewsObj.forEach(review => (
+            {reviewsObj.map(review => (
               <UserReview key={review.id} review={review}/>
-            ))} */}
+            ))}
            </div>
            </div>
       </>
