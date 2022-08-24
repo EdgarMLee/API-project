@@ -55,7 +55,7 @@ if (sessionUser && spot) {
            <div key={spot?.id} className='stateSpot'> · {spot?.city}, {spot?.state}, {spot?.country}</div>
       </div>
           <div className='imgDiv'>
-           <img className='imageSpot' src={spot?.previewImage} alt="Image Is Not Available"/>
+           <img className='imageSpot' src={spot?.previewImage || "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"} alt="Image Is Not Available"/>
            </div>
            <div className='bottomText'>
            <div className='pricesSpot'>${spot?.price}</div>
