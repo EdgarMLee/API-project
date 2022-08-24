@@ -141,7 +141,7 @@ const CreateNewSpot = () => {
         />
       </label>
       <label>
-        <textarea
+        <input
         className='createDescription'
         type="text"
         placeholder='Description'

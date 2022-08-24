@@ -1,3 +1,8 @@
+.editForm {
+  height: 900px;
+  width: 650px;
+}
+
 .editButton {
   background-color: rgb(233, 0, 0);
   color: white;
@@ -10,4 +15,50 @@
   height: 40px;
   width: 85px;
   margin-bottom: 20px;
+}
+
+.editSubTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
+  sans-serif;
+  font-weight: 550;
+  margin-bottom: 40px;
+}
+
+.editName,
+.editAddress,
+.editCity,
+.editState,
+.editCountry,
+.editLat,
+.editLng,
+.editDescription,
+.editPrice {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  border: solid 1px lightslategray;
+  border-radius: 8px;
+  width: 530px;
+  height: 45px;
+  padding-left: 15px;
+  padding-bottom: 6px;
+  padding-top: 6px;
+  margin-bottom: 20px;
+  margin-left: 50px;
+}
+
+.editSpotBut {
+  background-color: rgb(233, 0, 0);
+  color: white;
+  border: white solid 1px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 750;
+  height: 60px;
+  width: 550px;
+  margin-left: 50px;
 }
