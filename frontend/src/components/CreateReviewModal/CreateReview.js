@@ -24,13 +24,13 @@ function ReviewForm() {
 
   return (
     <form onSubmit={handleSubmit} className='reviewForm'>
+      <div className='reviewTitle'>
+        <h2 className='reviewHTitle'>Review</h2>
+      </div>
       <div>
         {errors.map((error, idx) => (
           <div key={idx} className='reviewErrors'>{error}</div>
         ))}
-      </div>
-      <div className='reviewTitle'>
-        <h2 className='reviewHTitle'>Review</h2>
       </div>
       <div className='reviewDescription'>
           <input

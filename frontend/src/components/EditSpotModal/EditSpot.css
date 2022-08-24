@@ -2,10 +2,12 @@
   background-color: rgb(233, 0, 0);
   color: white;
   border: white solid 1px;
-  border-radius: 12px;
+  border-radius: 15px;
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
+  sans-serif;
   font-size: 15px;
-  font-weight: 750;
-  height: 35px;
-  width: 65px;
+  font-weight: 600;
+  height: 40px;
+  width: 85px;
   margin-bottom: 20px;
 }
