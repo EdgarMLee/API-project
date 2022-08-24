@@ -21,9 +21,9 @@ const GET_SPOT = (spots) => ({
   spots
 })
 
-const EDIT_SPOT = (spotId) => ({
+const EDIT_SPOT = (spot) => ({
   type: EDIT,
-  spotId
+  spot
 })
 
 const DELETE_SPOT = (spotId) => ({
@@ -42,16 +42,15 @@ export const createSpot = (spotInfo) => async (dispatch) => {
   const res = await csrfFetch('/api/spots', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      spotInfo
-    })
+    body: JSON.stringify(spotInfo)
   });
   if (res.ok) {
     const newSpot = await res.json();
+    console.log('newSpot', newSpot)
     dispatch(CREATE_SPOT(newSpot));
-    return newSpot;
-  }
-};
+  };
+  return res;
+}
 
 //GET ALL SPOTS
 export const getAllSpots = () => async (dispatch) => {
@@ -65,42 +64,39 @@ export const getAllSpots = () => async (dispatch) => {
 }
 
 //EDIT A SPOT
-export const editSpot = (spotId) => async (dispatch) => {
-  const res = await csrfFetch(`/api/spots/${spotId.id}`, {
+export const editSpot = (info, spotId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/spots/${spotId}`, {
     method: "PUT",
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      spotId
-    })
+    body: JSON.stringify(info)
   });
   if (res.ok) {
     const eachSpot = await res.json();
     dispatch(EDIT_SPOT(eachSpot));
-    return eachSpot;
   };
+    return res;
 }
 
 //DELETE A SPOT
 export const deleteSpot = (spotId) => async (dispatch) => {
   const res = await csrfFetch(`/api/spots/${spotId}`, {
-    method: "DELETE",
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      spotId
-    })
+    method: "DELETE"
   });
   const spot = await res.json();
-  dispatch(DELETE_SPOT(spotId));
-  return spot;
+  if (res.ok) {
+    dispatch(DELETE_SPOT(spot));
+  }
+  return res;
 }
 
+//FIND A SPOT'S DETAIL
 export const findSpot = (spotId) => async (dispatch) => {
   const res = await csrfFetch(`/api/spots/${spotId}`)
   if (res.ok) {
     const spot = await res.json()
-    dispatch(FIND_SPOT(spot))
+    dispatch(GET_SPOT(spot))
   }
-  return res;
+  // return res;
 }
 
 const initialState = {}
@@ -117,7 +113,7 @@ const spotReducer = (state = initialState, action) => {
     }
     case CREATE: {
       const newState = {...state}
-      newState[action.spot.id] = action.spot
+      newState[action.spotInfo.id] = action.spotInfo
       return newState;
     }
     case EDIT: {
@@ -126,13 +122,15 @@ const spotReducer = (state = initialState, action) => {
       return newState;
     }
     case DELETE: {
+      console.log('state', state)
       const newState = {...state}
-      delete newState[action.spot.id]
+      console.log('newState', newState)
+      delete newState[action.spotId]
       return newState;
     }
     case FIND: {
       const newState = {...state}
-      newState[action.spot.id] = action.spot;
+      newState[action.spotId] = action.spot;
       return newState;
     }
     default:

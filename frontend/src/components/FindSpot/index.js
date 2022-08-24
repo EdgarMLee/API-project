@@ -2,8 +2,10 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { useHistory, useParams, Link } from 'react-router-dom';
 import {findSpot, allSpots, deleteSpot} from '../../store/spots';
+import {allReviews} from '../../store/reviews';
 import CreateReviewModal from '../CreateReviewModal';
 import EditSpotModal from "../EditSpotModal";
+import ReviewUser from '../UserReview';
 import "./FindSpot.css";
 
 
@@ -12,6 +14,7 @@ const FindSpot = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const spotsObj = useSelector(allSpots);
+  const reviewsObj = useSelector(allReviews);
   const spot = spotsObj.find(spot => spot.id == spotId)
   const sessionUser = useSelector(state => state.session.user);
   let currentUser;
@@ -19,10 +22,12 @@ const FindSpot = () => {
     dispatch(findSpot(spotsObj))
   }, [dispatch])
 
-  const handleDelete = async (e) => {
+  const handleDelete = async(e) => {
   e.preventDefault();
-  dispatch(deleteSpot(spotId))
-  history.push("/")
+  const response = await dispatch(deleteSpot(spotId))
+  console.log('spotId', spotId)
+  console.log('response', response)
+  if (response) history.push("/")
 }
 
 if (sessionUser && spot) {
@@ -56,8 +61,13 @@ if (sessionUser && spot) {
            <div className='pricesSpot'>${spot?.price}</div>
            <div className='nightsSpot'>night</div>
            <div className='descriptSpot'>{spot?.description}</div>
-           <div className='reviewSpot'>
+           <div className='createReviewSpot'>
               <CreateReviewModal/>
+           </div>
+           <div className='allReviewSpot'>
+            {/* {reviewsObj.forEach(review => (
+              <ReviewUser key={review.id} review={review}/>
+            ))} */}
            </div>
            </div>
       </>

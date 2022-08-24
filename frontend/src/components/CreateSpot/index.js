@@ -12,11 +12,11 @@ const CreateNewSpot = () => {
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [country, setCountry] = useState('');
-  const [lat, setLat] = useState(0);
-  const [lng, setLng] = useState(0);
+  const [lat, setLat] = useState('');
+  const [lng, setLng] = useState('');
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState('');
   const [errors, setErrors] = useState([]);
 
   useEffect(() => {
@@ -30,6 +30,7 @@ const CreateNewSpot = () => {
     if (name === '' || name.length > 50) errors.push("Valid name required")
     if (description === '') errors.push("Description is required")
     if (price === '') errors.push("Price is required")
+    setErrors(errors)
   }, [address, city, state, country, lat, lng, name, description, price])
 
   const handleSubmit = (e) => {
@@ -45,11 +46,12 @@ const CreateNewSpot = () => {
       description,
       price
     };
-
+    setErrors([]);
     dispatch(createSpot(spotInfo)).catch(async (res) => {
       const data = await res.json();
       if (data && data.errors) setErrors([data.errors])
     })
+    history.push('/')
   }
 
   return (

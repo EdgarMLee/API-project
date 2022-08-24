@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import {editSpot, findSpot} from "../../store/spots";
+import { Modal } from '../../context/Modal';
 import "./EditSpot.css"
 
 const EditSpot = () => {
@@ -10,31 +11,33 @@ const EditSpot = () => {
   const history = useHistory();
   const spot = useSelector(state => state.spots[spotId])
 
-  const [ownerId, setOwnerId] = useState(spot.ownerId)
-  const [address, setAddress] = useState(spot.address);
-  const [city, setCity] = useState(spot.city);
-  const [state, setState] = useState(spot.state);
-  const [country, setCountry] = useState(spot.country);
-  const [lat, setLat] = useState(spot.lat);
-  const [lng, setLng] = useState(spot.lng);
-  const [name, setName] = useState(spot.name);
-  const [description, setDescription] = useState(spot.description);
-  const [price, setPrice] = useState(spot.price);
+  const [ownerId, setOwnerId] = useState(spot?.ownerId)
+  const [address, setAddress] = useState(spot?.address);
+  const [city, setCity] = useState(spot?.city);
+  const [state, setState] = useState(spot?.state);
+  const [country, setCountry] = useState(spot?.country);
+  const [lat, setLat] = useState(spot?.lat);
+  const [lng, setLng] = useState(spot?.lng);
+  const [name, setName] = useState(spot?.name);
+  const [description, setDescription] = useState(spot?.description);
+  const [price, setPrice] = useState(spot?.price);
   const [errors, setErrors] = useState([]);
   const [disableToggle, setDisableToggle] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
-  // useEffect(() => {
-  //   const errors = [];
-  //   if (address === '') errors.push("Street address is required")
-  //   if (city === '') errors.push("City is required")
-  //   if (state === '') errors.push("State is required")
-  //   if (country === '') errors.push("Country is required")
-  //   if (lat === '') errors.push("Latitude is not valid")
-  //   if (lng === '') errors.push("'Longitude is not valid'")
-  //   if (name === '' || name.length > 50) errors.push("Valid name required")
-  //   if (description === '') errors.push("Description is required")
-  //   if (price === '') errors.push("Price is required")
-  // }, [address, city, state, country, lat, lng, name, description, price])
+  useEffect(() => {
+    const errors = [];
+    if (address === '') errors.push("Street address is required")
+    if (city === '') errors.push("City is required")
+    if (state === '') errors.push("State is required")
+    if (country === '') errors.push("Country is required")
+    if (lat === '') errors.push("Latitude is not valid")
+    if (lng === '') errors.push("'Longitude is not valid'")
+    if (name === '' || name.length > 50) errors.push("Valid name required")
+    if (description === '') errors.push("Description is required")
+    if (price === '') errors.push("Price is required")
+    setErrors(errors)
+  }, [address, city, state, country, lat, lng, name, description, price])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -50,11 +53,12 @@ const EditSpot = () => {
       price
     };
     setErrors([]);
-    dispatch(editSpot(spotInfo)).catch(async (res) => {
+    dispatch(editSpot(spotInfo, spot.id)).catch(async (res) => {
       const data = await res.json();
+      console.log('data', data)
       if (data && data.errors) setErrors([data.errors])
     })
-
+    // history.push(`/spots/${spotId}`)
   }
 
   return (
@@ -160,7 +164,7 @@ const EditSpot = () => {
         required
         />
       </label>
-      <button type="submit" disabled={disableToggle} className='editSpotBut'>Update Your Home!</button>
+      <button type="submit" className='editSpotBut'>Update Your Home!</button>
     </form>
   )
 }
