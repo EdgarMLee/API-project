@@ -1,0 +1,11 @@
+.createReview {
+  background-color: rgb(233, 0, 0);
+  color: white;
+  border: white solid 1px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 750;
+  height: 35px;
+  width: 65px;
+  margin-bottom: 20px;
+}

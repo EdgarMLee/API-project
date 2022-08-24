@@ -25,8 +25,8 @@ const FindSpot = () => {
   const handleDelete = async(e) => {
   e.preventDefault();
   const response = await dispatch(deleteSpot(spotId))
-  console.log('spotId', spotId)
-  console.log('response', response)
+  // console.log('spotId', spotId)
+  // console.log('response', response)
   if (response) history.push("/")
 }
 
@@ -44,7 +44,7 @@ if (sessionUser && spot) {
           <div className="nameSpot">{spot?.name}</div>
            <div className='ratingSpot'>
            <div className="fa-solid fa-star"/>
-            {spot?.avgRating} ·
+            {spot?.avgRating} · {spot?.numReviews} reviews
             </div>
             {currentUser && (
             <div className='editDeleteSpot'>

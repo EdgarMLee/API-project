@@ -23,10 +23,6 @@
   font-size: 12px;
 }
 
-/* .imgDiv { */
-  /* border: 1px solid red; */
-/* } */
-
 .imageSpot {
   /* border: 1px solid red; */
   margin-top: 20px;
@@ -39,5 +35,27 @@
 .bottomText {
   padding: 20px;
   margin-top: 110px;
+}
 
+.deleteButton {
+  background-color: rgb(233, 0, 0);
+  color: white;
+  border: white solid 1px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 750;
+  height: 35px;
+  width: 65px;
+  margin-bottom: 20px;
+}
+
+.pricesSpot,
+.nightsSpot,
+.descriptSpot {
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
+  sans-serif;
+}
+
+.descriptSpot {
+  font-size: 16px;
 }
