@@ -21,5 +21,23 @@
 }
 
 .bnbLogo {
+  display: flex;
   margin-left: 50px;
+}
+
+.fa-brands,
+.awayBnB {
+  color: rgb(260, 0, 0);
+}
+
+.fa-brands {
+  margin-right: 10px;
+}
+
+.awayBnB {
+  font-weight: 500;
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
+  sans-serif;
+  font-size: 23px;
+  margin-top: 8px;
 }
