@@ -37,17 +37,18 @@ const FIND_REVIEW = (reviewId) => ({
 
 // Thunks
 //CREATE REVIEW
-export const createReview = (reviewInfo) => async (dispatch) => {
-  const res = await csrfFetch('/api/reviews', {
+export const createReview = (reviewInfo, spotId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/spots/${spotId}/reviews`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
+    body: JSON.stringify(
       reviewInfo
-    })
+    )
   });
   if (res.ok) {
     const newReview = await res.json();
     dispatch(CREATE_REVIEW(newReview));
+    dispatch(findSpot(newReview.spotId));
     return newReview;
   }
 };

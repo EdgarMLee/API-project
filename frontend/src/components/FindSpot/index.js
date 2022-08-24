@@ -64,11 +64,11 @@ if (sessionUser && spot) {
            <div className='nightsSpot'>night</div>
            <div className='descriptSpot'>{spot?.description}</div>
            <div className='createReviewSpot'>
-              <CreateReviewModal/>
+             {sessionUser && <CreateReviewModal spotId={spotId}/>}
            </div>
            <div className='allReviewSpot'>
             {reviewsObj.map(review => (
-              <UserReview key={review.id} review={review}/>
+              <UserReview key={review?.id} review={review}/>
             ))}
            </div>
            </div>
