@@ -59,19 +59,18 @@ export const getAllReviews = () => async (dispatch) => {
   const res = await csrfFetch('/api/reviews');
   if (res.ok) {
     const allReviews = await res.json();
-    dispatch(GET_REVIEW(allReviews.reviews));
+    dispatch(GET_REVIEW(allReviews.Reviews));
   };
   return res;
 }
 
 //GET ALL REVIEWS BY CURRENT USER
 export const allReviewsUser = () => async (dispatch) => {
-  const res = await csrfFetch('/api/currentUser/reviews');
+  const res = await csrfFetch('/api/reviews/current');
   if (res.ok) {
     const allReviews = await res.json();
     dispatch(GET_REVIEW(allReviews.reviews));
   };
-  return res;
 }
 
 //EDIT A REVIEW
