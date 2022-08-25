@@ -17,6 +17,7 @@ const ReviewByUser = () => {
   return (
     <>
     <div className='ReviewsTitle'>My Reviews</div>
+    <div className='emptyBorder'/>
     <div className='MyReviews'>
     {allReviews.map((review) => (
       <UserReview key={review?.id} review={review}/>
