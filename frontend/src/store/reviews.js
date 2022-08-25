@@ -70,7 +70,8 @@ export const allReviewsUser = () => async (dispatch) => {
   const res = await csrfFetch('/api/reviews/current');
   if (res.ok) {
     const allReviews = await res.json();
-    dispatch(GET_REVIEW(allReviews.reviews));
+    console.log('allReviews', allReviews)
+    dispatch(GET_REVIEW(allReviews.Reviews));
   };
 }
 
@@ -130,6 +131,7 @@ const reviewReducer = (state = initialState, action) => {
   let newState = {};
   switch(action.type) {
     case GET: {
+      newState = {};
       action.reviews.forEach(review => {
         newState[review.id] = review;
       })

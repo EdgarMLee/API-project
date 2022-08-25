@@ -10,16 +10,16 @@ const SpotsByUser = () => {
   const dispatch = useDispatch();
   const spotsObj = useSelector(allSpotsObj);
   const spot = spotsObj[Number(spotId)]
-  const sessionUser = useSelector(state => state.session.user);
+  // const sessionUser = useSelector(state => state.session.user);
   useEffect(() => {
     dispatch(allSpotsUser());
   },[dispatch]);
 
-  if (sessionUser && spot) {
-    if (sessionUser.id === spot.ownerId) {
-      currentUser = true;
-    } else currentUser = false;
-  }
+  // if (sessionUser && spot) {
+  //   if (sessionUser.id === spot.ownerId) {
+  //     currentUser = true;
+  //   } else currentUser = false;
+  // }
 
   return  (
     <>

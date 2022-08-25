@@ -95,14 +95,16 @@ const validateReview = [
 
 //Get all Spots owned by the Current User
 router.get('/current', requireAuth, restoreUser, async (req, res) => {
+  // console.log("req", req.user.id)
   const id = req.user.id
   const spots = await Spot.findAll({
     where: {ownerId: id}
   })
   for (let spot of spots) {
+    console.log("*******spot******", spot)
     const spotReviews = await spot.getReviews({
       attributes: [
-        [sequelize.fn("COUNT", sequelize.col("id")), "countReviews"]
+        // [sequelize.fn("COUNT", sequelize.col("id")), "countReviews"]
         [sequelize.fn("AVG", sequelize.col("stars")), "avgStarRating"]
       ]
     })
@@ -135,21 +137,21 @@ router.get('/:spotId', async (req, res, next) => {
       }
     ]
   })
-  // const spotReviews = await spot.getReviews({
-  //   attributes: [
-  //     [sequelize.fn("COUNT", sequelize.col("id")), "countReviews"]
-  //     [sequelize.fn("AVG", sequelize.col("stars")), "avgStarRating"]
-  //   ]
-  // })
-  // const avgRating = spotReviews[0].dataValues.avgStarRating;
-  // const countReviews = spotReviews[0].dataValues.countReviews;
-  // spot.dataValues.avgRating = Number(avgRating).toFixed(1);
-  // spot.dataValues.countReviews = parseInt(countReviews)
   if (!spot) {
     const err = new Error("Spot couldn't be found")
     err.status = 404
     return next(err)
   }
+  const spotReviews = await spot.getReviews({
+    attributes: [
+      [sequelize.fn("COUNT", sequelize.col("id")), "countReviews"],
+      [sequelize.fn("AVG", sequelize.col("stars")), "avgStarRating"]
+    ]
+  })
+  const avgRating = spotReviews[0].dataValues.avgStarRating;
+  const countReviews = spotReviews[0].dataValues.countReviews;
+  spot.dataValues.avgRating = Number(avgRating).toFixed(1);
+  spot.dataValues.countReviews = parseInt(countReviews)
   res.json(spot)
 });
 

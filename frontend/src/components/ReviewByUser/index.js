@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, Link, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import UserReview from "../UserReview";
 import { allReviewsUser, allReviewsArray } from "../../store/reviews";
 import "./ReviewByUser.css";
@@ -25,5 +25,4 @@ const ReviewByUser = () => {
       </>
   )
 }
-
 export default ReviewByUser;
