@@ -1,15 +1,16 @@
 import { csrfFetch } from "./csrf"
 import { findSpot } from "./spots";
+
 // Variables
 const CREATE = 'reviews/CREATE';
 const GET = 'reviews/GET';
-// const EDIT = 'reviews/EDIT';
 const DELETE = 'reviews/DELETE';
 const FIND = 'reviews/FIND';
 
 export const allReviewsArray = (state) => Object.values(state.reviews);
 export const allReviewsObj = state => state.reviews;
-// Action Creator
+
+// Action Creators
 const CREATE_REVIEW = (reviewInfo) => ({
   type: CREATE,
   reviewInfo
@@ -73,6 +74,14 @@ export const allReviewsUser = () => async (dispatch) => {
   };
 }
 
+export const getAllReviewsBySpot = (spotId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/spots/${spotId}/reviews`);
+  if (res.ok) {
+    const review = await res.json();
+    dispatch(GET_REVIEW(review.Reviews))
+  }
+}
+
 //EDIT A REVIEW
 // export const editReview = (reviewId) => async (dispatch) => {
 //   const res = await csrfFetch(`/api/reviews/${reviewId.id}`, {
@@ -109,6 +118,8 @@ export const findReview = (spotId) => async (dispatch) => {
   if (res.ok) {
     const review = await res.json()
     dispatch(GET_REVIEW(review.Reviews))
+    dispatch(getAllReviewsBySpot(review.spotId))
+    dispatch(findSpot(review.spotId))
   }
 }
 

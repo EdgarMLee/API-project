@@ -68,7 +68,6 @@ export const allSpotsUser = () => async (dispatch) => {
     const allSpots = await res.json();
     dispatch(GET_SPOT(allSpots.spots));
   };
-  return res;
 }
 
 //EDIT A SPOT
