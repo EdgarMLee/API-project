@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { useHistory, useParams, Link } from 'react-router-dom';
 import {findSpot, allSpotsArray, allSpotsObj, deleteSpot} from '../../store/spots';
-import {allReviewsArray, allReviewsObj, findReview} from '../../store/reviews';
+import {allReviewsArray, allReviewsObj, getAllReviewsBySpot} from '../../store/reviews';
 import CreateReviewModal from '../CreateReviewModal';
 import EditSpotModal from "../EditSpotModal";
 import UserReview from '../UserReview';
@@ -21,7 +21,7 @@ const FindSpot = () => {
   useEffect(() => {
     dispatch(findSpot(spotId))
     // dispatch(findReview(spotId))
-    .then(() => dispatch(findReview(spotId)))
+    .then(() => dispatch(getAllReviewsBySpot(spotId)))
     .then(() => setIsLoaded(true))
   }, [dispatch])
 
