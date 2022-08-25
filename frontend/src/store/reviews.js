@@ -1,15 +1,16 @@
 import { csrfFetch } from "./csrf"
 import { findSpot } from "./spots";
+
 // Variables
 const CREATE = 'reviews/CREATE';
 const GET = 'reviews/GET';
-// const EDIT = 'reviews/EDIT';
 const DELETE = 'reviews/DELETE';
 const FIND = 'reviews/FIND';
 
 export const allReviewsArray = (state) => Object.values(state.reviews);
 export const allReviewsObj = state => state.reviews;
-// Action Creator
+
+// Action Creators
 const CREATE_REVIEW = (reviewInfo) => ({
   type: CREATE,
   reviewInfo
@@ -45,7 +46,7 @@ export const createReview = (reviewInfo, spotId) => async (dispatch) => {
       reviewInfo
     )
   });
-  // console.log('res', res);
+
   if (res.ok) {
     const newReview = await res.json();
     dispatch(CREATE_REVIEW(newReview));
@@ -59,19 +60,26 @@ export const getAllReviews = () => async (dispatch) => {
   const res = await csrfFetch('/api/reviews');
   if (res.ok) {
     const allReviews = await res.json();
-    dispatch(GET_REVIEW(allReviews.reviews));
+    dispatch(GET_REVIEW(allReviews.Reviews));
   };
   return res;
 }
 
 //GET ALL REVIEWS BY CURRENT USER
 export const allReviewsUser = () => async (dispatch) => {
-  const res = await csrfFetch('/api/currentUser/reviews');
+  const res = await csrfFetch('/api/reviews/current');
   if (res.ok) {
     const allReviews = await res.json();
     dispatch(GET_REVIEW(allReviews.reviews));
   };
-  return res;
+}
+
+export const getAllReviewsBySpot = (spotId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/spots/${spotId}/reviews`);
+  if (res.ok) {
+    const review = await res.json();
+    dispatch(GET_REVIEW(review.Reviews))
+  }
 }
 
 //EDIT A REVIEW
@@ -110,6 +118,8 @@ export const findReview = (spotId) => async (dispatch) => {
   if (res.ok) {
     const review = await res.json()
     dispatch(GET_REVIEW(review.Reviews))
+    dispatch(getAllReviewsBySpot(review.spotId))
+    dispatch(findSpot(review.spotId))
   }
 }
 
@@ -117,16 +127,16 @@ const initialState = {}
 
 // Reducer
 const reviewReducer = (state = initialState, action) => {
+  let newState = {};
   switch(action.type) {
     case GET: {
-      const newState = {...state}
       action.reviews.forEach(review => {
         newState[review.id] = review;
       })
       return newState;
     }
     case CREATE: {
-      const newState = {...state}
+      newState = {...state}
       newState[action.reviewInfo.id] = action.reviewInfo
       return newState;
     }
@@ -136,7 +146,7 @@ const reviewReducer = (state = initialState, action) => {
     //   return newState;
     // }
     case DELETE: {
-      const newState = {...state}
+      newState = {...state}
       delete newState[action.reviewId]
       return newState;
     }

@@ -101,7 +101,10 @@ router.get('/current', requireAuth, restoreUser, async (req, res) => {
   })
   for (let spot of spots) {
     const spotReviews = await spot.getReviews({
-      attributes: [[sequelize.fn("AVG", sequelize.col("stars")), "avgStarRating"]]
+      attributes: [
+        [sequelize.fn("COUNT", sequelize.col("id")), "countReviews"]
+        [sequelize.fn("AVG", sequelize.col("stars")), "avgStarRating"]
+      ]
     })
     const avgRating = spotReviews[0].dataValues.avgStarRating;
     spot.dataValues.avgRating = Number(avgRating).toFixed(1);
@@ -132,6 +135,16 @@ router.get('/:spotId', async (req, res, next) => {
       }
     ]
   })
+  // const spotReviews = await spot.getReviews({
+  //   attributes: [
+  //     [sequelize.fn("COUNT", sequelize.col("id")), "countReviews"]
+  //     [sequelize.fn("AVG", sequelize.col("stars")), "avgStarRating"]
+  //   ]
+  // })
+  // const avgRating = spotReviews[0].dataValues.avgStarRating;
+  // const countReviews = spotReviews[0].dataValues.countReviews;
+  // spot.dataValues.avgRating = Number(avgRating).toFixed(1);
+  // spot.dataValues.countReviews = parseInt(countReviews)
   if (!spot) {
     const err = new Error("Spot couldn't be found")
     err.status = 404

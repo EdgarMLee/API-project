@@ -60,6 +60,10 @@
   margin-bottom: 20px;
 }
 
+.signUpButton {
+  cursor: pointer;
+}
+
 /* Home Page Sign Up Button */
 .signupButton {
   background-color: white;

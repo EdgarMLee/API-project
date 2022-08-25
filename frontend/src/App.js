@@ -7,6 +7,8 @@ import Navigation from "./components/Navigation";
 import Home from "./components/Home";
 import FindSpot from "./components/FindSpot";
 import CreateNewSpot from "./components/CreateSpot";
+import ReviewByUser from "./components/ReviewByUser";
+import SpotsByUser from "./components/SpotsByUser";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,7 +28,11 @@ function App() {
           <Route path="/spots/:spotId">
             <FindSpot/>
           </Route>
-          <Route path="/reviews/:reviewId">
+          <Route path="/view-your-spots">
+            <SpotsByUser/>
+          </Route>
+          <Route path="/view-your-reviews">
+            <ReviewByUser/>
           </Route>
           <Route exact path="/host-your-home">
             <CreateNewSpot/>
