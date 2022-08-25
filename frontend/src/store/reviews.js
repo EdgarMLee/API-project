@@ -46,7 +46,7 @@ export const createReview = (reviewInfo, spotId) => async (dispatch) => {
       reviewInfo
     )
   });
-  // console.log('res', res);
+
   if (res.ok) {
     const newReview = await res.json();
     dispatch(CREATE_REVIEW(newReview));

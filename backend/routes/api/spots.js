@@ -142,9 +142,9 @@ router.get('/:spotId', async (req, res, next) => {
   //   ]
   // })
   // const avgRating = spotReviews[0].dataValues.avgStarRating;
-  // const amtReviews = spotReviews[0].dataValues.countReviews;
+  // const countReviews = spotReviews[0].dataValues.countReviews;
   // spot.dataValues.avgRating = Number(avgRating).toFixed(1);
-  // spot.dataValues.countReviews = parseInt(amtReviews)
+  // spot.dataValues.countReviews = parseInt(countReviews)
   if (!spot) {
     const err = new Error("Spot couldn't be found")
     err.status = 404
