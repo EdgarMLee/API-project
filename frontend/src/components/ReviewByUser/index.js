@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, Link, useParams } from "react-router-dom";
 import UserReview from "../UserReview";
 import { allReviewsUser, allReviewsArray } from "../../store/reviews";
 import "./ReviewByUser.css";
 const ReviewByUser = () => {
+  const {spotId} = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
   const allReviews = useSelector(allReviewsArray);
+  // const reviews = allReviews.map(review => review.userId ===)
   useEffect(() => {
     dispatch(allReviewsUser());
   },[dispatch]);

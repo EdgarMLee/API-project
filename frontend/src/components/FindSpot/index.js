@@ -46,7 +46,7 @@ if (sessionUser && spot) {
           <div className="nameSpot">{spot?.name}</div>
            <div className='ratingSpot'>
            <div className="fa-solid fa-star"/>
-            {spot?.avgRating} · {spot?.numReviews} reviews
+           <div>{spot?.avgRating} · {spot?.numReviews} reviews</div>
             </div>
             {currentUser && (
             <div className='editDeleteSpot'>

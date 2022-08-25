@@ -109,31 +109,32 @@ const initialState = {}
 
 // SPOT Reducer
 const spotReducer = (state = initialState, action) => {
+  let newState = {}
   switch(action.type) {
     case GET: {
-      const newState = {...state}
+      // const newState = {...state}
       action.spots.forEach(spot => {
         newState[spot.id] = spot;
       })
       return newState;
     }
     case CREATE: {
-      const newState = {...state}
+      newState = {...state}
       newState[action.spotInfo.id] = action.spotInfo
       return newState;
     }
     case EDIT: {
-      const newState = {...state}
+      newState = {...state}
       newState[action.spot.id] = action.spot
       return newState;
     }
     case DELETE: {
-      const newState = {...state}
+      newState = {...state}
       delete newState[action.spotId]
       return newState;
     }
     case FIND: {
-      const newState = {...state}
+      newState = {...state}
       newState[action.spotId] = action.spot;
       return newState;
     }

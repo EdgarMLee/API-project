@@ -127,16 +127,16 @@ const initialState = {}
 
 // Reducer
 const reviewReducer = (state = initialState, action) => {
+  let newState = {};
   switch(action.type) {
     case GET: {
-      const newState = {...state}
       action.reviews.forEach(review => {
         newState[review.id] = review;
       })
       return newState;
     }
     case CREATE: {
-      const newState = {...state}
+      newState = {...state}
       newState[action.reviewInfo.id] = action.reviewInfo
       return newState;
     }
@@ -146,7 +146,7 @@ const reviewReducer = (state = initialState, action) => {
     //   return newState;
     // }
     case DELETE: {
-      const newState = {...state}
+      newState = {...state}
       delete newState[action.reviewId]
       return newState;
     }

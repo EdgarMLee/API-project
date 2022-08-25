@@ -17,11 +17,9 @@ function ReviewForm() {
       review,
       stars
     };
-    console.log('reviewInfo', reviewInfo)
     setErrors([]);
     dispatch(createReview(reviewInfo, spotId)).catch(async (res) => {
       const data = await res.json();
-      console.log('data', data)
       if (data && data.errors) setErrors(data.errors);
     })
   }

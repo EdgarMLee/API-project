@@ -11,7 +11,7 @@ const EditSpot = () => {
   const history = useHistory();
   const spot = useSelector(state => state.spots[spotId])
 
-  const [ownerId, setOwnerId] = useState(spot?.ownerId)
+  // const [ownerId, setOwnerId] = useState(spot?.ownerId)
   const [address, setAddress] = useState(spot?.address);
   const [city, setCity] = useState(spot?.city);
   const [state, setState] = useState(spot?.state);
