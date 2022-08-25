@@ -6,7 +6,7 @@ import "./CreateReview.css";
 
 function CreateReviewModal() {
   const [showModal, setShowModal] = useState(false);
-  const allReviews = useSelector(state => state.reviewInfo);
+  const allReviews = useSelector(state => state.reviews);
   useEffect(() => {
     setShowModal(false);
   }, [allReviews])
