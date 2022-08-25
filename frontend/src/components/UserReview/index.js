@@ -36,7 +36,7 @@ function ReviewUser({review}) {
       </div>
       <div className='dateReview'>
       <div className='reviewDate'>{date} -</div>
-      <div className='reviewReview'>{review?.review}</div>
+      <div className='reviewReview'>{review?.stars} {review?.review}</div>
       </div>
       {/* </div> */}
       <div className='reviewDivDelete'>
