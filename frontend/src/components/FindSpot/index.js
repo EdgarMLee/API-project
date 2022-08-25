@@ -48,8 +48,8 @@ if (sessionUser && spot) {
             <div className='outsideStar'>
            <div className="fa-solid fa-star"/>
             {/* </div> */}
-           {spot?.avgRating} · {spot?.countReviews}
-            <div key={spot?.id} className='stateSpot'>reviews · {spot?.city}, {spot?.state}, {spot?.country}</div>
+           {spot?.avgRating} · {spot?.countReviews} reviews · {spot?.city}
+            <div key={spot?.id} className='stateSpot'>  , {spot?.state}, {spot?.country}</div>
            </div>
            </div>
             {currentUser && (
