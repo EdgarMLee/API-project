@@ -1,23 +1,27 @@
 import React, { useState } from 'react';
 import {createReview} from "../../store/reviews";
+import { useParams } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import './CreateReview.css';
 
 function ReviewForm() {
+  const {spotId} = useParams();
   const dispatch = useDispatch();
   const [review, setReview] = useState('');
-  const [star, setStar] = useState('');
+  const [stars, setStars] = useState('');
   const [errors, setErrors] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const reviewInfo = {
       review,
-      star
+      stars
     };
+    console.log('reviewInfo', reviewInfo)
     setErrors([]);
-    dispatch(createReview(reviewInfo)).catch(async (res) => {
+    dispatch(createReview(reviewInfo, spotId)).catch(async (res) => {
       const data = await res.json();
+      console.log('data', data)
       if (data && data.errors) setErrors(data.errors);
     })
   }
@@ -49,8 +53,8 @@ function ReviewForm() {
           min="0"
           max="5"
           className='userStar'
-          value={star}
-          onChange={(e) => setStar(e.target.value)}
+          value={stars}
+          onChange={(e) => setStars(e.target.value)}
           required
           />
       </div>
