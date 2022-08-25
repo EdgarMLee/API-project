@@ -1,0 +1,50 @@
+.reviewBox {
+  margin-top: 50px;
+}
+
+.reviewUserIcon {
+  height: 30px;
+}
+
+.reviewName,
+.reviewDate,
+.reviewReview {
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
+  sans-serif;
+  font-size: 17px;
+}
+
+.dateReview {
+  display: flex;
+  padding: 5px;
+}
+
+.reviewName,
+.reviewReview {
+  font-weight: 500;
+  margin-left: 6px;
+}
+
+.reviewProfile {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.reviewDeleteButton {
+  background-color: rgb(233, 0, 0);
+  color: white;
+  border: white solid 1px;
+  border-radius: 18px;
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
+  sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  height: 40px;
+  width: 120px;
+  margin-top: 5px;
+}
+
+.reviewDeleteButton:hover {
+  cursor: pointer;
+}

@@ -38,6 +38,7 @@ const EditSpot = () => {
     if (description === '') errors.push("Description is required")
     if (price === '') errors.push("Price is required")
     setErrors(errors)
+
   }, [address, city, state, country, lat, lng, name, description, price])
 
   const handleSubmit = (e) => {
@@ -60,7 +61,6 @@ const EditSpot = () => {
     })
     // history.push(`/spots/${spotId}`)
   }
-
   return (
     <form onSubmit={handleSubmit} className='editForm'>
       <div className='editTitle'>

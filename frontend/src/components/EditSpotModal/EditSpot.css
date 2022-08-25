@@ -7,7 +7,7 @@
   background-color: rgb(233, 0, 0);
   color: white;
   border: white solid 1px;
-  border-radius: 15px;
+  border-radius: 18px;
   font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
   sans-serif;
   font-size: 15px;
@@ -15,6 +15,10 @@
   height: 40px;
   width: 85px;
   margin-bottom: 20px;
+}
+
+.editButton:hover {
+  cursor: pointer;
 }
 
 .editSubTitle {
@@ -55,7 +59,7 @@
   background-color: rgb(233, 0, 0);
   color: white;
   border: white solid 1px;
-  border-radius: 10px;
+  border-radius: 13px;
   font-size: 20px;
   font-weight: 750;
   height: 60px;

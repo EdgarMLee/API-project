@@ -7,6 +7,10 @@
   border: 1px lightsteelblue solid;
   border-radius: 20px;
 }
+
+.profileButton:hover {
+  cursor: pointer;
+}
 /* position: fixed; */
 
 .profileIcon {
