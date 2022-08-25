@@ -114,6 +114,7 @@ const spotReducer = (state = initialState, action) => {
   let newState = {}
   switch(action.type) {
     case GET: {
+      newState = {};
       action.spots.forEach(spot => {
         newState[spot.id] = spot;
       })

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { useHistory, useParams, Link } from 'react-router-dom';
 import {findSpot, allSpotsArray, allSpotsObj, deleteSpot} from '../../store/spots';
-import {allReviewsArray, allReviewsObj, findReview} from '../../store/reviews';
+import {allReviewsArray, allReviewsObj, getAllReviewsBySpot} from '../../store/reviews';
 import CreateReviewModal from '../CreateReviewModal';
 import EditSpotModal from "../EditSpotModal";
 import UserReview from '../UserReview';
@@ -21,7 +21,7 @@ const FindSpot = () => {
   useEffect(() => {
     dispatch(findSpot(spotId))
     // dispatch(findReview(spotId))
-    .then(() => dispatch(findReview(spotId)))
+    .then(() => dispatch(getAllReviewsBySpot(spotId)))
     .then(() => setIsLoaded(true))
   }, [dispatch])
 
@@ -48,8 +48,8 @@ if (sessionUser && spot) {
             <div className='outsideStar'>
            <div className="fa-solid fa-star"/>
             {/* </div> */}
-           {spot?.avgRating} · {spot?.countReviews}
-            <div key={spot?.id} className='stateSpot'>reviews · {spot?.city}, {spot?.state}, {spot?.country}</div>
+           {spot?.avgRating} · {spot?.countReviews} reviews · {spot?.city}
+            <div key={spot?.id} className='stateSpot'>  , {spot?.state}, {spot?.country}</div>
            </div>
            </div>
             {currentUser && (

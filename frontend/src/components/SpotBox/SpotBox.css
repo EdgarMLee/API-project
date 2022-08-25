@@ -1,4 +1,4 @@
- /* .firstDiv {
+.firstDiv {
   margin-top: 20px;
   margin-bottom: 30px;
   border-bottom: 1px solid rgb(200, 200, 200);
@@ -8,7 +8,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 1%;
+  padding: 3px;
 }
 
 .imgDiv {
@@ -68,4 +68,4 @@
   sans-serif;
   color: black;
   margin-left: 5px;
-} */
+}

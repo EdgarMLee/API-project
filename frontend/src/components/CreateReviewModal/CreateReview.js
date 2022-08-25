@@ -30,7 +30,7 @@ function ReviewForm() {
         <h2 className='reviewHTitle'>Review</h2>
       </div>
       <div>
-        {errors.map((error, idx) => (
+        {Object.values(errors).map((error, idx) => (
           <div key={idx} className='reviewErrors'>{error}</div>
         ))}
       </div>
