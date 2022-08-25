@@ -5,8 +5,7 @@ import { useParams } from 'react-router-dom';
 import "./SpotsByUser.css";
 import SpotBox from "../SpotBox";
 const SpotsByUser = () => {
-  let currentUser;
-  const {spotId} = useParams();
+  // const {spotId} = useParams();
   const dispatch = useDispatch();
   const spotsObj = useSelector(allSpotsArray);
   // const sessionUser = useSelector(state => state.session.user);
@@ -17,7 +16,7 @@ const SpotsByUser = () => {
   return  (
     <>
     <div className='SpotsTitle'>My Spots</div>
-    <div className='MySpots'>
+    <div className='spotBox'>
       {spotsObj.map(spot => (<SpotBox key={spot?.id} spot={spot}/>))}
       </div>
       </>

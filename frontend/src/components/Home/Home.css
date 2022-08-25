@@ -5,18 +5,20 @@
 }
 
 .spotBox {
-  /* border: red solid 1px; */
   display: flex;
   flex-wrap: wrap;
-  padding-left: 85px;
+  justify-content: center;
+  padding: 1%;
+  /* padding-left: 85px; */
+  /* border: red solid 1px; */
 }
 
 .imgDiv {
-  /* border: 1px blue solid; */
   height: 300px;
   width: 320px;
   display: flex;
   margin-left: 20px;
+  /* border: 1px blue solid; */
 }
 
 .imgSpot {
