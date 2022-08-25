@@ -1,6 +1,14 @@
-.reviewBox {
-  margin-top: 50px;
+.reviewsContainer {
+  border: 1px red solid;
+  margin-bottom: 2%;
+  padding:2%;
+  display:flex;
+  flex-wrap: wrap;
+  width: 10%;
 }
+/* .reviewBox{
+  border: 1px black solid;
+} */
 
 .reviewUserIcon {
   height: 30px;
