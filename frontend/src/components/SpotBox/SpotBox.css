@@ -1,43 +1,71 @@
-.eachSpotsb {
-  text-decoration: none;
-  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
-  sans-serif;
-  color: black;
+.firstDiv {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid rgb(200, 200, 200);
 }
 
-.imgDivsb {
+.spotBox {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 3px;
+}
+
+.imgDiv {
   height: 300px;
   width: 320px;
-  /* display: flex; */
-  /* margin-left: 20px; */
+  display: flex;
+  margin-left: 20px;
 }
 
-.imgSpotsb {
+.imgSpot {
   height: 100%;
   width: 100%;
   border-radius: 16px;
 }
-/*
-.locationReviewssb {
-  border: 1px green solid;
+
+.priceSpot,
+.citySpot,
+.starSpot {
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
+  sans-serif;
+  color: black;
+  padding-left: 30px;
+}
+.eachSpot {
+  text-decoration: none;
 }
 
-.citySpotsb {
-  border: 1px green solid;
+.citySpot,
+.priceSpot {
+  font-weight: 500;
 }
 
-.starSpotsb {
-  border: 1px green solid;
+.citySpot {
+  margin-top: 5px;
 }
 
-.priceNightsb {
-  border: 1px green solid;
+.nightSpot {
+  margin-bottom: 10px;
 }
 
-.priceSpotsb {
-  border: 1px green solid;
+.locationReviews {
+  display: flex;
+  justify-content: space-between;
 }
 
-.nightSpotsb {
-  border: 1px green solid;
-} */
+.starSpot {
+  margin-right: 10px;
+  margin-top: 3px;
+}
+
+.priceNight {
+  display: flex;
+}
+
+.nightSpot {
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
+  sans-serif;
+  color: black;
+  margin-left: 5px;
+}

@@ -16,6 +16,7 @@ const SpotsByUser = () => {
   return  (
     <>
     <div className='SpotsTitle'>My Spots</div>
+    <div className='emptyBorder'/>
     <div className='spotBox'>
       {spotsObj.map(spot => (<SpotBox key={spot?.id} spot={spot}/>))}
       </div>
