@@ -17,7 +17,7 @@ const Home = () => {
       <div className='firstDiv'></div>
       <div className='spotBox'>
         {spotsObj?.map(spot =>
-          <Link className='eachSpot' to={`/spots/${spot?.id}`}>
+          <Link key={spot?.id} className='eachSpot' to={`/spots/${spot?.id}`}>
           <div className='imgDiv'>
            <img className='imgSpot' src={spot?.previewImage || "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"} alt="Image Not Available"/>
            </div>

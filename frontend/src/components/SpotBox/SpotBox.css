@@ -1,0 +1,44 @@
+.eachSpotsb {
+  text-decoration: none;
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
+  sans-serif;
+  color: black;
+}
+
+.imgDivsb {
+  height: 300px;
+  width: 320px;
+  /* display: flex; */
+  /* margin-left: 20px; */
+
+}
+
+.imgSpotsb {
+  height: 100%;
+  width: 100%;
+  border-radius: 16px;
+}
+/*
+.locationReviewssb {
+  border: 1px green solid;
+}
+
+.citySpotsb {
+  border: 1px green solid;
+}
+
+.starSpotsb {
+  border: 1px green solid;
+}
+
+.priceNightsb {
+  border: 1px green solid;
+}
+
+.priceSpotsb {
+  border: 1px green solid;
+}
+
+.nightSpotsb {
+  border: 1px green solid;
+} */
