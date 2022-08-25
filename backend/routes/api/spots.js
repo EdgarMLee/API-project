@@ -109,7 +109,7 @@ router.get('/current', requireAuth, restoreUser, async (req, res) => {
       ]
     })
     const avgRating = spotReviews[0].dataValues.avgStarRating;
-    spot.dataValues.avgRating = Number(avgRating).toFixed(1);
+    spot.dataValues.avgRating = Number(avgRating).toFixed(2);
     const previewImage = await Image.findOne({
       where: {[Op.and]: {
         spotId: spot.id,
@@ -150,11 +150,10 @@ router.get('/:spotId', async (req, res, next) => {
   })
   const avgRating = spotReviews[0].dataValues.avgStarRating;
   const countReviews = spotReviews[0].dataValues.countReviews;
-  spot.dataValues.avgRating = Number(avgRating).toFixed(1);
+  spot.dataValues.avgRating = Number(avgRating).toFixed(2);
   spot.dataValues.countReviews = parseInt(countReviews)
   res.json(spot)
 });
-
 
 // Create a Spot
 router.post('/', validateSpot, requireAuth, async (req, res) => {
@@ -412,7 +411,7 @@ for (let spot of spots) {
     attributes: [[sequelize.fn("AVG", sequelize.col("stars")), "avgStarRating"]]
   })
   const avgRating = spotReviews[0].dataValues.avgStarRating;
-  spot.dataValues.avgRating = Number(avgRating).toFixed(1);
+  spot.dataValues.avgRating = Number(avgRating).toFixed(2);
   const previewImage = await Image.findOne({
     where: {[Op.and]: {
       spotId: spot.id,
