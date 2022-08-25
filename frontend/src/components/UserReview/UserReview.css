@@ -1,10 +1,10 @@
 .reviewsContainer {
-  border: 1px red solid;
-  margin-bottom: 2%;
+  /* border: 1px red solid; */
   padding:2%;
-  display:flex;
-  flex-wrap: wrap;
-  width: 10%;
+  width: 200px;
+  /* display:flex; */
+  /* flex-wrap: wrap; */
+  /* width: 10%; */
 }
 /* .reviewBox{
   border: 1px black solid;

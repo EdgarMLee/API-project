@@ -114,4 +114,5 @@
 .allReviewSpot {
   display: flex;
   flex-wrap: wrap;
+  padding: 2%;
 }
