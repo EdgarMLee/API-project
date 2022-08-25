@@ -1,14 +1,12 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {allSpots,getAllSpots} from '../../store/spots';
+import {allSpotsArray,getAllSpots} from '../../store/spots';
 import "./Home.css";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const spotsObj = useSelector(allSpots);
-// console.log('spotsObj',spotsObj)
-// console.log('allSpots',allSpots)
+  const spotsObj = useSelector(allSpotsArray);
   useEffect(() => {
     dispatch(getAllSpots(spotsObj))
   },[dispatch])
@@ -19,10 +17,9 @@ const Home = () => {
       <div className='firstDiv'></div>
       <div className='spotBox'>
         {spotsObj?.map(spot =>
-            // console.log("***spot***",spot)
           <Link className='eachSpot' to={`/spots/${spot?.id}`}>
           <div className='imgDiv'>
-           <img className='imgSpot' src={spot?.previewImage} alt="Image Not Available"/>
+           <img className='imgSpot' src={spot?.previewImage || "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"} alt="Image Not Available"/>
            </div>
            <div key={spot?.id} className='citySpot'>{spot?.city}, {spot?.state}</div>
            <div className='starSpot'>

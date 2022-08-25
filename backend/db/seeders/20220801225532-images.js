@@ -32,7 +32,7 @@ const images = [
   {
     url: 'https://a0.muscache.com/im/pictures/3ea83d79-0f60-4abd-beda-bc7bd1a8f80c.jpg?im_w=1200',
     previewImage: true,
-    spotId: 3,
+    spotId: 4,
     reviewId: 5,
     userId: 4
   },

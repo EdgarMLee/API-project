@@ -7,17 +7,17 @@ const GET = 'reviews/GET';
 const DELETE = 'reviews/DELETE';
 const FIND = 'reviews/FIND';
 
-export const allReviews = (state) => Object.values(state.reviews);
-
+export const allReviewsArray = (state) => Object.values(state.reviews);
+export const allReviewsObj = state => state.reviews;
 // Action Creator
 const CREATE_REVIEW = (reviewInfo) => ({
   type: CREATE,
   reviewInfo
 })
 
-const GET_REVIEW = (review) => ({
+const GET_REVIEW = (reviews) => ({
   type: GET,
-  review
+  reviews
 })
 
 // const EDIT_REVIEW = (reviewId) => ({
@@ -37,17 +37,19 @@ const FIND_REVIEW = (reviewId) => ({
 
 // Thunks
 //CREATE REVIEW
-export const createReview = (reviewInfo) => async (dispatch) => {
-  const res = await csrfFetch('/api/reviews', {
+export const createReview = (reviewInfo, spotId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/spots/${spotId}/reviews`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
+    body: JSON.stringify(
       reviewInfo
-    })
+    )
   });
+  // console.log('res', res);
   if (res.ok) {
     const newReview = await res.json();
     dispatch(CREATE_REVIEW(newReview));
+    dispatch(findSpot(newReview.spotId));
     return newReview;
   }
 };
@@ -57,8 +59,17 @@ export const getAllReviews = () => async (dispatch) => {
   const res = await csrfFetch('/api/reviews');
   if (res.ok) {
     const allReviews = await res.json();
-    // console.log('allReviews', allReviews);
-    dispatch(GET_REVIEW(allReviews));
+    dispatch(GET_REVIEW(allReviews.reviews));
+  };
+  return res;
+}
+
+//GET ALL REVIEWS BY CURRENT USER
+export const allReviewsUser = () => async (dispatch) => {
+  const res = await csrfFetch('/api/currentUser/reviews');
+  if (res.ok) {
+    const allReviews = await res.json();
+    dispatch(GET_REVIEW(allReviews.reviews));
   };
   return res;
 }
@@ -94,30 +105,29 @@ export const deleteReview = (reviewId, spotId) => async (dispatch) => {
   return review;
 }
 
-export const findReview = (reviewId) => async (dispatch) => {
-  const res = await csrfFetch(`/api/reviews/${reviewId}`)
+export const findReview = (spotId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/spots/${spotId}/reviews`)
   if (res.ok) {
     const review = await res.json()
-    dispatch(FIND_REVIEW(review))
+    dispatch(GET_REVIEW(review.Reviews))
   }
-  return res;
 }
 
-const initialState = {review:null}
+const initialState = {}
 
 // Reducer
 const reviewReducer = (state = initialState, action) => {
   switch(action.type) {
     case GET: {
       const newState = {...state}
-      action.payload.forEach(review => {
+      action.reviews.forEach(review => {
         newState[review.id] = review;
       })
       return newState;
     }
     case CREATE: {
       const newState = {...state}
-      newState[action.review.id] = action.review
+      newState[action.reviewInfo.id] = action.reviewInfo
       return newState;
     }
     // case EDIT: {
@@ -127,7 +137,7 @@ const reviewReducer = (state = initialState, action) => {
     // }
     case DELETE: {
       const newState = {...state}
-      delete newState[action.review.id]
+      delete newState[action.reviewId]
       return newState;
     }
     // case FIND: {
