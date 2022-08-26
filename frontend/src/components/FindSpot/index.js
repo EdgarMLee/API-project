@@ -16,7 +16,7 @@ const FindSpot = () => {
   const spotsObj = useSelector(allSpotsObj);
   const reviewsObj = useSelector(allReviewsArray);
   const [isLoaded, setIsLoaded] = useState(false)
-  const spot = spotsObj[Number(spotId)]
+  const spot = spotsObj[Number(spotId)];
   const sessionUser = useSelector(state => state.session.user);
   useEffect(() => {
     dispatch(findSpot(spotId))
