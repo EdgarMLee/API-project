@@ -17,14 +17,14 @@
   cursor: pointer;
 }
 
-/* .reviewErrors {
+.reviewErrors {
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
   sans-serif;
   font-weight: 450;
-} */
+}
 
 .reviewErrors:hover {
   color: red;
