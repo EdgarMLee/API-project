@@ -25,9 +25,9 @@ const FindSpot = () => {
     .then(() => setIsLoaded(true))
   }, [dispatch])
 
-  const handleDelete = (e) => {
+  const handleDelete = async (e) => {
   e.preventDefault();
-  const res = dispatch(deleteSpot(spotId))
+  const res = await dispatch(deleteSpot(spotId))
   if (res) history.push("/")
 }
 
