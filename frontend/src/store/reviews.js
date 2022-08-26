@@ -1,5 +1,5 @@
 import { csrfFetch } from "./csrf"
-import { findSpot } from "./spots";
+import { findSpotID } from "./spots";
 
 // Variables
 const CREATE = 'reviews/CREATE';
@@ -37,17 +37,14 @@ export const createReview = (reviewInfo, spotId) => async (dispatch) => {
   const res = await csrfFetch(`/api/spots/${spotId}/reviews`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(
-      reviewInfo
-    )
+    body: JSON.stringify(reviewInfo)
   });
-
   if (res.ok) {
     const newReview = await res.json();
     dispatch(CREATE_REVIEW(newReview));
-    dispatch(findSpot(newReview.spotId));
-    return newReview;
+    dispatch(findSpotID(newReview.spotId));
   }
+    return res;
 };
 
 //GET ALL REVIEWS
@@ -102,7 +99,7 @@ export const deleteReview = (reviewId, spotId) => async (dispatch) => {
   const review = await res.json();
   if (res.ok) {
     dispatch(DELETE_REVIEW(reviewId));
-    dispatch(findSpot(spotId))
+    dispatch(findSpotID(spotId))
   }
   return review;
 }
@@ -113,7 +110,7 @@ export const findReview = (spotId) => async (dispatch) => {
     const review = await res.json()
     dispatch(GET_REVIEW(review.Reviews))
     dispatch(getAllReviewsBySpot(review.spotId))
-    dispatch(findSpot(review.spotId))
+    dispatch(findSpotID(review.spotId))
   }
 }
 

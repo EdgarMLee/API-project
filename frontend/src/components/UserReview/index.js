@@ -10,18 +10,18 @@ function ReviewUser({review}) {
   const history = useHistory();
   const sessionUser = useSelector(state => state.session.user);
   const date = new Date().toLocaleDateString();
-  let currentUser;
   // const {reviewId} = useParams
   // const allReviews = (state) => Object.values(state.reviews)
   // const reviewsObj = useSelector(allReviews);
   // const review = reviewsObj.find(review => review.id == reviewId)
+  let currentUser;
   if (sessionUser && review) {
     if (sessionUser.id === review.userId) {
       currentUser = true;
     } else currentUser = false;
   }
+
   const handleDelete = () => {
-    // e.preventDefault();
     dispatch(deleteReview(review.id, review.spotId))
   }
 

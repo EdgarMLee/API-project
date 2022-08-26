@@ -291,7 +291,7 @@ router.post('/:spotId/reviews', validateReview, requireAuth, async (req, res, ne
     },
   })
   //If so, then return an error
-  if (existReview.length >= 1) {
+  if (existReview.length) {
     const err = new Error('User already has a review for this spot')
     err.status = 403
     return next(err)
