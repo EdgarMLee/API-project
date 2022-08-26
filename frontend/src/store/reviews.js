@@ -97,15 +97,13 @@ export const getAllReviewsBySpot = (spotId) => async (dispatch) => {
 //DELETE A REVIEW
 export const deleteReview = (reviewId, spotId) => async (dispatch) => {
   const res = await csrfFetch(`/api/reviews/${reviewId}`, {
-    method: "DELETE",
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(
-      reviewId
-    )
+    method: "DELETE"
   });
   const review = await res.json();
-  dispatch(DELETE_REVIEW(reviewId));
-  dispatch(findSpot(spotId))
+  if (res.ok) {
+    dispatch(DELETE_REVIEW(reviewId));
+    dispatch(findSpot(spotId))
+  }
   return review;
 }
 

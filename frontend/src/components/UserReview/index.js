@@ -20,9 +20,9 @@ function ReviewUser({review}) {
       currentUser = true;
     } else currentUser = false;
   }
-  const handleDelete = async (e) => {
-    e.preventDefault();
-    dispatch(deleteReview(review.id))
+  const handleDelete = () => {
+    // e.preventDefault();
+    dispatch(deleteReview(review.id, review.spotId))
   }
 
   return (

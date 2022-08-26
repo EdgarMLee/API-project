@@ -7,7 +7,6 @@ import "./CreateSpot.css"
 const CreateNewSpot = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
@@ -23,8 +22,13 @@ const CreateNewSpot = () => {
 
   useEffect(() => {
     const errors = [];
+    if (!image.endsWith('.jpg') && !image.endsWith('.png') && !image.endsWith('.jpeg')) {
+      errors.push('Provide a valid image')
+    }
+    setErrors(errors)
+  }, [address, city, state, country, lat, lng, name, description, price, image])
+  // if (address.length < 6)
     // if (address === '') errors.push("Street address is required")
-    // if (address.length < 6)
     // if (city === '') errors.push("City is required")
     // if (state === '') errors.push("State is required")
     // if (country === '') errors.push("Country is required")
@@ -33,11 +37,6 @@ const CreateNewSpot = () => {
     // if (name === '' || name.length > 50) errors.push("Valid name required")
     // if (description === '') errors.push("Description is required")
     // if (price === '') errors.push("Price is required")
-    if (!image.endsWith('.jpg') && !image.endsWith('.png') && !image.endsWith('.jpeg')) {
-      errors.push('Provide a valid image')
-    }
-    setErrors(errors)
-  }, [address, city, state, country, lat, lng, name, description, price, image])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,7 +54,6 @@ const CreateNewSpot = () => {
       price
     };
     setErrors([]);
-
     const spot = await dispatch(createSpot(spotInfo)).catch(async (res) => {
       const data = await res.json();
       if (data && data.errors) setErrors([data.errors])
