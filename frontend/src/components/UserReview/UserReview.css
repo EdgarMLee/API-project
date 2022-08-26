@@ -60,4 +60,7 @@
 
 .reviewDeleteButton:hover {
   cursor: pointer;
+  font-size: 16px;
+  height: 45px;
+  width: 125px;
 }

@@ -19,6 +19,9 @@
 
 .editButton:hover {
   cursor: pointer;
+  font-size: 17px;
+  height: 40px;
+  width: 90px;
 }
 
 .editSubTitle {
