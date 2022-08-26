@@ -34,8 +34,8 @@ function ReviewUser({review}) {
       </div>
       <div className='reviewName'>Review-User#{review?.userId}</div>
       </div>
+      <div className='reviewDate'>{date}</div>
       <div className='dateReview'>
-      <div className='reviewDate'>{date} -</div>
       <div className='reviewReview'>
       <div className="fa-solid fa-star"/>{review?.stars} : {review?.review}</div>
       </div>
