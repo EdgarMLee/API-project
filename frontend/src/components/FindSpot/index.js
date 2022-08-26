@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import { useHistory, useParams, Link } from 'react-router-dom';
-import {findSpot, allSpotsArray, allSpotsObj, deleteSpot} from '../../store/spots';
-import {allReviewsArray, allReviewsObj, getAllReviewsBySpot} from '../../store/reviews';
+import { useHistory, useParams } from 'react-router-dom';
+import {findSpot, allSpotsObj, deleteSpot} from '../../store/spots';
+import {allReviewsArray, getAllReviewsBySpot} from '../../store/reviews';
 import CreateReviewModal from '../CreateReviewModal';
 import EditSpotModal from "../EditSpotModal";
 import UserReview from '../UserReview';
@@ -36,7 +36,6 @@ if (sessionUser && spot) {
     currentUser = true;
   } else currentUser = false;
 }
-
 
   return isLoaded && (
         (

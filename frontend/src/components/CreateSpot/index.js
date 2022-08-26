@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import {createSpot, createImage} from "../../store/spots";
 import "./CreateSpot.css"
