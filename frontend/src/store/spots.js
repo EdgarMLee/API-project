@@ -68,7 +68,7 @@ export const allSpotsUser = () => async (dispatch) => {
   console.log('res', res)
   if (res.ok) {
     const allSpots = await res.json();
-    console.log('allSpots', allSpots)
+    // console.log('allSpots', allSpots)
     dispatch(GET_SPOT(allSpots.Spots));
   };
 }

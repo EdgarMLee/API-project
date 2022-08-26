@@ -6,6 +6,7 @@ import { deleteReview } from "../../store/reviews";
 import "./UserReview.css";
 
 function ReviewUser({review}) {
+  const {spotId} = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
   const sessionUser = useSelector(state => state.session.user);
@@ -24,6 +25,10 @@ function ReviewUser({review}) {
   const handleDelete = () => {
     dispatch(deleteReview(review.id, review.spotId))
   }
+
+  // const handleSpot = () => {
+  //   history.push(`/spot/${spotId}`)
+  // }
 
   return (
     <div className='reviewSquare'>
