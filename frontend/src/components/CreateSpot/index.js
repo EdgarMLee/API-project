@@ -22,8 +22,10 @@ const CreateNewSpot = () => {
 
   useEffect(() => {
     const errors = [];
+    if (lat > 180 || lat < -180) errors.push("Latitude is not valid")
+    if (lng > 90 || lng < -90) errors.push("Longitude is not valid")
     if (!image.endsWith('.jpg') && !image.endsWith('.png') && !image.endsWith('.jpeg')) {
-      errors.push('Provide a valid image')
+      errors.push('Provide a valid image url')
     }
     setErrors(errors)
   }, [address, city, state, country, lat, lng, name, description, price, image])
@@ -32,8 +34,6 @@ const CreateNewSpot = () => {
     // if (city === '') errors.push("City is required")
     // if (state === '') errors.push("State is required")
     // if (country === '') errors.push("Country is required")
-    // if (lat === '') errors.push("Latitude is not valid")
-    // if (lng === '') errors.push("Longitude is not valid")
     // if (name === '' || name.length > 50) errors.push("Valid name required")
     // if (description === '') errors.push("Description is required")
     // if (price === '') errors.push("Price is required")
@@ -176,7 +176,7 @@ const CreateNewSpot = () => {
         <input
         className='createImage'
         type="url"
-        placeholder='Image Url'
+        placeholder='Image Url (.jpg/.jpeg/.png)'
         value={image}
         onChange={(e) => setImage(e.target.value)}
         required

@@ -146,6 +146,15 @@ const spotReducer = (state = initialState, action) => {
       newState[action.spotInfo.id] = action.spotInfo
       return newState;
     }
+
+    // case READ: {
+    //   const newState = {...state};
+    //   action.spots.forEach(spot => {
+    //     newState[action.spot.id] = {...newState[action.spot.id], ...spot}
+    //   })
+    //   return newState;
+    // }
+    
     // case EDIT: {
     //   newState = {...state}
     //   newState[action.spot.id] = {newState[action.spot.id], ...action.spot}
