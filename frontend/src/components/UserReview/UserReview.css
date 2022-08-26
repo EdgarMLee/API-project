@@ -8,11 +8,21 @@
 }
 
 .reviewBox {
-  /* border: 1px red solid; */
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
+  width: 250px;
   padding: 3px;
+  /* flex-wrap: wrap; */
+  /* border: 1px black solid; */
+}
+
+.reviewSquare {
+  /* border: 1px black solid; */
+  display: flex;
+  justify-content: center;
+  /* flex-direction: row; */
+  /* flex-wrap: nowrap; */
+  /* flex-grow: 4; */
 }
 
 .reviewUserIcon {
