@@ -51,6 +51,12 @@
   sans-serif;
 }
 
+.loginButton:hover {
+  cursor:pointer;
+  font-size: 17px;
+  font-weight: 600;
+}
+
 /* In Modal */
 .submitLogin {
   background-color: rgb(230, 0, 0);
