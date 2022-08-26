@@ -5,7 +5,7 @@ import { findSpot } from "./spots";
 const CREATE = 'reviews/CREATE';
 const GET = 'reviews/GET';
 const DELETE = 'reviews/DELETE';
-const FIND = 'reviews/FIND';
+// const FIND = 'reviews/FIND';
 
 export const allReviewsArray = (state) => Object.values(state.reviews);
 export const allReviewsObj = state => state.reviews;
@@ -21,20 +21,15 @@ const GET_REVIEW = (reviews) => ({
   reviews
 })
 
-// const EDIT_REVIEW = (reviewId) => ({
-//   type: EDIT,
-//   reviewId
-// })
-
 const DELETE_REVIEW = (reviewId) => ({
   type: DELETE,
   reviewId
 })
 
-const FIND_REVIEW = (reviewId) => ({
-  type: FIND,
-  reviewId
-})
+// const FIND_REVIEW = (reviewId) => ({
+//   type: FIND,
+//   reviewId
+// })
 
 // Thunks
 //CREATE REVIEW
