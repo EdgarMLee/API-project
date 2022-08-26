@@ -46,7 +46,8 @@ export const createSpot = (spotInfo) => async (dispatch) => {
   });
   if (res.ok) {
     const newSpot = await res.json();
-    dispatch(CREATE_SPOT(newSpot));
+    dispatch(findSpot(newSpot.id));
+    return newSpot;
   };
   return res;
 }
