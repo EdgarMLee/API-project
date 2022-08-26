@@ -22,8 +22,8 @@ const CreateNewSpot = () => {
 
   useEffect(() => {
     const errors = [];
-    if (lat > 180 || lat < -180) errors.push("Latitude is not valid")
-    if (lng > 90 || lng < -90) errors.push("Longitude is not valid")
+    if (lat > 180 || lat < -180) errors.push("Latitude is not valid (Between -180 & 180)")
+    if (lng > 90 || lng < -90) errors.push("Longitude is not valid (Between -90 & 90)")
     if (!image.endsWith('.jpg') && !image.endsWith('.png') && !image.endsWith('.jpeg')) {
       errors.push('Provide a valid image url')
     }
