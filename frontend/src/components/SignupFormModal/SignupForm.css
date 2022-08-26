@@ -25,6 +25,13 @@
   font-size: 18px;
   font-weight: 750;
   border: none;
+  margin-top: -1%;
+}
+
+.emptyBordersuf {
+  margin-top: 1%;
+  margin-bottom: 1%;
+  border: solid 1px rgb(230, 230, 230);
 }
 
 /* SignUpPage Title */
@@ -32,6 +39,7 @@
   font-size: 22px;
   font-weight: 600;
   border: none;
+  margin-top: 7%;
 }
 
 /* All Inputs of SignUp Form */

@@ -34,6 +34,7 @@ function SignupFormPage() {
       </div>
       <div>
         <h2 className="signUpSubTitle">Sign Up</h2>
+        <div className='emptyBordersuf'/>
       </div>
       <div>
         {Object.values(errors).map((error, idx) =>
