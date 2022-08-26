@@ -46,7 +46,7 @@ export const createSpot = (spotInfo) => async (dispatch) => {
   });
   if (res.ok) {
     const newSpot = await res.json();
-    dispatch(findSpot(newSpot.id));
+    dispatch(findSpotID(newSpot.id));
     return newSpot;
   };
   return res;
@@ -107,6 +107,14 @@ export const findSpot = (spotId) => async (dispatch) => {
     dispatch(GET_SPOT([spot]))
   }
 }
+
+export const findSpotID = (spotId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/spots/${spotId}`);
+  if (res.ok) {
+    const spot = await res.json();
+    dispatch(CREATE_SPOT(spot));
+  }
+};
 
 const initialState = {}
 
