@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import {createSpot, findSpot} from "../../store/spots";
+import {createSpot, createImage} from "../../store/spots";
 import "./CreateSpot.css"
 
 const CreateNewSpot = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
@@ -17,24 +16,32 @@ const CreateNewSpot = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
+  const [image, setImage] = useState('')
   const [errors, setErrors] = useState([]);
+  const [isSubmitted, setIsSubmitted] = useState(false)
 
   useEffect(() => {
     const errors = [];
-    if (address === '') errors.push("Street address is required")
-    if (city === '') errors.push("City is required")
-    if (state === '') errors.push("State is required")
-    if (country === '') errors.push("Country is required")
-    if (lat === '') errors.push("Latitude is not valid")
-    if (lng === '') errors.push("Longitude is not valid")
-    if (name === '' || name.length > 50) errors.push("Valid name required")
-    if (description === '') errors.push("Description is required")
-    if (price === '') errors.push("Price is required")
+    if (!image.endsWith('.jpg') && !image.endsWith('.png') && !image.endsWith('.jpeg')) {
+      errors.push('Provide a valid image')
+    }
     setErrors(errors)
-  }, [address, city, state, country, lat, lng, name, description, price])
+  }, [address, city, state, country, lat, lng, name, description, price, image])
+  // if (address.length < 6)
+    // if (address === '') errors.push("Street address is required")
+    // if (city === '') errors.push("City is required")
+    // if (state === '') errors.push("State is required")
+    // if (country === '') errors.push("Country is required")
+    // if (lat === '') errors.push("Latitude is not valid")
+    // if (lng === '') errors.push("Longitude is not valid")
+    // if (name === '' || name.length > 50) errors.push("Valid name required")
+    // if (description === '') errors.push("Description is required")
+    // if (price === '') errors.push("Price is required")
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitted(true);
+     if (errors.length > 0) return
     const spotInfo = {
       address,
       city,
@@ -47,11 +54,12 @@ const CreateNewSpot = () => {
       price
     };
     setErrors([]);
-    dispatch(createSpot(spotInfo)).catch(async (res) => {
+    const spot = await dispatch(createSpot(spotInfo)).catch(async (res) => {
       const data = await res.json();
       if (data && data.errors) setErrors([data.errors])
     })
-    history.push('/')
+    dispatch(createImage({previewImage: true, url: image}, spot.id))
+    history.push(`/spots/${spot.id}`)
   }
 
   return (
@@ -64,9 +72,13 @@ const CreateNewSpot = () => {
         <h2 className='createSubTitle'>Host Your Home</h2>
       </div>
       <div>
-        {errors.map((error, idx) =>
-        <div key={idx} className='createError'>{error}</div>
-        )}
+        {isSubmitted && errors.length > 0 &&
+        <ul>
+          {errors.map((error, idx) =>
+            <div key={idx} className='createError'>{error}</div>
+            )}
+            </ul>
+            }
       </div>
         </div>
         <div className='createText'>
@@ -160,9 +172,19 @@ const CreateNewSpot = () => {
         required
         />
       </label>
+      <label>
+        <input
+        className='createImage'
+        type="url"
+        placeholder='Image Url'
+        value={image}
+        onChange={(e) => setImage(e.target.value)}
+        required
+        />
+      </label>
       </div>
       <div className='createDivBut'>
-      <button type="submit" className='signUpButton'>Host Your Home!</button>
+      <button type="submit" disabled={isSubmitted && errors.length > 0} className='signUpButton'>Host Your Home!</button>
       </div>
     </form>
   )

@@ -41,7 +41,8 @@
 .createLat,
 .createLng,
 .createDescription,
-.createPrice {
+.createPrice,
+.createImage {
   display: flex;
   justify-content: center;
   align-items: center;

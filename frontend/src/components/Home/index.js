@@ -17,7 +17,7 @@ const Home = () => {
       <div className='firstDiv'></div>
       <div className='spotBox'>
         {spotsObj?.map(spot => (
-          <SpotBox spot={spot}/>
+          <SpotBox key={spot?.id} spot={spot}/>
         )
           )}
       </div>

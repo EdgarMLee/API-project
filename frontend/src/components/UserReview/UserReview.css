@@ -17,9 +17,9 @@
 }
 
 .reviewSquare {
-  /* border: 1px black solid; */
   display: flex;
   justify-content: center;
+  /* border: 1px black solid; */
   /* flex-direction: row; */
   /* flex-wrap: nowrap; */
   /* flex-grow: 4; */
