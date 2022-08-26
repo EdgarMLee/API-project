@@ -46,9 +46,9 @@
   border-radius: 20px;
 }
 
-.bottomText {
+/* .bottomText {
   padding: 20px;
-}
+} */
 
 .deleteButton {
   background-color: rgb(233, 0, 0);
@@ -84,11 +84,11 @@
 
 .pricesSpot {
   font-weight: 500;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .nightsSpot {
-  font-size: 15px;
+  font-size: 17px;
   display: flex;
   align-items: center;
   margin-left: 5px;
@@ -98,15 +98,19 @@
   margin-bottom: 10px;
 }
 
-.nameSpot,
-.outsideStar,
 .editDeleteSpot,
 .imgDiv,
 .createReviewSpot,
-.priceNightfs,
 .descriptSpot {
   display: flex;
   justify-content: center;
+}
+
+.priceNightfs {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 25%;
+  margin-top: 5px;
 }
 
 .emptyBorder {
@@ -117,6 +121,32 @@
 
 .allReviewSpot {
   display: flex;
+  justify-content: flex-start;
   flex-wrap: wrap;
-  padding: 2%;
+  margin-top: 1%;
+  margin-left: 24.5%;
+  width: 52%;
+  /* border: black 1px solid; */
+}
+
+.nameSpot {
+  /* border: 1px black solid; */
+  margin-left: 25%;
+}
+
+.outsideStar {
+  display: flex;
+  justify-content: flex-start;
+  margin-right: 32%;
+}
+
+.bigStar {
+  font-size: 23px;
+}
+
+.bottomAvgCount {
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
+  sans-serif;
+  font-size: 23px;
+  margin-left: 25%;
 }
