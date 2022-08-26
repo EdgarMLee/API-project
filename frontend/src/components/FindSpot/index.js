@@ -72,6 +72,10 @@ if (sessionUser && spot) {
              {sessionUser && <CreateReviewModal spotId={spotId}/>}
            </div>
            <div className='emptyBorder'/>
+           <div className='bottomAvgCount'>
+           <div className="fa-solid fa-star bigStar"/>
+            {spot?.avgRating} · {spot?.countReviews} reviews
+            </div>
            <div className='allReviewSpot'>
             {reviewsObj.map(review => (
               <UserReview key={review?.id} review={review}/>
