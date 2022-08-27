@@ -176,7 +176,7 @@ const CreateNewSpot = () => {
         <input
         className='createImage'
         type="url"
-        placeholder='Image Url (.jpg/.jpeg/.png)'
+        placeholder='Image Url (Must end with .jpg/.jpeg/.png)'
         value={image}
         onChange={(e) => setImage(e.target.value)}
         required
