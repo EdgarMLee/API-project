@@ -72,7 +72,7 @@ const CreateNewSpot = () => {
         <h2 className='createSubTitle'>Host Your Home</h2>
       </div>
       <div>
-        {isSubmitted && errors.length > 0 &&
+        {isSubmitted && errors?.length > 0 &&
         <ul>
           {errors.map((error, idx) =>
             <div key={idx} className='createError'>{error}</div>
