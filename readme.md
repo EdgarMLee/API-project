@@ -3,9 +3,14 @@ AwayBnB allows people to create homes to rent around the world.
 
 ## This project was developed utilizing:
 
-* ####  Backend: Express/Sequelize
+* ####  Backend:
+![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)&nbsp;
+![Sequelize](https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white)&nbsp;
 
-* #### Frontend: React/Redux/JS
+* #### Frontend: 
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)&nbsp;
+![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)&nbsp;
+![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)&nbsp; 
 
 * ####  Hosted on Heroku
 [AwayBnB](https://airbnb-away.herokuapp.com/)
