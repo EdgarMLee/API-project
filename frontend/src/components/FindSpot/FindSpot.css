@@ -66,9 +66,6 @@
 
 .deleteButton:hover {
   cursor: pointer;
-  font-size: 17px;
-  height: 40px;
-  width: 90px;
 }
 
 .pricesSpot,
@@ -79,23 +76,44 @@
 }
 
 .descriptSpot {
-  font-size: 18px;
+  font-size: 17px;
 }
 
 .pricesSpot {
   font-weight: 500;
   font-size: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .nightsSpot {
-  font-size: 17px;
-  display: flex;
-  align-items: center;
+  font-size: 14px;
   margin-left: 5px;
+  font-weight: lighter;
 }
 
 .descriptSpot {
   margin-bottom: 10px;
+}
+
+.spotstarReviews {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
+  sans-serif;
+  font-size: 15px;
+}
+
+.outsideStar {
+  color: rgb(0, 0, 0, 0.8);
+  /* font-weight: lighter; */
+}
+
+.reviewStar {
+  margin-bottom: 4%;
+  color: rgb(0, 0, 0, 0.8);
 }
 
 .editDeleteSpot,
@@ -108,9 +126,37 @@
 
 .priceNightfs {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin-right: 25%;
-  margin-top: 5px;
+  width: 950px;
+  margin-top: 1.5%;
+  margin-left: 25%;
+  margin-bottom: 3%;
+  /* border: 1px solid red; */
+}
+
+.descriptSpot {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 15px;
+  color: rgb(0, 0, 0, 0.7);
+}
+
+.spotdetailBox {
+  width: 400px;
+  display: flex;
+  justify-content: space-between;
+  border: 1px rgb(178, 178, 178, 0.5) solid;
+  border-radius: 15px;
+  box-shadow: 5px 10px 20px rgb(178, 178, 178, 0.5);
+  padding: 18px;
+  margin-right: 2%;
+  /* margin-left: 3%; */
+}
+
+.spotstarReviews {
+  display: flex;
 }
 
 .emptyBorder {
