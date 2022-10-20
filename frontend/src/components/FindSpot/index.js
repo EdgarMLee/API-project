@@ -75,17 +75,21 @@ if (sessionUser && spot) {
            </div>
             </div>
             </div>
-            {/* <div className='descriptstars'> */}
            <div className='createReviewSpot'>
              {sessionUser && <CreateReviewModal spotId={spotId}/>}
            </div>
            <div className='emptyBorder'/>
            <div className='bottomAvgCount'>
-            {/* </div> */}
            <div className='allReviewSpot'>
+           <div className='reviewsCard'>
+           <div className="fa-solid fa-star reviewCardStar"/>
+            {spot?.avgRating} · {spot?.countReviews} reviews
+            <div className='profileReview'>
             {reviewsObj.map(review => (
               <UserReview key={review?.id} review={review}/>
-            ))}
+              ))}
+              </div>
+              </div>
            </div>
            </div>
       </>
