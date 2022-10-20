@@ -27,10 +27,17 @@
 
 .reviewUserIcon {
   height: 30px;
+  margin-top: 8%;
 }
 
 .reviewName,
-.reviewDate,
+.reviewDate {
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
+  sans-serif;
+  font-size: 15px;
+  /* border: 1px solid red; */
+}
+
 .reviewReview {
   font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
   sans-serif;
@@ -38,9 +45,15 @@
 }
 
 .reviewDate {
+  margin-top: -5%;
+  margin-bottom: 6%;
+  margin-left: 16%;
+}
+
+.reviewDate {
   display: flex;
-  justify-content: center;
-  margin-left: -70px;
+  justify-content: flex-start;
+  width: 80px;
 }
 
 .dateReview {
@@ -52,6 +65,10 @@
 .reviewReview {
   font-weight: 500;
   margin-left: 6px;
+}
+
+.reviewuser-date {
+  border: 1px solid red;
 }
 
 .reviewProfile {
