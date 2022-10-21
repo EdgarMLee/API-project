@@ -34,7 +34,16 @@
 .reviewReview {
   font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
   sans-serif;
-  font-size: 17px;
+  font-size: 16px;
+  display: flex;
+  flex-direction: row;
+  /* border: 1px solid red; */
+}
+
+.reviewDescript {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgb(0, 0, 0, 0.7);
 }
 
 .reviewDate {
@@ -52,6 +61,8 @@
 .dateReview {
   display: flex;
   padding: 5px;
+  width: 375px;
+  /* border: 1px solid red; */
 }
 
 .reviewName,
