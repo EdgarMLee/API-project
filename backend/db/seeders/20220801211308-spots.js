@@ -72,7 +72,7 @@ module.exports = {
         lat: 3.166165,
         lng: 5.325166,
         name: 'Zion EcoCabin : Zion A-Frame',
-        description: 'Soak up the sun and unwind in the Zion A-Frame. The unique convertible door lets the indoor comforts of this cozy cabin blend seamlessly with the stunning nature of the South Zion Mountains. The A-Frame living space is expansive - an open air concept to reconnect human and nature, allowing you to enjoy the natural world around you.',
+        description: 'Soak up the sun and unwind in the Zion A-Frame. The unique convertible door lets the indoor comforts of this cozy cabin blend seamlessly with the stunning nature of the South Zion Mountains.',
         price: 783
       },
       {
@@ -84,7 +84,7 @@ module.exports = {
         lat: 4.534123,
         lng: 7.656166,
         name: 'Modern ranch cabin at the base of the mountains!',
-        description: 'Modern ranch style cabin on 160 acre property with incredible large mountain views all around.  House was designed by an architect and shows in every detail and the gorgeous furnishings throughout the inside and exterior of the home.  Large screened porch to enjoy the incredible mountain views for hours on end.',
+        description: 'Modern ranch style cabin on 160 acre property with incredible large mountain views all around.  House was designed by an architect and shows in every detail and the gorgeous furnishings.',
         price: 500
       },
       {
@@ -96,7 +96,7 @@ module.exports = {
         lat: 6.136846,
         lng: 3.731873,
         name: 'Picturesque Lodge, Seventy A. Bordering Flat Top Wilderness.',
-        description: 'Escape it all in this one if kind handcrafted custom log home. This work of art is tucked away in the largest aspen grove in the Flat Tops National Forest at 9200 feet. You will relax in a rust-hued armchair in front of majestic gallery windows or on the front or back porches looking into the tranquil surrounding aspen forest while spotting deer, foxes, elk, bald eagles, and maybe the local moose. ',
+        description: 'Escape it all in this one if kind handcrafted custom log home. This work of art is tucked away in the largest aspen grove in the Flat Tops National Forest at 9200 feet.',
         price: 338
       },
       {
@@ -132,7 +132,7 @@ module.exports = {
         lat: 2.136846,
         lng: 8.731873,
         name: 'Abode at 7 Cabins | Perfect for Family & Group Retreats | One of a Kind Property',
-        description: 'If you are looking for a place to frolic amongst wide open spaces and enjoy life outside, Abode at 7 Cabins is an incredible place to host a family reunion, a business retreat, or a gathering of old friends.',
+        description: 'If you are looking for a place to frolic amongst wide open spaces and enjoy life outside, Abode at 7 Cabins is an incredible place to host a family reunion.',
         price: 1836
       },
       {
@@ -144,7 +144,7 @@ module.exports = {
         lat: 4.136846,
         lng: 6.731873,
         name: '"Oak Tree A-Frame", designed by @To_Dwell_Here',
-        description: 'No expense was spared for this 100% remodeled cabin, designed by yours truly, @To_Dwell_Here.   Every beautiful detail was planned with you in mind, because our passion is creating places for inviting people!  Modern, Scandinavian, and mid-century inspired décor is as inviting and cozy as it is magazine worthy.',
+        description: 'No expense was spared for this 100% remodeled cabin, designed by yours truly, @To_Dwell_Here.   Every beautiful detail was planned with you in mind!',
         price: 450
       },
       {
@@ -156,7 +156,7 @@ module.exports = {
         lat: 3.136846,
         lng: 8.731873,
         name: 'Beautiful Ocean View Cabin and Hot Tub!',
-        description: 'Relax on our lawn chairs and breathe fresh air as sea lions bark and waves crash on the rocks below. Whale watch from the picnic table or soak in the hot tub while taking in the amazing view. How about a glass of wine while the sunset paints the sky in vibrant colors?',
+        description: 'Relax on our lawn chairs and breathe fresh air as sea lions bark and waves crash on the rocks below. Whale watch from the picnic table.',
         price: 299
       },
       {
@@ -168,7 +168,7 @@ module.exports = {
         lat: 2.136846,
         lng: 5.731873,
         name: 'Mountain View Villa - Alpine Falls Ranch',
-        description: 'Come enjoy the beauty, privacy and seclusion of Mountain View Villa at Alpine Falls Ranch, adjacent to the LoLo National Forest and steps away from the Clark Fork river. Ranch Manager and housekeeping on site, catering available upon request.  The ranch includes horse facilities, a riding arena, gym, theater and trap/skeet for entertaining or parties.',
+        description: 'Come enjoy the beauty, privacy and seclusion of Mountain View Villa at Alpine Falls Ranch, adjacent to the LoLo National Forest and steps away from the Clark Fork river. Ranch Manager and housekeeping on site, catering available upon request.',
         price: 2499
       },
       {
