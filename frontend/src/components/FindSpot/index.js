@@ -45,7 +45,7 @@ if (sessionUser && spot) {
           <div className="nameSpot">{spot?.name}</div>
            <div className='ratingSpot'>
             <div className='outsideStar'>
-           <div className="fa-solid fa-star"/>
+           <div className="fa-solid fa-star reviewStarTitle"/>
             {/* </div> */}
            {spot?.avgRating} · {spot?.countReviews} reviews · {spot?.city}
             <div key={spot?.id} className='stateSpot'>  , {spot?.state}, {spot?.country}</div>
@@ -59,26 +59,37 @@ if (sessionUser && spot) {
              )}
       </div>
           <div className='imgDivfs'>
-           <img className='imageSpotfs' src={spot?.Images[0]?.url || "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"} alt="Image Is Not Available"/>
+           <img className='imageSpotfs' src={spot?.Images[0] ? spot?.Images[0]?.url : "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"} alt="Image Is Not Available"/>
            </div>
            <div className='bottomText'>
             <div className='priceNightfs'>
-           <div className='pricesSpot'>${spot?.price}</div>
-           <div className='nightsSpot'>night</div>
-            </div>
            <div className='descriptSpot'>{spot?.description}</div>
+           <div className='spotdetailBox'>
+           <div className='pricesSpot'>${spot?.price}
+           <div className='nightsSpot'>night</div>
+           </div>
+           <div className='spotstarReviews'>
+           <div className="fa-solid fa-star reviewStar"/>
+            {spot?.avgRating} · {spot?.countReviews} reviews
+           </div>
+           </div>
+            </div>
+            </div>
            <div className='createReviewSpot'>
              {sessionUser && <CreateReviewModal spotId={spotId}/>}
            </div>
            <div className='emptyBorder'/>
            <div className='bottomAvgCount'>
-           <div className="fa-solid fa-star bigStar"/>
-            {spot?.avgRating} · {spot?.countReviews} reviews
-            </div>
            <div className='allReviewSpot'>
+           <div className='reviewsCard'>
+           <div className="fa-solid fa-star reviewCardStar"/>
+            {spot?.avgRating} · {spot?.countReviews} reviews
+            <div className='profileReview'>
             {reviewsObj.map(review => (
               <UserReview key={review?.id} review={review}/>
-            ))}
+              ))}
+              </div>
+              </div>
            </div>
            </div>
       </>

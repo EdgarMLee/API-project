@@ -66,9 +66,6 @@
 
 .deleteButton:hover {
   cursor: pointer;
-  font-size: 17px;
-  height: 40px;
-  width: 90px;
 }
 
 .pricesSpot,
@@ -79,23 +76,44 @@
 }
 
 .descriptSpot {
-  font-size: 18px;
+  font-size: 17px;
 }
 
 .pricesSpot {
   font-weight: 500;
   font-size: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .nightsSpot {
-  font-size: 17px;
-  display: flex;
-  align-items: center;
+  font-size: 14px;
   margin-left: 5px;
+  font-weight: lighter;
 }
 
 .descriptSpot {
   margin-bottom: 10px;
+}
+
+.spotstarReviews {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
+  sans-serif;
+  font-size: 15px;
+}
+
+.outsideStar {
+  color: rgb(0, 0, 0, 0.8);
+  /* font-weight: lighter; */
+}
+
+.reviewStar {
+  margin-bottom: 4%;
+  color: rgb(0, 0, 0, 0.8);
 }
 
 .editDeleteSpot,
@@ -108,15 +126,46 @@
 
 .priceNightfs {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin-right: 25%;
-  margin-top: 5px;
+  width: 950px;
+  margin-top: 1.5%;
+  margin-left: 25%;
+  margin-bottom: 1.5%;
+  /* border: 1px solid red; */
+}
+
+.descriptSpot {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 15px;
+  color: rgb(0, 0, 0, 0.7);
+}
+
+.spotdetailBox {
+  width: 400px;
+  display: flex;
+  justify-content: space-between;
+  border: 1px rgb(178, 178, 178, 0.25) solid;
+  border-radius: 15px;
+  box-shadow: 5px 10px 20px rgb(178, 178, 178, 0.5);
+  padding: 18px;
+  margin-right: 2%;
+  /* margin-left: 3%; */
+}
+
+.spotstarReviews {
+  display: flex;
 }
 
 .emptyBorder {
   margin-top: 1%;
   margin-bottom: 1%;
-  border: solid 1px rgb(230, 230, 230);
+  border: solid 1px rgb(230, 230, 230, 0.7);
+  width: 950px;
+  display: flex;
+  margin-left: 25%;
 }
 
 .allReviewSpot {
@@ -124,14 +173,21 @@
   justify-content: flex-start;
   flex-wrap: wrap;
   margin-top: 0.5%;
-  margin-left: 24.5%;
-  width: 52%;
+  margin-top: 4%;
   /* border: black 1px solid; */
 }
 
+.bottomAvgCount {
+  width: 1000px;
+}
+
+.reviewCardStar {
+  font-size: 22px;
+}
+
 .nameSpot {
-  /* border: 1px black solid; */
   margin-left: 25%;
+  /* border: 1px black solid; */
 }
 
 .outsideStar {
@@ -149,4 +205,16 @@
   sans-serif;
   font-size: 23px;
   margin-left: 25%;
+}
+
+.reviewsCard {
+  width: 1000px;
+  margin-bottom: 5%;
+  /* border: 1px solid red; */
+}
+
+.profileReview {
+  display: flex;
+  flex-direction: row;
+  /* border: 1px solid red; */
 }
