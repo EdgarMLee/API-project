@@ -40,7 +40,7 @@ JWT_EXPIRES_IN=604800
 * In your terminal under the backend folder, migrate and seed the files as follows:
 ```
 npx dotenv sequelize db:migrate
-npx dotenv sequelzie db:seed:all
+npx dotenv sequelize db:seed:all
 ```
 ### Your local host should be running with full functionality now!
 
