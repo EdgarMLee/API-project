@@ -60,8 +60,18 @@
   margin-top: 3px;
 }
 
+.miles,
+.bookedDay {
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
+  sans-serif;
+  color: rgb(0, 0, 0, 0.6);
+  font-size: 15px;
+  margin-left: 8.5%;
+}
+
 .priceNight {
   display: flex;
+  margin-top: 2%;
 }
 
 .nightSpot {
