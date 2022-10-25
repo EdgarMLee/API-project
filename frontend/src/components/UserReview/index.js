@@ -43,7 +43,10 @@ function ReviewUser({review}) {
       <div className='reviewDate'>{new Date(review?.createdAt).toLocaleDateString()}</div>
       <div className='dateReview'>
       <div className='reviewReview'>
-      <div className="fa-solid fa-star"/>{review?.stars} : {review?.review}</div>
+      <div className="fa-solid fa-star"/>{review?.stars}
+      <div className='reviewsText'>
+        : {review?.review}</div>
+        </div>
       </div>
       <div className='reviewDivDelete'>
         {currentUser && (
