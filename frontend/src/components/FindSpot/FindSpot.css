@@ -109,6 +109,8 @@
 .outsideStar {
   color: rgb(0, 0, 0, 0.8);
   /* font-weight: lighter; */
+  /* border: 1px red solid; */
+  margin-left: 3%;
 }
 
 .reviewStar {
@@ -141,6 +143,8 @@
   align-items: center;
   font-size: 15px;
   color: rgb(0, 0, 0, 0.7);
+  /* border: 1px solid red; */
+  width: 500px;
 }
 
 .spotdetailBox {
