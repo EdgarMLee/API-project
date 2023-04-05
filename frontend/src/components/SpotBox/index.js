@@ -2,8 +2,22 @@ import {Link} from 'react-router-dom';
 import "./SpotBox.css"
 
 const SpotBox = ({spot}) => {
-  let num = Math.floor(Math.random()*100)
-  let date = Math.round(Math.random(1,80)*10+1)
+
+  function randomInt(max) {
+    // Random int function
+    return Math.floor(Math.random()*max)
+  }
+
+  function randomInt2(min, max) {
+    // Set a min and max parameters
+    return Math.random() * (max - min) + min;
+  }
+  
+  let date = Date()
+  let curMonth = date.slice(4,8)
+  let curDay = date.slice(9,10)
+  let miles = randomInt(200)
+  let date2 = Math.ceil(randomInt2(curDay-1,30))
   return (
       <>
           <div className='spotBox'>
@@ -17,8 +31,8 @@ const SpotBox = ({spot}) => {
            <div className="fa-solid fa-star"/>
            {spot?.avgRating}</div>
            </div>
-            <div className='miles'>{num} miles away</div>
-            <div className='bookedDay'>Nov {date} - {date+5}</div>
+            <div className='miles'>{miles} miles away</div>
+            <div className='bookedDay'>{curMonth} {curDay} - {date2}</div>
            <div className='priceNight'>
            <div className='priceSpot'>${spot?.price}</div>
            <div className='nightSpot'>night</div>
