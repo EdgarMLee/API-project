@@ -12,12 +12,21 @@ const SpotBox = ({spot}) => {
     // Set a min and max parameters
     return Math.random() * (max - min) + min;
   }
-  
+
   let date = Date()
+
+  function curDay2(date) {
+    let cd = date.slice(8,10)
+    //If the date is 04, convert to 4
+    if (cd[0] === 0) return date.slice(9,10)
+    //If date is 10, remain as 10
+    else return cd;
+  }
+
   let curMonth = date.slice(4,8)
-  let curDay = date.slice(9,10)
+  let curDay = curDay2(date)
   let miles = randomInt(200)
-  let date2 = Math.ceil(randomInt2(curDay-1,30))
+  let date2 = Math.ceil(randomInt2(parseInt(curDay),30))
   return (
       <>
           <div className='spotBox'>
