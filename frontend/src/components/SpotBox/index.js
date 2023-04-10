@@ -41,7 +41,7 @@ const SpotBox = ({spot}) => {
            {spot?.avgRating}</div>
            </div>
             <div className='miles'>{miles} miles away</div>
-            <div className='bookedDay'>{curMonth} {curDay} - {date2}</div>
+            <div className='bookedDay'>{curMonth} {curDay} – {date2}</div>
            <div className='priceNight'>
            <div className='priceSpot'>${spot?.price}</div>
            <div className='nightSpot'>night</div>
