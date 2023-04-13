@@ -26,9 +26,11 @@ function ReviewUser({review}) {
     dispatch(deleteReview(review.id, review.spotId))
   }
 
-  // const handleSpot = () => {
-  //   history.push(`/spot/${spotId}`)
-  // }
+  function ctStars(stars) {
+    let arr = []
+    for (let i = 0; i<stars; i++) arr.push(<div className="fa-solid fa-star"/>)
+    return arr;
+  }
 
   return (
     <div className='reviewSquare'>
@@ -43,9 +45,12 @@ function ReviewUser({review}) {
       <div className='reviewDate'>{new Date(review?.createdAt).toLocaleDateString()}</div>
       <div className='dateReview'>
       <div className='reviewReview'>
-      <div className="fa-solid fa-star"/>{review?.stars}
+      {/* <div className="fa-solid fa-star"/>{review?.stars} */}
+      <div>
+        {ctStars(review?.stars)}
+        </div>
       <div className='reviewsText'>
-        : {review?.review}</div>
+        {review?.review}</div>
         </div>
       </div>
       <div className='reviewDivDelete'>
