@@ -1,31 +1,23 @@
 .reviewsContainer {
   padding:2%;
-  width: 200px;
   border: 1px rgb(203, 203, 203) solid;
   border-radius: 15px;
-  margin-right: 50px;
   margin-top: 20px;
-  padding-left: 12%;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-bottom: 20px;
   /* background-color: rgb(207, 207, 207); */
 }
 
 .reviewBox {
-  display: flex;
-  justify-content: center;
-  width: 250px;
   padding: 3px;
-  /* border: 1px black solid; */
-}
-
-.reviewSquare {
-  display: flex;
-  justify-content: center;
   /* border: 1px black solid; */
 }
 
 .reviewUserIcon {
   height: 30px;
-  margin-top: 8%;
+  margin-top: 5%;
+  margin-right: 3%;
 }
 
 .reviewName,
@@ -52,9 +44,9 @@
 }
 
 .reviewDate {
-  margin-top: -5%;
-  margin-bottom: 6%;
-  margin-left: 16%;
+  margin-top: -10px;
+  margin-bottom: 2%;
+  margin-left: 14%;
 }
 
 .reviewDate {
@@ -66,14 +58,13 @@
 .dateReview {
   display: flex;
   padding: 5px;
-  width: 375px;
+  width: 350px;
   /* border: 1px solid red; */
 }
 
 .reviewName,
 .reviewReview {
   font-weight: 500;
-  margin-left: 6px;
 }
 
 .reviewuser-date {
@@ -87,8 +78,8 @@
 }
 
 .reviewReview {
-  /* border: 1px solid red; */
   display: grid;
+  /* border: 1px solid red; */
 }
 
 .reviewsText {
@@ -97,6 +88,8 @@
   font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
   sans-serif;
   margin-top: 5px;
+  max-width: 300px;
+  word-wrap: break-word;
   /* border: 1px solid red; */
 }
 

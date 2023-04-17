@@ -208,11 +208,6 @@ router.put('/:spotId', validateSpot, requireAuth, async (req, res, next) => {
     err.status = 404
     return next(err)
   }
-  // else if (editSpot.ownerId !== req.user.id) {
-  //   const err = new Error('Forbidden')
-  //   err.status = 403
-  //   return next(err)
-  // }
   else {
     editSpot.address = address;
     editSpot.city = city;
