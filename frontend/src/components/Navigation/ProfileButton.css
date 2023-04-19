@@ -1,17 +1,17 @@
-/* .profileDiv {
-
-} */
 
 .profileButton {
   background-color: white;
   border: 1px lightsteelblue solid;
   border-radius: 20px;
+  margin-top: 25%;
+  /* border: 1px solid red; */
 }
 
 .profileButton:hover {
   cursor: pointer;
+  background-color: rgb(238, 237, 237);
+  transition: all 0.8s;
 }
-/* position: fixed; */
 
 .profileIcon {
   display: flex;
@@ -55,9 +55,9 @@
 .reviewsButton:hover,
 .allSpotButton:hover,
 .createSpotButton:hover,
-.logoutUser:hover,
-.userProfile:hover {
+.logoutUser:hover {
   background-color: rgb(240, 240, 240);
+  /* transition: all 0.5s; */
   border-radius: 15px;
 }
 

@@ -22,7 +22,7 @@
   background-color: white;
   color: rgb(233, 0, 0);
   border: rgb(233, 0, 0) solid 1px;
-  transition: all 1.5s;
+  transition: all 1s;
 }
 
 .editSubTitle {

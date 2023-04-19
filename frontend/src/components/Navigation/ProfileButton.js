@@ -49,9 +49,6 @@ function ProfileButton({ user }) {
         <div className="profile-dropdown">
           <div className='userProfile'>
           {user.username}
-          {/* <div className='userProfil-email'>
-          {user.email}
-          </div> */}
         </div>
           <div className='divLine'></div>
           <Link to='/view-your-spots' className='allSpotButton'>View My Spots</Link>
