@@ -17,9 +17,7 @@ const SpotBox = ({spot}) => {
 
   function curDay2(date) {
     let cd = date.slice(8,10)
-    //If the date is 04, convert to 4
     if (cd[0] === 0) return date.slice(9,10)
-    //If date is 10, remain as 10
     else return cd;
   }
 

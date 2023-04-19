@@ -54,7 +54,7 @@
   background-color: rgb(233, 0, 0);
   color: white;
   border: white solid 1px;
-  border-radius: 18px;
+  border-radius: 12px;
   font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
   sans-serif;
   font-size: 15px;
@@ -66,6 +66,10 @@
 
 .deleteButton:hover {
   cursor: pointer;
+  background-color: white;
+  color: rgb(233, 0, 0);
+  border: rgb(233, 0, 0) solid 1px;
+  transition: all 1.5s;
 }
 
 .pricesSpot,
