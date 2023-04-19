@@ -20,7 +20,6 @@ const FindSpot = () => {
   const sessionUser = useSelector(state => state.session.user);
   useEffect(() => {
     dispatch(findSpot(spotId))
-    // dispatch(findReview(spotId))
     .then(() => dispatch(getAllReviewsBySpot(spotId)))
     .then(() => setIsLoaded(true))
   }, [dispatch])
